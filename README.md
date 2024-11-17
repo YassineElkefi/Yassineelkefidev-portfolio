@@ -59,4 +59,4 @@ Feel free to reach out or connect with me:
 - **Email**: yassine.elkefi6@gmail.com
 - **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/yassine-elkefi/ "LinkedIn Profile")
 - **GitHub**: [Github Profile](https://github.com/YassineElkefi "Github Profile")
-- **Portfolio Live Demo**:
+- **Portfolio Live Demo**: [Live Demo](https://yassineelkefidev-portfolio.vercel.app)
