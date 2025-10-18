@@ -75,8 +75,8 @@ export const PROJECTS = [
     title: "Expense Tracking System",
     image: project3,
     description:
-      "The Expense Tracking System is an intuitive application designed to help users manage and track their personal finances. Made with Next.js for its fast server-side rendering capabilities, Angular for the frontend, and MongoDB for database storage, the system allows users to easily record and categorize their expenses, providing them with insightful reports and a clear overview of their financial health.",
-    technologies: ["Next.js", "Angular", "MongoDB"],
+      "The Expense Tracking System is an intuitive application designed to help users manage and track their personal finances. Made with NestJS for its robust backend capabilities, Angular for the frontend, and MongoDB for database storage, the system allows users to easily record and categorize their expenses, providing them with insightful reports and a clear overview of their financial health.",
+    technologies: ["NestJS", "Angular", "MongoDB"],
     githubRepo: "https://github.com/YassineElkefi/Expense-Tracking-System",
     status: "public"
   },
