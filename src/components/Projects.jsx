@@ -1,9 +1,16 @@
-import {PROJECTS} from '../constants'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { PROJECTS } from '../constants'
 import Swal from 'sweetalert2'
 
+const filterTags = ['All', 'Web', 'Mobile']
+
 const Projects = () => {
-  const handleProjectClick = (project) => {
+  const [active, setActive] = useState('All')
+
+  const filtered = active === 'All' ? PROJECTS : PROJECTS.filter((p) => p.tag === active)
+
+  const handleClick = (project) => {
     if (project.status === 'private') {
       Swal.fire({
         title: '🔒 Private Repository',
@@ -11,8 +18,7 @@ const Projects = () => {
           <div class="text-gray-300 mb-4">
             <p class="mb-2">This repository is <span class="text-red-400 font-semibold">private</span>.</p>
             <p>Contact me for more details about <span class="text-cyan-400 font-medium">${project.title}</span></p>
-          </div>
-        `,
+          </div>`,
         icon: 'warning',
         iconColor: '#EF4444',
         confirmButtonText: '📧 Contact Me',
@@ -22,88 +28,171 @@ const Projects = () => {
         customClass: {
           popup: 'border-2 border-red-500/30 shadow-2xl shadow-red-500/20 backdrop-blur-sm rounded-xl',
           title: 'text-xl font-bold text-red-400 mb-4',
-          htmlContainer: 'text-gray-300',
-          confirmButton: 'px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25',
+          confirmButton: 'px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105',
           cancelButton: 'px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105',
-          actions: 'gap-4 mt-6'
+          actions: 'gap-4 mt-6',
         },
         showCancelButton: true,
         cancelButtonText: '✕ Close',
         cancelButtonColor: '#6B7280',
         buttonsStyling: false,
-        allowOutsideClick: false,
         allowEscapeKey: true,
-        focusConfirm: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown animate__faster'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp animate__faster'
-        }
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `mailto:yassine.elkefi6@gmail.com?subject=Inquiry about Private Project: ${project.title}&body=Hi Yassine,%0D%0A%0D%0AI would like to know more about your private project "${project.title}".%0D%0A%0D%0AThank you!`;
+          window.location.href = `mailto:yassine.elkefi6@gmail.com?subject=Inquiry about Private Project: ${project.title}&body=Hi Yassine,%0D%0A%0D%0AI would like to know more about "${project.title}".%0D%0A%0D%0AThank you!`
         }
-      });
-      return;
+      })
+      return
     }
-    window.open(project.githubRepo, '_blank');
-  };
+    window.open(project.githubRepo, '_blank')
+  }
 
   return (
-    <div className="border-b border-neutral-900 pb-4">
-        <motion.h2
-            whileInView={{opacity: 1, y: 0}}
-            initial={{opacity: 0, y: -100}}
-            transition={{duration: 0.5}}
-            className="my-20 text-center text-4xl">
-            Projects
-        </motion.h2>
-        <div>
-            {PROJECTS.map((project, index) => (
-                <div key={index} className='mb-8 flex flex-wrap lg:justify-center'>
-                    <motion.div
-                        whileInView={{opacity: 1, x: 0}}
-                        initial={{opacity: 0, x: -100}}
-                        transition={{duration: 1}}
-                        className='w-full lg:w-1/4 relative'>
-                        <div 
-                          onClick={() => handleProjectClick(project)}
-                          className='cursor-pointer'
-                        >
-                          <img 
-                            src={project.image} 
-                            alt={project.title}  
-                            className='mb-6 rounded w-full max-w-[200px] aspect-square object-cover transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300'
-                          />
-                          
-                        </div>
-                    </motion.div>
-                    <motion.div
-                        whileInView={{opacity: 1, x: 0}}
-                        initial={{opacity: 0, x: 100}}
-                        transition={{duration: 1}}
-                        className='w-full max-w-xl lg:w-3/4'>
-                        <div className='flex items-center gap-2 mb-2'>
-                          <h6 className='font-semibold'>{project.title}</h6>
-                          {project.status === 'private' && (
-                            <span className='rounded mr-2 bg-black border border-red-400 px-2 py-1 text-sm font-medium text-red-400 text-center shadow-lg shadow-red-400/25'>
-                              Private Repository
-                            </span>
-                          )}
-                        </div>
-                        <p className='mb-5 text-neutral-400'>{project.description}</p>
-                        {project.technologies.map((technology, index) => (
-                            <span key={index}
-                             className='mr-2 bg-black border border-cyan-400 px-2 py-1 text-sm font-medium text-cyan-400 text-center shadow-lg shadow-cyan-400/25'>
-                                {technology}
-                            </span>    
-                        ))}
-                    </motion.div>
-                </div>    
+    <section id="projects" className="py-28 px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
+      <div className="max-w-7xl mx-auto">
+
+        {/* Header */}
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+          <div>
+            <div className="section-label">Work</div>
+            <h2
+              className="text-4xl font-extrabold tracking-tight"
+              style={{ letterSpacing: '-0.03em' }}
+            >
+              Projects
+            </h2>
+          </div>
+
+          {/* Filter tabs */}
+          <div className="flex gap-2">
+            {filterTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setActive(tag)}
+                className="font-mono text-xs tracking-widest uppercase px-5 py-2 rounded transition-all duration-200"
+                style={{
+                  border: `1px solid ${active === tag ? '#7B2FFF' : 'rgba(255,255,255,0.1)'}`,
+                  background: active === tag ? 'rgba(123,47,255,0.15)' : 'transparent',
+                  color: active === tag ? 'white' : 'rgba(240,238,246,0.45)',
+                }}
+              >
+                {tag}
+              </button>
             ))}
+          </div>
         </div>
-    </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ duration: 0.35 }}
+                onClick={() => handleClick(project)}
+                className="group relative flex flex-col rounded-xl overflow-hidden"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  transition: 'border-color 0.3s ease, transform 0.3s ease',
+                }}
+                whileHover={{ y: -6 }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = project.accent + '55')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}
+              >
+                {/* Top accent line */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}
+                />
+
+                {/* Thumbnail */}
+                <div className="relative overflow-hidden h-44">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0.2) 100%)' }}
+                  />
+                  {/* Tags over image */}
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    <span
+                      className="font-mono text-xs px-2 py-1 rounded"
+                      style={{
+                        background: 'rgba(6,6,8,0.7)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        color: 'rgba(240,238,246,0.7)',
+                        backdropFilter: 'blur(8px)',
+                      }}
+                    >
+                      {project.tag}
+                    </span>
+                    {project.status === 'private' && (
+                      <span
+                        className="font-mono text-xs px-2 py-1 rounded"
+                        style={{
+                          background: 'rgba(255,50,50,0.15)',
+                          border: '1px solid rgba(255,50,50,0.35)',
+                          color: '#FF5555',
+                          backdropFilter: 'blur(8px)',
+                        }}
+                      >
+                        Private
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col flex-1 p-6">
+                  <h6
+                    className="text-lg font-bold mb-2"
+                    style={{ letterSpacing: '-0.02em' }}
+                  >
+                    {project.emoji} {project.title}
+                  </h6>
+
+                  <p
+                    className="text-sm leading-relaxed mb-5 flex-1"
+                    style={{ color: 'rgba(240,238,246,0.5)' }}
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* Tech + action */}
+                  <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div className="flex flex-wrap gap-1">
+                      {project.technologies.slice(0, 3).map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-xs px-2 py-0.5 rounded"
+                          style={{ color: project.accent, border: `1px solid ${project.accent}30`, background: `${project.accent}0D` }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <span
+                      className="font-mono text-xs flex items-center gap-1 transition-colors duration-200"
+                      style={{ color: 'rgba(240,238,246,0.35)' }}
+                    >
+                      {project.status === 'private' ? '🔒' : '→'}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
   )
 }
 

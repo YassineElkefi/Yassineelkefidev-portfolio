@@ -1,28 +1,107 @@
-import About from "./components/About"
-import Contact from "./components/Contact"
-import Experience from "./components/Experience"
-import Hero from "./components/Hero"
-import Navbar from "./components/Navbar"
-import Projects from "./components/Projects"
-import PersonalProjects from "./components/PersonalProjects"
-import Technologies from "./components/Technologies"
+import { useEffect, useRef, useState } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import About from './components/About'
+import Technologies from './components/Technologies'
+import Experience from './components/Experience'
+import Projects from './components/Projects'
+import PersonalProjects from './components/PersonalProjects'
+import Contact from './components/Contact'
 
+// ── Custom cursor ──────────────────────────────────────────────────────────────
+const Cursor = () => {
+  const dotRef = useRef(null)
+  const ringRef = useRef(null)
+  const pos = useRef({ x: -100, y: -100 })
+  const ring = useRef({ x: -100, y: -100 })
+  const rafId = useRef(null)
+
+  useEffect(() => {
+    const onMove = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY }
+    }
+    window.addEventListener('mousemove', onMove)
+
+    const animate = () => {
+      ring.current.x += (pos.current.x - ring.current.x) * 0.12
+      ring.current.y += (pos.current.y - ring.current.y) * 0.12
+
+      if (dotRef.current) {
+        dotRef.current.style.left = `${pos.current.x}px`
+        dotRef.current.style.top  = `${pos.current.y}px`
+      }
+      if (ringRef.current) {
+        ringRef.current.style.left = `${ring.current.x}px`
+        ringRef.current.style.top  = `${ring.current.y}px`
+      }
+      rafId.current = requestAnimationFrame(animate)
+    }
+    rafId.current = requestAnimationFrame(animate)
+
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(rafId.current)
+    }
+  }, [])
+
+  return (
+    <>
+      <div ref={dotRef}  className="cursor cursor-dot" />
+      <div ref={ringRef} className="cursor cursor-ring" />
+    </>
+  )
+}
+
+// ── App ────────────────────────────────────────────────────────────────────────
 const App = () => {
   return (
-      <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">
-        <div className="fixed top-0 -z-10 h-full w-full">
-          <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+    <div
+      className="overflow-x-hidden text-neutral-300 antialiased"
+      style={{ background: '#060608', color: '#F0EEF6' }}
+    >
+      {/* Film grain overlay */}
+      <div className="noise" />
+
+      {/* Custom cursor */}
+      <Cursor />
+
+      {/* Background radial glow (fixed) */}
+      <div
+        className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(123,47,255,0.18), transparent)',
+        }}
+      />
+
+      <Navbar />
+
+      <main>
+        <Hero />
+        <About />
+        <Technologies />
+        <Experience />
+        <Projects />
+        <PersonalProjects />
+        <Contact />
+      </main>
+
+      {/* Footer */}
+      <footer
+        className="flex flex-wrap justify-between items-center gap-4 px-12 py-8 text-xs"
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+          color: 'rgba(240,238,246,0.35)',
+          fontFamily: "'DM Mono', monospace",
+        }}
+      >
+        <span>© 2026 Yassine ELKEFI</span>
+        <div className="flex gap-6">
+          <a href="https://github.com/YassineElkefi" target="_blank" className="hover:text-white transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" className="hover:text-white transition-colors">LinkedIn</a>
+          <a href="mailto:yassine.elkefi6@gmail.com" className="hover:text-white transition-colors">Email</a>
         </div>
-        <div className="container mx-auto px-8">
-          <Navbar />
-          <Hero />
-          <About />
-          <Technologies />
-          <Experience />
-          <Projects />
-          <PersonalProjects />
-          <Contact />
-        </div>
+      </footer>
     </div>
   )
 }
