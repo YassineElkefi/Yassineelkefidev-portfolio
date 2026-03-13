@@ -48,15 +48,15 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-28 px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
+    <section id="projects" className="py-20 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-10 md:mb-14">
           <div>
             <div className="section-label">Work</div>
             <h2
-              className="text-4xl font-extrabold tracking-tight"
+              className="text-3xl md:text-4xl font-extrabold tracking-tight"
               style={{ letterSpacing: '-0.03em' }}
             >
               Projects
@@ -69,7 +69,7 @@ const Projects = () => {
               <button
                 key={tag}
                 onClick={() => setActive(tag)}
-                className="font-mono text-xs tracking-widest uppercase px-5 py-2 rounded transition-all duration-200"
+                className="font-mono text-xs tracking-widest uppercase px-4 md:px-5 py-2 rounded transition-all duration-200"
                 style={{
                   border: `1px solid ${active === tag ? '#7B2FFF' : 'rgba(255,255,255,0.1)'}`,
                   background: active === tag ? 'rgba(123,47,255,0.15)' : 'transparent',
@@ -83,7 +83,7 @@ const Projects = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <motion.div
@@ -99,6 +99,7 @@ const Projects = () => {
                   background: 'rgba(255,255,255,0.03)',
                   border: '1px solid rgba(255,255,255,0.07)',
                   transition: 'border-color 0.3s ease, transform 0.3s ease',
+                  cursor: 'pointer',
                 }}
                 whileHover={{ y: -6 }}
                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = project.accent + '55')}
@@ -151,9 +152,9 @@ const Projects = () => {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-1 p-6">
+                <div className="flex flex-col flex-1 p-5 md:p-6">
                   <h6
-                    className="text-lg font-bold mb-2"
+                    className="text-base md:text-lg font-bold mb-2"
                     style={{ letterSpacing: '-0.02em' }}
                   >
                     {project.emoji} {project.title}

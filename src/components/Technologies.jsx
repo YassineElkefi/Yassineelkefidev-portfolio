@@ -21,23 +21,20 @@ const SKILLS = [
 
 const Technologies = () => {
   return (
-    <section id="skills" className="py-28 px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
+    <section id="skills" className="py-20 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
       <div className="max-w-7xl mx-auto">
-
         <div className="section-label">Tech Stack</div>
-
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-extrabold tracking-tight mb-14"
+          className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 md:mb-14"
           style={{ letterSpacing: '-0.03em' }}
         >
           Technologies I work with
         </motion.h2>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {SKILLS.map((skill, i) => (
             <motion.div
               key={skill.name}
@@ -46,7 +43,7 @@ const Technologies = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               whileHover={{ y: -6 }}
-              className="relative group flex flex-col items-center gap-3 p-6 rounded-xl overflow-hidden"
+              className="relative group flex flex-col items-center gap-2 md:gap-3 p-4 md:p-6 rounded-xl overflow-hidden"
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -60,11 +57,8 @@ const Technologies = () => {
                 className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out"
                 style={{ background: skill.color }}
               />
-
-              <skill.Icon className="text-5xl" style={{ color: skill.color }} />
-
-              <span className="font-semibold text-sm text-center">{skill.name}</span>
-
+              <skill.Icon className="text-3xl md:text-5xl" style={{ color: skill.color }} />
+              <span className="font-semibold text-xs md:text-sm text-center">{skill.name}</span>
               {/* Progress bar */}
               <div className="w-full h-[3px] rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
                 <motion.div

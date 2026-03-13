@@ -11,7 +11,11 @@ const container = (delay) => ({
 
 const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-32 pb-16 px-12 overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-start xl:items-center px-6 md:px-12 overflow-hidden"
+      style={{ paddingTop: 'max(7rem, 15vh)', paddingBottom: '4rem' }}
+    >
 
       {/* Grid background */}
       <div
@@ -34,15 +38,15 @@ const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-wrap items-center gap-12">
+      {/* On mobile/tablet: flex-col (stack). On xl+: flex-row (side by side) */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col xl:flex-row xl:items-center gap-12 xl:gap-16">
 
-        {/* Left: Text */}
-        <div className="flex-1 min-w-[320px]">
+        {/* Text */}
+        <div className="flex-1 min-w-0">
 
-          {/* Status badge */}
           <motion.div variants={container(0)} initial="hidden" animate="visible">
             <div
-              className="inline-flex items-center gap-2 mb-10 px-5 py-2 rounded-full font-mono text-xs"
+              className="inline-flex items-center gap-2 mb-8 px-4 md:px-5 py-2 rounded-full font-mono text-xs"
               style={{
                 background: 'rgba(0,229,255,0.06)',
                 border: '1px solid rgba(0,229,255,0.2)',
@@ -50,20 +54,19 @@ const Hero = () => {
               }}
             >
               <span
-                className="w-1.5 h-1.5 rounded-full"
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                 style={{ background: '#00E5FF', animation: 'pulse 2s ease-in-out infinite' }}
               />
               Available for new opportunities
             </div>
           </motion.div>
 
-          {/* Name */}
           <motion.h1
             variants={container(0.1)}
             initial="hidden"
             animate="visible"
             className="font-extrabold leading-[0.92] tracking-tighter mb-6"
-            style={{ fontSize: 'clamp(3.5rem, 7vw, 7.5rem)' }}
+            style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)' }}
           >
             Yassine
             <br />
@@ -78,30 +81,27 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* Title */}
           <motion.p
             variants={container(0.25)}
             initial="hidden"
             animate="visible"
-            className="font-mono text-lg mb-7"
+            className="font-mono text-base md:text-lg mb-6"
             style={{ color: 'rgba(240,238,246,0.45)' }}
           >
             <span className="text-white">Mobile</span> &amp;{' '}
             <span className="text-white">Full Stack</span> Developer
           </motion.p>
 
-          {/* Description */}
           <motion.p
             variants={container(0.35)}
             initial="hidden"
             animate="visible"
-            className="text-base leading-relaxed max-w-lg mb-12"
+            className="text-sm md:text-base leading-relaxed max-w-lg mb-10"
             style={{ color: 'rgba(240,238,246,0.45)' }}
           >
             {HERO_CONTENT}
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             variants={container(0.5)}
             initial="hidden"
@@ -119,15 +119,14 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Right: Photo */}
+        {/* Photo — always visible, centered below text on mobile/tablet, beside on xl+ */}
         <motion.div
-          initial={{ opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.9, ease: 'easeOut' }}
-          className="flex-shrink-0"
+          className="flex-shrink-0 flex justify-center xl:justify-end"
         >
           <div className="relative">
-            {/* Accent border behind */}
             <div
               className="absolute inset-0 rounded-2xl pointer-events-none"
               style={{
@@ -141,12 +140,12 @@ const Hero = () => {
               alt="Yassine ELKEFI"
               className="relative z-10 rounded-2xl object-cover object-top"
               style={{
-                width: 'clamp(260px, 28vw, 420px)',
+                width: 'clamp(180px, 38vw, 420px)',
+                maxHeight: '420px',
                 aspectRatio: '3/4',
                 boxShadow: '0 32px 80px rgba(0,0,0,0.6)',
               }}
             />
-            {/* Gradient overlay bottom */}
             <div
               className="absolute bottom-0 left-0 right-0 h-1/3 rounded-b-2xl z-20 pointer-events-none"
               style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.7), transparent)' }}
@@ -157,16 +156,13 @@ const Hero = () => {
 
       {/* Scroll indicator */}
       <div
-        className="absolute bottom-10 left-12 font-mono text-xs tracking-widest uppercase flex items-center gap-4"
+        className="hidden sm:flex absolute bottom-10 left-6 md:left-12 font-mono text-xs tracking-widest uppercase items-center gap-4"
         style={{ color: 'rgba(240,238,246,0.35)' }}
       >
         <div className="w-14 h-px bg-white/20 relative overflow-hidden">
           <div
             className="absolute inset-y-0 left-0 w-full"
-            style={{
-              background: '#00E5FF',
-              animation: 'scanline 2s ease-in-out infinite',
-            }}
+            style={{ background: '#00E5FF', animation: 'scanline 2s ease-in-out infinite' }}
           />
         </div>
         scroll

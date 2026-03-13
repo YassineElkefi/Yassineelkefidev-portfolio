@@ -41,9 +41,36 @@ const PersonalProjects = () => {
   }
 
   return (
-    <section id="personal-projects" className="border-b border-neutral-900 py-28 px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="personal-projects" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12">
+      <style>{`
+        .pp-card { display: flex; flex-direction: column; }
+        .pp-thumb-wrap {
+          position: relative;
+          width: 100%;
+          height: 200px;
+          overflow: hidden;
+          flex-shrink: 0;
+          border-radius: 0;
+        }
+        .pp-thumb-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        .pp-card:hover .pp-thumb-wrap img { transform: scale(1.05); }
+        @media (min-width: 1024px) {
+          .pp-card { flex-direction: row; align-items: center; }
+          .pp-thumb-wrap {
+            width: 160px;
+            height: 160px;
+            margin: 1.25rem;
+            border-radius: 0.75rem;
+          }
+        }
+      `}</style>
 
+      <div className="max-w-7xl mx-auto">
         <div className="section-label">Side Work</div>
 
         <motion.h2
@@ -51,13 +78,13 @@ const PersonalProjects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-extrabold tracking-tight mb-14"
+          className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 md:mb-14"
           style={{ letterSpacing: '-0.03em' }}
         >
           Personal Projects
         </motion.h2>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-5 md:gap-6">
           {PERSONAL_PROJECTS.map((project, index) => (
             <motion.div
               key={index}
@@ -66,33 +93,27 @@ const PersonalProjects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               onClick={() => handleProjectClick(project)}
-              className="group flex flex-wrap lg:flex-nowrap gap-8 items-center p-6 rounded-xl transition-all duration-300"
+              className="pp-card group rounded-xl overflow-hidden transition-all duration-300"
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: '1px solid rgba(255,255,255,0.07)',
+                cursor: 'pointer',
               }}
               whileHover={{ borderColor: project.accent + '44' }}
             >
-              {/* Thumbnail */}
-              <div
-                className="flex-shrink-0 relative overflow-hidden rounded-lg"
-                style={{ width: 160, height: 160 }}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+              {/* Thumbnail — single image, always visible at every breakpoint */}
+              <div className="pp-thumb-wrap">
+                <img src={project.image} alt={project.title} />
                 <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(135deg, rgba(6,6,8,0.3), transparent)' }}
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.65) 0%, transparent 60%)' }}
                 />
               </div>
 
-              {/* Info */}
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <h6 className="text-xl font-bold" style={{ letterSpacing: '-0.02em' }}>
+              {/* Content */}
+              <div className="flex-1 min-w-0 p-5 md:p-6">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em' }}>
                     {project.emoji} {project.title}
                   </h6>
                   {project.status === 'private' && (
@@ -104,11 +125,11 @@ const PersonalProjects = () => {
                         color: '#FF5555',
                       }}
                     >
-                      Private Repository
+                      Private
                     </span>
                   )}
                   <span
-                    className="font-mono text-xs px-2 py-1 rounded ml-auto"
+                    className="font-mono text-xs px-2 py-1 rounded"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid rgba(255,255,255,0.1)',
@@ -119,7 +140,7 @@ const PersonalProjects = () => {
                   </span>
                 </div>
 
-                <p className="text-sm leading-relaxed mb-5" style={{ color: 'rgba(240,238,246,0.5)' }}>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(240,238,246,0.5)' }}>
                   {project.description}
                 </p>
 
@@ -127,7 +148,7 @@ const PersonalProjects = () => {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="font-mono text-xs px-3 py-1 rounded"
+                      className="font-mono text-xs px-2 md:px-3 py-1 rounded"
                       style={{
                         color: project.accent,
                         border: `1px solid ${project.accent}35`,
@@ -140,9 +161,9 @@ const PersonalProjects = () => {
                 </div>
               </div>
 
-              {/* Arrow */}
+              {/* Arrow — desktop only */}
               <div
-                className="flex-shrink-0 text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="hidden lg:flex flex-shrink-0 text-2xl pr-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ color: project.accent }}
               >
                 {project.status === 'private' ? '🔒' : '→'}
