@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
 import { ABOUT_TEXT } from '../constants'
 import aboutImg from '../assets/about.webp'
+import { label } from 'framer-motion/client'
 
 const stats = [
-  { num: '4+', label: 'Years Coding' },
+  { num: '6+', label: 'Years Coding' },
   { num: '8+', label: 'Projects Built' },
   { num: '4',  label: 'Internships' },
+  //{ num: '1+', label: 'Work Experience' },
 ]
 
 const About = () => {
