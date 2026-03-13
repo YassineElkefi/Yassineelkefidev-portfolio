@@ -16,7 +16,6 @@ const Hero = () => {
       className="relative min-h-screen flex items-start xl:items-center px-6 md:px-12 overflow-hidden"
       style={{ paddingTop: 'max(7rem, 15vh)', paddingBottom: '4rem' }}
     >
-
       {/* Grid background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -38,7 +37,6 @@ const Hero = () => {
         }}
       />
 
-      {/* On mobile/tablet: flex-col (stack). On xl+: flex-row (side by side) */}
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col xl:flex-row xl:items-center gap-12 xl:gap-16">
 
         {/* Text */}
@@ -50,12 +48,12 @@ const Hero = () => {
               style={{
                 background: 'rgba(0,229,255,0.06)',
                 border: '1px solid rgba(0,229,255,0.2)',
-                color: '#00E5FF',
+                color: 'var(--cyan)',
               }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: '#00E5FF', animation: 'pulse 2s ease-in-out infinite' }}
+                style={{ background: 'var(--cyan)', animation: 'pulse 2s ease-in-out infinite' }}
               />
               Available for new opportunities
             </div>
@@ -66,7 +64,7 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             className="font-extrabold leading-[0.92] tracking-tighter mb-6"
-            style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)' }}
+            style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)', color: 'var(--text)' }}
           >
             Yassine
             <br />
@@ -86,10 +84,10 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             className="font-mono text-base md:text-lg mb-6"
-            style={{ color: 'rgba(240,238,246,0.45)' }}
+            style={{ color: 'var(--muted)' }}
           >
-            <span className="text-white">Mobile</span> &amp;{' '}
-            <span className="text-white">Full Stack</span> Developer
+            <span style={{ color: 'var(--text)' }}>Mobile</span> &amp;{' '}
+            <span style={{ color: 'var(--text)' }}>Full Stack</span> Developer
           </motion.p>
 
           <motion.p
@@ -97,7 +95,7 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             className="text-sm md:text-base leading-relaxed max-w-lg mb-10"
-            style={{ color: 'rgba(240,238,246,0.45)' }}
+            style={{ color: 'var(--muted)' }}
           >
             {HERO_CONTENT}
           </motion.p>
@@ -119,7 +117,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Photo — always visible, centered below text on mobile/tablet, beside on xl+ */}
+        {/* Photo */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -157,12 +155,12 @@ const Hero = () => {
       {/* Scroll indicator */}
       <div
         className="hidden sm:flex absolute bottom-10 left-6 md:left-12 font-mono text-xs tracking-widest uppercase items-center gap-4"
-        style={{ color: 'rgba(240,238,246,0.35)' }}
+        style={{ color: 'var(--muted)' }}
       >
-        <div className="w-14 h-px bg-white/20 relative overflow-hidden">
+        <div className="w-14 h-px relative overflow-hidden" style={{ background: 'var(--border-bright)' }}>
           <div
             className="absolute inset-y-0 left-0 w-full"
-            style={{ background: '#00E5FF', animation: 'scanline 2s ease-in-out infinite' }}
+            style={{ background: 'var(--cyan)', animation: 'scanline 2s ease-in-out infinite' }}
           />
         </div>
         scroll

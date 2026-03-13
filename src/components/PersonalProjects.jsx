@@ -41,32 +41,25 @@ const PersonalProjects = () => {
   }
 
   return (
-    <section id="personal-projects" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12">
+    <section
+      id="personal-projects"
+      className="border-b py-20 md:py-28 px-6 md:px-12"
+      style={{ borderColor: 'var(--border)' }}
+    >
       <style>{`
         .pp-card { display: flex; flex-direction: column; }
         .pp-thumb-wrap {
-          position: relative;
-          width: 100%;
-          height: 200px;
-          overflow: hidden;
-          flex-shrink: 0;
-          border-radius: 0;
+          position: relative; width: 100%; height: 200px;
+          overflow: hidden; flex-shrink: 0; border-radius: 0;
         }
         .pp-thumb-wrap img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+          width: 100%; height: 100%; object-fit: cover;
           transition: transform 0.5s ease;
         }
         .pp-card:hover .pp-thumb-wrap img { transform: scale(1.05); }
         @media (min-width: 1024px) {
           .pp-card { flex-direction: row; align-items: center; }
-          .pp-thumb-wrap {
-            width: 160px;
-            height: 160px;
-            margin: 1.25rem;
-            border-radius: 0.75rem;
-          }
+          .pp-thumb-wrap { width: 160px; height: 160px; margin: 1.25rem; border-radius: 0.75rem; }
         }
       `}</style>
 
@@ -79,7 +72,7 @@ const PersonalProjects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 md:mb-14"
-          style={{ letterSpacing: '-0.03em' }}
+          style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
         >
           Personal Projects
         </motion.h2>
@@ -95,13 +88,13 @@ const PersonalProjects = () => {
               onClick={() => handleProjectClick(project)}
               className="pp-card group rounded-xl overflow-hidden transition-all duration-300"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
               }}
               whileHover={{ borderColor: project.accent + '44' }}
             >
-              {/* Thumbnail — single image, always visible at every breakpoint */}
+              {/* Thumbnail */}
               <div className="pp-thumb-wrap">
                 <img src={project.image} alt={project.title} />
                 <div
@@ -113,7 +106,7 @@ const PersonalProjects = () => {
               {/* Content */}
               <div className="flex-1 min-w-0 p-5 md:p-6">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em' }}>
+                  <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}>
                     {project.emoji} {project.title}
                   </h6>
                   {project.status === 'private' && (
@@ -131,16 +124,16 @@ const PersonalProjects = () => {
                   <span
                     className="font-mono text-xs px-2 py-1 rounded"
                     style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      color: 'rgba(240,238,246,0.5)',
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border-bright)',
+                      color: 'var(--muted)',
                     }}
                   >
                     {project.tag}
                   </span>
                 </div>
 
-                <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(240,238,246,0.5)' }}>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
                   {project.description}
                 </p>
 

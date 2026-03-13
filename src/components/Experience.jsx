@@ -3,22 +3,30 @@ import { EXPERIENCES } from '../constants'
 
 const Experience = () => {
   return (
-    <section id="experience" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12">
+    <section
+      id="experience"
+      className="border-b py-20 md:py-28 px-6 md:px-12"
+      style={{ borderColor: 'var(--border)' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="section-label">Career</div>
+
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-extrabold tracking-tight mb-12 md:mb-16"
-          style={{ letterSpacing: '-0.03em' }}
+          style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
         >
           Work Experience
         </motion.h2>
 
         {/* Timeline */}
-        <div className="relative pl-6 md:pl-10" style={{ borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
+        <div
+          className="relative pl-6 md:pl-10"
+          style={{ borderLeft: '1px solid var(--border)' }}
+        >
           {EXPERIENCES.map((exp, i) => (
             <motion.div
               key={i}
@@ -42,12 +50,12 @@ const Experience = () => {
               />
 
               {/* Year */}
-              <p className="font-mono text-xs tracking-widest mb-2" style={{ color: 'rgba(240,238,246,0.4)' }}>
+              <p className="font-mono text-xs tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
                 {exp.year}
               </p>
 
               {/* Role */}
-              <h6 className="text-lg md:text-xl font-bold mb-1" style={{ letterSpacing: '-0.01em' }}>
+              <h6 className="text-lg md:text-xl font-bold mb-1" style={{ letterSpacing: '-0.01em', color: 'var(--text)' }}>
                 {exp.role}
               </h6>
 
@@ -57,7 +65,10 @@ const Experience = () => {
               </p>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed mb-4 md:mb-5" style={{ color: 'rgba(240,238,246,0.5)', maxWidth: '42rem' }}>
+              <p
+                className="text-sm leading-relaxed mb-4 md:mb-5"
+                style={{ color: 'var(--muted)', maxWidth: '42rem' }}
+              >
                 {exp.description}
               </p>
 

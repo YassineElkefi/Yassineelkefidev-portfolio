@@ -16,24 +16,30 @@ const SKILLS = [
   { name: 'MySQL',    Icon: SiMysql,         level: 80, color: '#00ADEF' },
   { name: 'SwiftUI',  Icon: FaSwift,         level: 72, color: '#FF6B35' },
   { name: 'Android',  Icon: FaAndroid,       level: 75, color: '#68D391' },
-  { name: 'Next.js',  Icon: RiNextjsFill,    level: 70, color: '#ffffff' },
+  { name: 'Next.js',  Icon: RiNextjsFill,    level: 70, color: '#7B2FFF' },
 ]
 
 const Technologies = () => {
   return (
-    <section id="skills" className="py-20 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
+    <section
+      id="skills"
+      className="py-20 md:py-28 px-6 md:px-12"
+      style={{ background: 'var(--bg2)' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="section-label">Tech Stack</div>
+
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 md:mb-14"
-          style={{ letterSpacing: '-0.03em' }}
+          style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
         >
           Technologies I work with
         </motion.h2>
+
         <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {SKILLS.map((skill, i) => (
             <motion.div
@@ -45,22 +51,33 @@ const Technologies = () => {
               whileHover={{ y: -6 }}
               className="relative group flex flex-col items-center gap-2 md:gap-3 p-4 md:p-6 rounded-xl overflow-hidden"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
                 transition: 'border-color 0.3s ease',
               }}
               onMouseEnter={e => e.currentTarget.style.borderColor = skill.color + '55'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
             >
               {/* Bottom accent bar */}
               <div
                 className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out"
                 style={{ background: skill.color }}
               />
+
               <skill.Icon className="text-3xl md:text-5xl" style={{ color: skill.color }} />
-              <span className="font-semibold text-xs md:text-sm text-center">{skill.name}</span>
+
+              <span
+                className="font-semibold text-xs md:text-sm text-center"
+                style={{ color: 'var(--text)' }}
+              >
+                {skill.name}
+              </span>
+
               {/* Progress bar */}
-              <div className="w-full h-[3px] rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+              <div
+                className="w-full h-[3px] rounded-full"
+                style={{ background: 'var(--border)' }}
+              >
                 <motion.div
                   className="h-full rounded-full"
                   style={{ background: skill.color }}

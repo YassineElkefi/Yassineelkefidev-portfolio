@@ -1,23 +1,23 @@
 import { motion } from 'framer-motion'
 import { ABOUT_TEXT } from '../constants'
 import aboutImg from '../assets/about.webp'
-import { label } from 'framer-motion/client'
 
 const stats = [
   { num: '6+', label: 'Years Coding' },
   { num: '8+', label: 'Projects Built' },
   { num: '4',  label: 'Internships' },
-  //{ num: '1+', label: 'Work Experience' },
 ]
 
 const About = () => {
   return (
-    <section id="about" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12">
+    <section id="about" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12"
+      style={{ borderColor: 'var(--border)' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="section-label">About Me</div>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start lg:items-center">
 
-          {/* Image — full width on mobile, fixed width on desktop */}
+          {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -25,7 +25,6 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative w-full lg:w-[340px] xl:w-[380px] flex-shrink-0"
           >
-            {/* Accent frame */}
             <div
               className="absolute rounded-xl pointer-events-none"
               style={{
@@ -61,13 +60,14 @@ const About = () => {
           >
             <h2
               className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6"
-              style={{ letterSpacing: '-0.03em' }}
+              style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
             >
               Building digital
               <br />
-              <span style={{ color: '#00E5FF' }}>experiences</span>
+              <span style={{ color: 'var(--cyan)' }}>experiences</span>
             </h2>
-            <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'rgba(240,238,246,0.5)' }}>
+
+            <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'var(--muted)' }}>
               {ABOUT_TEXT}
             </p>
 
@@ -76,11 +76,13 @@ const About = () => {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="p-3 md:p-5 rounded-lg transition-all duration-300 hover:border-cyan-400/50"
+                  className="p-3 md:p-5 rounded-lg transition-all duration-300"
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border)',
                   }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--cyan)'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
                 >
                   <div
                     className="text-2xl md:text-4xl font-extrabold leading-none mb-1"
@@ -92,7 +94,7 @@ const About = () => {
                   >
                     {s.num}
                   </div>
-                  <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase" style={{ color: 'rgba(240,238,246,0.4)' }}>
+                  <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase" style={{ color: 'var(--muted)' }}>
                     {s.label}
                   </div>
                 </div>

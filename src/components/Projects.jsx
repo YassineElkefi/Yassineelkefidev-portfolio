@@ -48,7 +48,11 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-20 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg2, #0d0d12)' }}>
+    <section
+      id="projects"
+      className="py-20 md:py-28 px-6 md:px-12"
+      style={{ background: 'var(--bg2)' }}
+    >
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -57,7 +61,7 @@ const Projects = () => {
             <div className="section-label">Work</div>
             <h2
               className="text-3xl md:text-4xl font-extrabold tracking-tight"
-              style={{ letterSpacing: '-0.03em' }}
+              style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
             >
               Projects
             </h2>
@@ -71,9 +75,9 @@ const Projects = () => {
                 onClick={() => setActive(tag)}
                 className="font-mono text-xs tracking-widest uppercase px-4 md:px-5 py-2 rounded transition-all duration-200"
                 style={{
-                  border: `1px solid ${active === tag ? '#7B2FFF' : 'rgba(255,255,255,0.1)'}`,
+                  border: `1px solid ${active === tag ? 'var(--violet)' : 'var(--border-bright)'}`,
                   background: active === tag ? 'rgba(123,47,255,0.15)' : 'transparent',
-                  color: active === tag ? 'white' : 'rgba(240,238,246,0.45)',
+                  color: active === tag ? 'var(--text)' : 'var(--muted)',
                 }}
               >
                 {tag}
@@ -96,14 +100,14 @@ const Projects = () => {
                 onClick={() => handleClick(project)}
                 className="group relative flex flex-col rounded-xl overflow-hidden"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                   transition: 'border-color 0.3s ease, transform 0.3s ease',
                   cursor: 'pointer',
                 }}
                 whileHover={{ y: -6 }}
                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = project.accent + '55')}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               >
                 {/* Top accent line */}
                 <div
@@ -155,34 +159,41 @@ const Projects = () => {
                 <div className="flex flex-col flex-1 p-5 md:p-6">
                   <h6
                     className="text-base md:text-lg font-bold mb-2"
-                    style={{ letterSpacing: '-0.02em' }}
+                    style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}
                   >
                     {project.emoji} {project.title}
                   </h6>
 
                   <p
                     className="text-sm leading-relaxed mb-5 flex-1"
-                    style={{ color: 'rgba(240,238,246,0.5)' }}
+                    style={{ color: 'var(--muted)' }}
                   >
                     {project.description}
                   </p>
 
                   {/* Tech + action */}
-                  <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                  <div
+                    className="flex items-center justify-between pt-4"
+                    style={{ borderTop: '1px solid var(--border)' }}
+                  >
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.slice(0, 3).map((t) => (
                         <span
                           key={t}
                           className="font-mono text-xs px-2 py-0.5 rounded"
-                          style={{ color: project.accent, border: `1px solid ${project.accent}30`, background: `${project.accent}0D` }}
+                          style={{
+                            color: project.accent,
+                            border: `1px solid ${project.accent}30`,
+                            background: `${project.accent}0D`,
+                          }}
                         >
                           {t}
                         </span>
                       ))}
                     </div>
                     <span
-                      className="font-mono text-xs flex items-center gap-1 transition-colors duration-200"
-                      style={{ color: 'rgba(240,238,246,0.35)' }}
+                      className="font-mono text-xs flex items-center gap-1"
+                      style={{ color: 'var(--muted)' }}
                     >
                       {project.status === 'private' ? '🔒' : '→'}
                     </span>

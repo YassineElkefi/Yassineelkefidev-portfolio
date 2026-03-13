@@ -93,7 +93,7 @@ export const PROJECTS = [
     status: "public",
     emoji: "💸",
     tag: "Web",
-    accent: "#FFD700",
+    accent: "#D4A017",
   },
   {
     title: "Real Estate Mobile App",

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa'
 import { FaSquareXTwitter, FaDiscord } from 'react-icons/fa6'
 import { motion, AnimatePresence } from 'framer-motion'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = ['About', 'Skills', 'Experience', 'Projects', 'Contact']
 
@@ -15,7 +16,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close menu on resize to desktop
   useEffect(() => {
     const handleResize = () => { if (window.innerWidth >= 1024) setMenuOpen(false) }
     window.addEventListener('resize', handleResize)
@@ -34,10 +34,12 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 transition-all duration-400 ${
-          scrolled || menuOpen
-            ? 'bg-[rgba(6,6,8,0.95)] backdrop-blur-xl border-b border-white/[0.07]'
-            : 'bg-transparent border-b border-transparent'
+          scrolled || menuOpen ? 'backdrop-blur-xl' : ''
         }`}
+        style={{
+          background: scrolled || menuOpen ? 'rgba(var(--nav-rgb, 6,6,8), 0.95)' : 'transparent',
+          borderBottom: `1px solid ${scrolled || menuOpen ? 'var(--border)' : 'transparent'}`,
+        }}
       >
         {/* Logo */}
         <div className="flex items-center gap-3">
@@ -59,7 +61,10 @@ const Navbar = () => {
             <li key={link}>
               <a
                 href={`#${link.toLowerCase()}`}
-                className="font-mono text-xs tracking-widest uppercase text-white/45 hover:text-white transition-colors duration-200"
+                className="font-mono text-xs tracking-widest uppercase transition-colors duration-200"
+                style={{ color: 'var(--muted)' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
               >
                 {link}
               </a>
@@ -69,14 +74,17 @@ const Navbar = () => {
 
         {/* Right side */}
         <div className="flex items-center gap-4">
-          {/* Socials — hide on very small screens, show on sm+ */}
+          {/* Socials — hide on very small screens */}
           <div className="hidden sm:flex items-center gap-4 text-xl">
-            <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" className="text-white/45 hover:text-blue-400 transition-colors duration-200"><FaLinkedin /></a>
-            <a href="https://github.com/YassineElkefi" target="_blank" className="text-white/45 hover:text-white transition-colors duration-200"><FaGithub /></a>
-            <a href="https://x.com/YassineElkefi" target="_blank" className="text-white/45 hover:text-white transition-colors duration-200"><FaSquareXTwitter /></a>
-            <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" className="text-white/45 hover:text-pink-400 transition-colors duration-200"><FaInstagram /></a>
-            <a href="http://discord.com/users/189012634056654849" target="_blank" className="text-white/45 hover:text-indigo-400 transition-colors duration-200"><FaDiscord /></a>
+            <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#3B82F6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaLinkedin /></a>
+            <a href="https://github.com/YassineElkefi" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaGithub /></a>
+            <a href="https://x.com/YassineElkefi" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaSquareXTwitter /></a>
+            <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#F472B6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaInstagram /></a>
+            <a href="http://discord.com/users/189012634056654849" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#818CF8'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaDiscord /></a>
           </div>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {/* Hamburger — mobile only */}
           <button
@@ -85,16 +93,22 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             <span
-              className="block w-6 h-px bg-white transition-all duration-300"
-              style={{ transform: menuOpen ? 'translateY(4px) rotate(45deg)' : 'none' }}
+              className="block w-6 h-px transition-all duration-300"
+              style={{
+                background: 'var(--text)',
+                transform: menuOpen ? 'translateY(4px) rotate(45deg)' : 'none',
+              }}
             />
             <span
-              className="block w-6 h-px bg-white transition-all duration-300"
-              style={{ opacity: menuOpen ? 0 : 1 }}
+              className="block w-6 h-px transition-all duration-300"
+              style={{ background: 'var(--text)', opacity: menuOpen ? 0 : 1 }}
             />
             <span
-              className="block w-6 h-px bg-white transition-all duration-300"
-              style={{ transform: menuOpen ? 'translateY(-4px) rotate(-45deg)' : 'none' }}
+              className="block w-6 h-px transition-all duration-300"
+              style={{
+                background: 'var(--text)',
+                transform: menuOpen ? 'translateY(-4px) rotate(-45deg)' : 'none',
+              }}
             />
           </button>
         </div>
@@ -108,10 +122,10 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[68px] left-0 right-0 z-40 lg:hidden"
+            className="mobile-menu fixed top-[68px] left-0 right-0 z-40 lg:hidden"
             style={{
-              background: 'rgba(6,6,8,0.97)',
-              borderBottom: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--bg)',
+              borderBottom: '1px solid var(--border)',
               backdropFilter: 'blur(20px)',
             }}
           >
@@ -125,7 +139,10 @@ const Navbar = () => {
                 >
                   <button
                     onClick={() => handleNavClick(link)}
-                    className="w-full text-left px-6 py-4 font-mono text-sm tracking-widest uppercase text-white/60 hover:text-white hover:bg-white/5 transition-colors duration-200"
+                    className="w-full text-left px-6 py-4 font-mono text-sm tracking-widest uppercase transition-colors duration-200"
+                    style={{ color: 'var(--muted)' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
                   >
                     {link}
                   </button>
@@ -134,12 +151,15 @@ const Navbar = () => {
             </ul>
 
             {/* Socials in mobile menu */}
-            <div className="flex items-center gap-5 px-6 py-4 border-t text-xl" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-              <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" className="text-white/45 hover:text-blue-400 transition-colors"><FaLinkedin /></a>
-              <a href="https://github.com/YassineElkefi" target="_blank" className="text-white/45 hover:text-white transition-colors"><FaGithub /></a>
-              <a href="https://x.com/YassineElkefi" target="_blank" className="text-white/45 hover:text-white transition-colors"><FaSquareXTwitter /></a>
-              <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" className="text-white/45 hover:text-pink-400 transition-colors"><FaInstagram /></a>
-              <a href="http://discord.com/users/189012634056654849" target="_blank" className="text-white/45 hover:text-indigo-400 transition-colors"><FaDiscord /></a>
+            <div
+              className="flex items-center gap-5 px-6 py-4 border-t text-xl"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" style={{ color: 'var(--muted)' }}><FaLinkedin /></a>
+              <a href="https://github.com/YassineElkefi" target="_blank" style={{ color: 'var(--muted)' }}><FaGithub /></a>
+              <a href="https://x.com/YassineElkefi" target="_blank" style={{ color: 'var(--muted)' }}><FaSquareXTwitter /></a>
+              <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" style={{ color: 'var(--muted)' }}><FaInstagram /></a>
+              <a href="http://discord.com/users/189012634056654849" target="_blank" style={{ color: 'var(--muted)' }}><FaDiscord /></a>
             </div>
           </motion.div>
         )}

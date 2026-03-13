@@ -3,9 +3,12 @@ import { CONTACT } from '../constants'
 
 const Contact = () => {
   return (
-    <section id="contact" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12">
+    <section
+      id="contact"
+      className="border-b py-20 md:py-28 px-6 md:px-12"
+      style={{ borderColor: 'var(--border)' }}
+    >
       <div className="max-w-7xl mx-auto">
-
         <div className="section-label">Let's Talk</div>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
@@ -20,14 +23,14 @@ const Contact = () => {
           >
             <h2
               className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 md:mb-6"
-              style={{ letterSpacing: '-0.03em' }}
+              style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
             >
               Ready to build
               <br />
-              <span style={{ color: '#FF3CAC' }}>something great?</span>
+              <span style={{ color: 'var(--pink)' }}>something great?</span>
             </h2>
 
-            <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md" style={{ color: 'rgba(240,238,246,0.5)' }}>
+            <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md" style={{ color: 'var(--muted)' }}>
               I'm always open to discussing new projects, creative ideas, or opportunities
               to be part of an ambitious team.
             </p>
@@ -38,12 +41,13 @@ const Contact = () => {
                 href={`mailto:${CONTACT.email}`}
                 className="flex items-center gap-4 p-4 rounded-xl transition-all duration-300 group"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  textDecoration: 'none', color: 'inherit',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  textDecoration: 'none',
+                  color: 'var(--text)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#00E5FF55')}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--cyan)')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               >
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-lg"
@@ -52,16 +56,16 @@ const Contact = () => {
                   ✉
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'rgba(240,238,246,0.4)' }}>Email</div>
-                  <div className="text-sm truncate">{CONTACT.email}</div>
+                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>Email</div>
+                  <div className="text-sm truncate" style={{ color: 'var(--text)' }}>{CONTACT.email}</div>
                 </div>
               </a>
 
               <div
                 className="flex items-center gap-4 p-4 rounded-xl"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                 }}
               >
                 <div
@@ -71,16 +75,16 @@ const Contact = () => {
                   📍
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'rgba(240,238,246,0.4)' }}>Location</div>
-                  <div className="text-sm">{CONTACT.address}</div>
+                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>Location</div>
+                  <div className="text-sm" style={{ color: 'var(--text)' }}>{CONTACT.address}</div>
                 </div>
               </div>
 
               <div
                 className="flex items-center gap-4 p-4 rounded-xl"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
                 }}
               >
                 <div
@@ -90,12 +94,11 @@ const Contact = () => {
                   📞
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'rgba(240,238,246,0.4)' }}>Phone</div>
-                  {/* Stack phone numbers on mobile */}
-                  <div className="text-sm hidden md:block">{CONTACT.phoneNo.join('  |  ')}</div>
+                  <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>Phone</div>
+                  <div className="text-sm hidden md:block" style={{ color: 'var(--text)' }}>{CONTACT.phoneNo.join('  |  ')}</div>
                   <div className="flex flex-col gap-0.5 md:hidden">
                     {CONTACT.phoneNo.map((p) => (
-                      <span key={p} className="text-sm">{p}</span>
+                      <span key={p} className="text-sm" style={{ color: 'var(--text)' }}>{p}</span>
                     ))}
                   </div>
                 </div>
@@ -115,7 +118,7 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {['Name', 'Email'].map((field) => (
                   <div key={field} className="flex flex-col gap-2">
-                    <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'rgba(240,238,246,0.4)' }}>
+                    <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--muted)' }}>
                       {field}
                     </label>
                     <input
@@ -123,20 +126,20 @@ const Contact = () => {
                       placeholder={field === 'Email' ? 'you@email.com' : 'Your name'}
                       className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200"
                       style={{
-                        background: 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(255,255,255,0.07)',
-                        color: 'var(--text, #F0EEF6)',
+                        background: 'var(--surface)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text)',
                         fontFamily: 'Syne, sans-serif',
                       }}
-                      onFocus={(e) => (e.target.style.borderColor = '#7B2FFF')}
-                      onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.07)')}
+                      onFocus={(e) => (e.target.style.borderColor = 'var(--violet)')}
+                      onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
                     />
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'rgba(240,238,246,0.4)' }}>
+                <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--muted)' }}>
                   Subject
                 </label>
                 <input
@@ -144,18 +147,18 @@ const Contact = () => {
                   placeholder="Project inquiry"
                   className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200"
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    color: 'var(--text, #F0EEF6)',
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text)',
                     fontFamily: 'Syne, sans-serif',
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = '#7B2FFF')}
-                  onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.07)')}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--violet)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'rgba(240,238,246,0.4)' }}>
+                <label className="font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--muted)' }}>
                   Message
                 </label>
                 <textarea
@@ -163,13 +166,13 @@ const Contact = () => {
                   rows={5}
                   className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200 resize-none"
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    color: 'var(--text, #F0EEF6)',
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text)',
                     fontFamily: 'Syne, sans-serif',
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = '#7B2FFF')}
-                  onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.07)')}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--violet)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
                 />
               </div>
 
