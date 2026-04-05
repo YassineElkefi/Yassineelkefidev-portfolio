@@ -1,7 +1,23 @@
 import { motion } from 'framer-motion'
 import { CONTACT } from '../constants'
+import { useState } from 'react'
 
 const Contact = () => {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const mailtoLink = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      form.subject
+    )}&body=${encodeURIComponent(
+      `Name: ${form.name}
+      Email: ${form.email}
+
+    ${form.message}`
+  )}`
   return (
     <section
       id="contact"
@@ -122,6 +138,7 @@ const Contact = () => {
                       {field}
                     </label>
                     <input
+                      onChange={(e) => setForm({ ...form, [field.toLowerCase()]: e.target.value })}
                       type={field === 'Email' ? 'email' : 'text'}
                       placeholder={field === 'Email' ? 'you@email.com' : 'Your name'}
                       className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200"
@@ -143,6 +160,7 @@ const Contact = () => {
                   Subject
                 </label>
                 <input
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
                   type="text"
                   placeholder="Project inquiry"
                   className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200"
@@ -162,6 +180,7 @@ const Contact = () => {
                   Message
                 </label>
                 <textarea
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project..."
                   rows={5}
                   className="rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200 resize-none"
@@ -177,7 +196,7 @@ const Contact = () => {
               </div>
 
               <a
-                href={`mailto:${CONTACT.email}`}
+                href={mailtoLink}
                 className="btn-primary justify-center mt-2"
               >
                 <span>Send Message</span>

@@ -87,7 +87,7 @@ const Hero = () => {
             style={{ color: 'var(--muted)' }}
           >
             <span style={{ color: 'var(--text)' }}>Mobile</span> &amp;{' '}
-            <span style={{ color: 'var(--text)' }}>Full Stack</span> Developer
+            <span style={{ color: 'var(--text)' }}>Web Full Stack</span> Developer
           </motion.p>
 
           <motion.p
