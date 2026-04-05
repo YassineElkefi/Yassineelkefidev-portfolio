@@ -83,18 +83,22 @@ const SlideshowModal = ({ project, onClose }) => {
           </div>
         </div>
 
-        {/* Image area */}
-        <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: 0 }}>
-          <AnimatePresence mode="wait">
+        {/* Image area — portrait-ratio container sized for mobile screenshots */}
+        <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: '500px' }}>
+          {/* Preload all images silently so they're cached before the user navigates */}
+          {images.map((src, i) => i !== current && (
+            <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
+          ))}
+          <AnimatePresence initial={false}>
             <motion.img
               key={current}
               src={images[current]}
               alt={`${project.title} screenshot ${current + 1}`}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="w-full h-full object-contain"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, position: 'absolute' }}
+              transition={{ duration: 0.15 }}
+              className="absolute w-full h-full object-contain"
               style={{ maxHeight: '65vh' }}
             />
           </AnimatePresence>
