@@ -3,7 +3,7 @@ import {
   RiFlutterFill, RiReactjsLine, RiNextjsFill, RiAngularjsFill,
 } from 'react-icons/ri'
 import { FaNodeJs, FaAndroid, FaSwift } from 'react-icons/fa6'
-import { SiMongodb, SiNestjs, SiGraphql, SiMysql } from 'react-icons/si'
+import { SiMongodb, SiNestjs, SiGraphql, SiMysql, SiPostgresql } from 'react-icons/si'
 
 const SKILLS = [
   { name: 'Flutter',  Icon: RiFlutterFill,   level: 90, color: '#00E5FF' },
@@ -17,6 +17,7 @@ const SKILLS = [
   { name: 'SwiftUI',  Icon: FaSwift,         level: 72, color: '#FF6B35' },
   { name: 'Android',  Icon: FaAndroid,       level: 75, color: '#68D391' },
   { name: 'Next.js',  Icon: RiNextjsFill,    level: 70, color: '#7B2FFF' },
+  { name: 'PostgreSQL', Icon: SiPostgresql, level: 60, color: '#336791' }
 ]
 
 const Technologies = () => {
