@@ -5,6 +5,24 @@ import Swal from 'sweetalert2'
 
 const filterTags = ['All', 'Web', 'Mobile']
 
+/* Read the current theme from the DOM — works with data-theme, .dark/.light classes */
+const getTheme = () => {
+  const root = document.documentElement
+  if (
+    root.dataset.theme === 'dark' ||
+    root.classList.contains('dark') ||
+    root.className.includes('dark')
+  ) return 'dark'
+  if (
+    root.dataset.theme === 'light' ||
+    root.classList.contains('light') ||
+    root.className.includes('light')
+  ) return 'light'
+  // Fallback: check computed background luminance
+  const bg = getComputedStyle(root).getPropertyValue('--bg') || ''
+  return bg.trim().startsWith('#f') || bg.trim().startsWith('rgb(2') ? 'light' : 'dark'
+}
+
 const Projects = () => {
   const [active, setActive] = useState('All')
 
@@ -12,22 +30,26 @@ const Projects = () => {
 
   const handleClick = (project) => {
     if (project.status === 'private') {
+      const isDark = getTheme() === 'dark'
+
       Swal.fire({
         title: '🔒 Private Repository',
         html: `
-          <div class="text-gray-300 mb-4">
-            <p class="mb-2">This repository is <span class="text-red-400 font-semibold">private</span>.</p>
-            <p>Contact me for more details about <span class="text-cyan-400 font-medium">${project.title}</span></p>
+          <div style="color:${isDark ? '#D1D5DB' : '#374151'}" class="mb-4">
+            <p class="mb-2">This repository is <span style="color:#EF4444;font-weight:600">private</span>.</p>
+            <p>Contact me for more details about <span style="color:#06B6D4;font-weight:500">${project.title}</span></p>
           </div>`,
         icon: 'warning',
         iconColor: '#EF4444',
         confirmButtonText: '📧 Contact Me',
         confirmButtonColor: '#06B6D4',
-        background: 'linear-gradient(145deg, #1a1a1a, #262626)',
-        color: '#FFFFFF',
+        background: isDark
+          ? 'linear-gradient(145deg, #1a1a1a, #262626)'
+          : 'linear-gradient(145deg, #ffffff, #f3f4f6)',
+        color: isDark ? '#FFFFFF' : '#111827',
         customClass: {
-          popup: 'border-2 border-red-500/30 shadow-2xl shadow-red-500/20 backdrop-blur-sm rounded-xl',
-          title: 'text-xl font-bold text-red-400 mb-4',
+          popup: `border-2 shadow-2xl rounded-xl ${isDark ? 'border-red-500/30' : 'border-red-300/60'}`,
+          title: `text-xl font-bold mb-4 ${isDark ? 'text-red-400' : 'text-red-500'}`,
           confirmButton: 'px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105',
           cancelButton: 'px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105',
           actions: 'gap-4 mt-6',
