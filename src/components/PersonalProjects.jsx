@@ -1,8 +1,392 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { PERSONAL_PROJECTS } from '../constants'
 import Swal from 'sweetalert2'
 
+/* ─────────────────────────────────────────────────────────────
+   SLIDESHOW MODAL
+   ───────────────────────────────────────────────────────────── */
+const SlideshowModal = ({ project, onClose }) => {
+  const [current, setCurrent] = useState(0)
+  const images = project.screenshots || []
+  const total = images.length
+
+  const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total])
+  const next = useCallback(() => setCurrent(i => (i + 1) % total), [total])
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose, prev, next])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center modal-backdrop"
+      onClick={onClose}
+    >
+      {/* Card */}
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        className="relative w-full max-w-3xl mx-4 rounded-2xl overflow-hidden flex flex-col"
+        style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, maxHeight: '90vh' }}
+      >
+        {/* Header */}
+        <div
+          className="flex items-center justify-between px-5 py-3 flex-shrink-0"
+          style={{ borderBottom: `1px solid ${project.accent}22` }}
+        >
+          <span className="font-bold text-base" style={{ color: 'var(--text)' }}>
+            {project.emoji} {project.title} — Screenshots
+          </span>
+          <div className="flex items-center gap-3">
+            {project.githubRepo && project.status !== 'private' && (
+              <a
+                href={project.githubRepo}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200"
+                style={{
+                  color: project.accent,
+                  border: `1px solid ${project.accent}44`,
+                  background: `${project.accent}11`,
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}22` }}
+                onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}11` }}
+              >
+                GitHub →
+              </a>
+            )}
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-200 modal-close-btn"
+              style={{
+                color: 'var(--muted)',
+                border: '1px solid var(--border)',
+                background: 'transparent',
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        {/* Image area */}
+        <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: 0 }}>
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={current}
+              src={images[current]}
+              alt={`${project.title} screenshot ${current + 1}`}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="w-full h-full object-contain"
+              style={{ maxHeight: '65vh' }}
+            />
+          </AnimatePresence>
+
+          {/* Prev / Next */}
+          {total > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn"
+                style={{
+                  border: `1px solid ${project.accent}33`,
+                  color: 'var(--text)',
+                  '--nav-hover-bg': `${project.accent}33`,
+                }}
+              >
+                ‹
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn"
+                style={{
+                  border: `1px solid ${project.accent}33`,
+                  color: 'var(--text)',
+                  '--nav-hover-bg': `${project.accent}33`,
+                }}
+              >
+                ›
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Dots + counter */}
+        {total > 1 && (
+          <div
+            className="flex items-center justify-center gap-2 py-3 flex-shrink-0"
+            style={{ borderTop: `1px solid ${project.accent}22` }}
+          >
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className="transition-all duration-200"
+                style={{
+                  width: i === current ? '20px' : '8px',
+                  height: '8px',
+                  borderRadius: '4px',
+                  background: i === current ? project.accent : `${project.accent}44`,
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                }}
+              />
+            ))}
+            <span className="ml-2 font-mono text-xs" style={{ color: 'var(--muted)' }}>
+              {current + 1} / {total}
+            </span>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LIVE PREVIEW MODAL
+   ───────────────────────────────────────────────────────────── */
+const LivePreviewModal = ({ project, onClose }) => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center modal-backdrop"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        className="relative w-full max-w-5xl mx-4 rounded-2xl overflow-hidden flex flex-col"
+        style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, height: '85vh' }}
+      >
+        {/* Browser chrome */}
+        <div
+          className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome"
+          style={{ borderBottom: `1px solid ${project.accent}22` }}
+        >
+          {/* Traffic lights */}
+          <div className="flex gap-1.5">
+            <button
+              onClick={onClose}
+              className="w-3.5 h-3.5 rounded-full transition-opacity"
+              style={{ background: '#FF5F57' }}
+              title="Close"
+            />
+            <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#FEBC2E' }} />
+            <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#28C840' }} />
+          </div>
+
+          {/* URL bar */}
+          <div
+            className="flex-1 flex items-center gap-2 px-3 py-1 rounded-lg font-mono text-xs truncate modal-url-bar"
+            style={{ border: '1px solid var(--border)', color: 'var(--muted)' }}
+          >
+            <span style={{ color: project.accent }}>🔒</span>
+            <span className="truncate">{project.demoUrl}</span>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all duration-200"
+              style={{
+                color: project.accent,
+                border: `1px solid ${project.accent}44`,
+                background: `${project.accent}11`,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}22` }}
+              onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}11` }}
+              title="Open in new tab"
+            >
+              ↗ Open
+            </a>
+            {project.githubRepo && project.status !== 'private' && (
+              <a
+                href={project.githubRepo}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200 modal-ghost-btn"
+                style={{
+                  color: 'var(--muted)',
+                  border: '1px solid var(--border)',
+                  background: 'transparent',
+                }}
+              >
+                GitHub →
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* iframe */}
+        <div className="relative flex-1 overflow-hidden">
+          {loading && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3" style={{ background: 'var(--surface)', zIndex: 1 }}>
+              <div
+                className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin"
+                style={{ borderColor: `${project.accent}44`, borderTopColor: project.accent }}
+              />
+              <span className="font-mono text-xs" style={{ color: 'var(--muted)' }}>Loading preview…</span>
+            </div>
+          )}
+          <iframe
+            src={project.demoUrl}
+            title={`${project.title} live preview`}
+            className="w-full h-full border-0"
+            onLoad={() => setLoading(false)}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DEMO CHOICE MODAL
+   ───────────────────────────────────────────────────────────── */
+const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  const demoLabel = project.demo === 'live' ? '🌐 Live Preview' : '🖼️ Screenshots'
+  const demoSub   = project.demo === 'live' ? 'Open inside portfolio' : 'Browse app screenshots'
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center modal-backdrop"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.88, opacity: 0, y: 16 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.88, opacity: 0, y: 16 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        className="w-full max-w-sm mx-4 rounded-2xl overflow-hidden p-6"
+        style={{
+          background: 'var(--surface)',
+          border: `1px solid ${project.accent}33`,
+          boxShadow: `0 0 60px ${project.accent}18`,
+        }}
+      >
+        {/* Title */}
+        <div className="text-center mb-6">
+          <div className="text-3xl mb-2">{project.emoji}</div>
+          <h3 className="font-bold text-lg" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+            {project.title}
+          </h3>
+          <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>What would you like to open?</p>
+        </div>
+
+        {/* Options */}
+        <div className="flex flex-col gap-3">
+          {/* Demo button */}
+          <button
+            onClick={onDemo}
+            className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full"
+            style={{
+              background: `${project.accent}0D`,
+              border: `1px solid ${project.accent}33`,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}1A` }}
+            onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}0D` }}
+          >
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+              style={{ background: `${project.accent}22` }}
+            >
+              {project.demo === 'live' ? '🌐' : '🖼️'}
+            </div>
+            <div>
+              <div className="font-semibold text-sm" style={{ color: project.accent }}>{demoLabel}</div>
+              <div className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{demoSub}</div>
+            </div>
+            <span className="ml-auto text-lg" style={{ color: project.accent }}>›</span>
+          </button>
+
+          {/* GitHub button */}
+          <button
+            onClick={onGithub}
+            className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-ghost-btn"
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border)',
+            }}
+          >
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg"
+            >
+              ⌥
+            </div>
+            <div>
+              <div className="font-semibold text-sm" style={{ color: 'var(--text)' }}>GitHub Repository</div>
+              <div className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>View source code</div>
+            </div>
+            <span className="ml-auto text-lg" style={{ color: 'var(--muted)' }}>›</span>
+          </button>
+        </div>
+
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="w-full mt-4 py-2 rounded-xl font-mono text-xs transition-all duration-200 modal-ghost-btn"
+          style={{ color: 'var(--muted)', border: '1px solid var(--border)', background: 'transparent' }}
+        >
+          Cancel
+        </button>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MAIN COMPONENT
+   ───────────────────────────────────────────────────────────── */
 const PersonalProjects = () => {
+  const [modal, setModal] = useState(null)
+
   const handleProjectClick = (project) => {
     if (project.status === 'private') {
       Swal.fire({
@@ -37,8 +421,16 @@ const PersonalProjects = () => {
       })
       return
     }
-    window.open(project.githubRepo, '_blank')
+
+    if (!project.demo) {
+      window.open(project.githubRepo, '_blank')
+      return
+    }
+
+    setModal({ type: 'choice', project })
   }
+
+  const closeModal = () => setModal(null)
 
   return (
     <section
@@ -47,6 +439,92 @@ const PersonalProjects = () => {
       style={{ borderColor: 'var(--border)' }}
     >
       <style>{`
+        /* ── Modal backdrop: adapts to light/dark ── */
+        .modal-backdrop {
+          background: var(--modal-backdrop, rgba(0, 0, 0, 0.75));
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Light mode overrides */
+        :root[data-theme="light"] .modal-backdrop,
+        .light .modal-backdrop,
+        [class*="light"] .modal-backdrop {
+          background: rgba(0, 0, 0, 0.45);
+        }
+
+        /* Browser chrome bar */
+        .modal-browser-chrome {
+          background: var(--surface-raised, rgba(0, 0, 0, 0.18));
+        }
+
+        /* URL bar */
+        .modal-url-bar {
+          background: var(--input-bg, rgba(0, 0, 0, 0.06));
+        }
+
+        /* Nav arrows (prev/next in slideshow) */
+        .modal-nav-btn {
+          background: var(--modal-nav-bg, rgba(0, 0, 0, 0.45));
+          backdrop-filter: blur(6px);
+        }
+        .modal-nav-btn:hover {
+          background: var(--nav-hover-bg, rgba(255,255,255,0.15)) !important;
+        }
+
+        /* Ghost buttons */
+        .modal-ghost-btn:hover {
+          background: var(--ghost-hover, rgba(0, 0, 0, 0.06)) !important;
+        }
+
+        /* Close button hover */
+        .modal-close-btn:hover {
+          background: var(--ghost-hover, rgba(0, 0, 0, 0.08)) !important;
+        }
+
+        /* Icon bg in choice modal */
+        .modal-icon-bg {
+          background: var(--icon-bg, rgba(0, 0, 0, 0.07));
+        }
+
+        /* ── Dark mode: restore original darker values ── */
+        :root[data-theme="dark"] .modal-nav-btn,
+        .dark .modal-nav-btn,
+        [class*="dark"] .modal-nav-btn {
+          background: rgba(0, 0, 0, 0.55);
+        }
+        :root[data-theme="dark"] .modal-browser-chrome,
+        .dark .modal-browser-chrome,
+        [class*="dark"] .modal-browser-chrome {
+          background: rgba(0, 0, 0, 0.3);
+        }
+        :root[data-theme="dark"] .modal-url-bar,
+        .dark .modal-url-bar,
+        [class*="dark"] .modal-url-bar {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        :root[data-theme="dark"] .modal-ghost-btn:hover,
+        .dark .modal-ghost-btn:hover,
+        [class*="dark"] .modal-ghost-btn:hover {
+          background: rgba(255, 255, 255, 0.06) !important;
+        }
+        :root[data-theme="dark"] .modal-close-btn:hover,
+        .dark .modal-close-btn:hover,
+        [class*="dark"] .modal-close-btn:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+        }
+        :root[data-theme="dark"] .modal-icon-bg,
+        .dark .modal-icon-bg,
+        [class*="dark"] .modal-icon-bg {
+          background: rgba(255, 255, 255, 0.06);
+        }
+        :root[data-theme="dark"] .modal-backdrop,
+        .dark .modal-backdrop,
+        [class*="dark"] .modal-backdrop {
+          background: rgba(0, 0, 0, 0.88);
+        }
+
+        /* ── Card layout ── */
         .pp-card { display: flex; flex-direction: column; }
         .pp-thumb-wrap {
           position: relative; width: 100%; height: 200px;
@@ -109,26 +587,26 @@ const PersonalProjects = () => {
                   <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}>
                     {project.emoji} {project.title}
                   </h6>
+
                   {project.status === 'private' && (
-                    <span
-                      className="font-mono text-xs px-2 py-1 rounded"
-                      style={{
-                        background: 'rgba(255,50,50,0.1)',
-                        border: '1px solid rgba(255,50,50,0.3)',
-                        color: '#FF5555',
-                      }}
-                    >
+                    <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,50,50,0.1)', border: '1px solid rgba(255,50,50,0.3)', color: '#FF5555' }}>
                       Private
                     </span>
                   )}
-                  <span
-                    className="font-mono text-xs px-2 py-1 rounded"
-                    style={{
-                      background: 'var(--surface)',
-                      border: '1px solid var(--border-bright)',
-                      color: 'var(--muted)',
-                    }}
-                  >
+
+                  {project.demo === 'live' && (
+                    <span className="font-mono text-xs px-2 py-1 rounded flex items-center gap-1" style={{ background: 'rgba(40,200,80,0.08)', border: '1px solid rgba(40,200,80,0.28)', color: '#4ade80' }}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse" />
+                      Live
+                    </span>
+                  )}
+                  {project.demo === 'slideshow' && (
+                    <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: `${project.accent}0D`, border: `1px solid ${project.accent}33`, color: project.accent }}>
+                      🖼️ Preview
+                    </span>
+                  )}
+
+                  <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--surface)', border: '1px solid var(--border-bright)', color: 'var(--muted)' }}>
                     {project.tag}
                   </span>
                 </div>
@@ -142,11 +620,7 @@ const PersonalProjects = () => {
                     <span
                       key={tech}
                       className="font-mono text-xs px-2 md:px-3 py-1 rounded"
-                      style={{
-                        color: project.accent,
-                        border: `1px solid ${project.accent}35`,
-                        background: `${project.accent}0D`,
-                      }}
+                      style={{ color: project.accent, border: `1px solid ${project.accent}35`, background: `${project.accent}0D` }}
                     >
                       {tech}
                     </span>
@@ -154,17 +628,36 @@ const PersonalProjects = () => {
                 </div>
               </div>
 
-              {/* Arrow — desktop only */}
+              {/* Arrow */}
               <div
                 className="hidden lg:flex flex-shrink-0 text-2xl pr-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ color: project.accent }}
               >
-                {project.status === 'private' ? '🔒' : '→'}
+                {project.status === 'private' ? '🔒' : project.demo ? '⊕' : '→'}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* ── Modals ── */}
+      <AnimatePresence>
+        {modal?.type === 'choice' && (
+          <DemoChoiceModal
+            key="choice"
+            project={modal.project}
+            onClose={closeModal}
+            onGithub={() => { closeModal(); window.open(modal.project.githubRepo, '_blank') }}
+            onDemo={() => setModal({ type: modal.project.demo, project: modal.project })}
+          />
+        )}
+        {modal?.type === 'slideshow' && (
+          <SlideshowModal key="slideshow" project={modal.project} onClose={closeModal} />
+        )}
+        {modal?.type === 'live' && (
+          <LivePreviewModal key="live" project={modal.project} onClose={closeModal} />
+        )}
+      </AnimatePresence>
     </section>
   )
 }
