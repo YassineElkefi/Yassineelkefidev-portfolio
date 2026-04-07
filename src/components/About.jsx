@@ -4,7 +4,7 @@ import aboutImg from '../assets/about.webp'
 
 const stats = [
   { num: '6+', label: 'Years Coding' },
-  { num: '12+', label: 'Projects Built' },
+  { num: '14+', label: 'Projects Built' },
   { num: '4',  label: 'Internships' },
 ]
 
