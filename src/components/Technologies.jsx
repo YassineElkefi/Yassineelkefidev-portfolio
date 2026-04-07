@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import {
   RiFlutterFill, RiReactjsLine, RiNextjsFill, RiAngularjsFill,
 } from 'react-icons/ri'
-import { FaNodeJs, FaAndroid, FaSwift } from 'react-icons/fa6'
-import { SiMongodb, SiNestjs, SiGraphql, SiMysql, SiPostgresql } from 'react-icons/si'
+import { FaNodeJs, FaAndroid, FaSwift, FaGitAlt, FaDocker, FaRedhat } from 'react-icons/fa6'
+import { SiMongodb, SiNestjs, SiGraphql, SiMysql, SiPostgresql, SiTypescript, SiExpress, SiTailwindcss } from 'react-icons/si'
 
 const SKILLS = [
   { name: 'Flutter',  Icon: RiFlutterFill,   level: 90, color: '#00E5FF' },
@@ -17,7 +17,13 @@ const SKILLS = [
   { name: 'SwiftUI',  Icon: FaSwift,         level: 72, color: '#FF6B35' },
   { name: 'Android',  Icon: FaAndroid,       level: 75, color: '#68D391' },
   { name: 'Next.js',  Icon: RiNextjsFill,    level: 70, color: '#7B2FFF' },
-  { name: 'PostgreSQL', Icon: SiPostgresql, level: 60, color: '#336791' }
+  { name: 'PostgreSQL', Icon: SiPostgresql, level: 60, color: '#336791' },
+  { name: 'TypeScript', Icon: SiTypescript, level: 90, color: '#3178C6' },
+  { name: 'Express.js', Icon: SiExpress, level: 85, color: '#FFFFFF' },
+  { name: 'Git', Icon: FaGitAlt, level: 85, color: '#F05032' },
+  { name: 'Docker', Icon: FaDocker, level: 65, color: '#2496ED' },
+  { name: 'Tailwind CSS', Icon: SiTailwindcss, level: 85, color: '#06B6D4' },
+  { name: 'Red Hat', Icon: FaRedhat, level: 80, color: '#EE0000' },
 ]
 
 const Technologies = () => {
