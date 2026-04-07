@@ -10,6 +10,8 @@ import project9 from "../assets/projects/project-9.png";
 import project10 from "../assets/projects/project-10.png";
 import project11 from "../assets/projects/project-11.png";
 import project12 from "../assets/projects/project-12.png";
+import project13 from "../assets/projects/project-13.png";
+import project14 from "../assets/projects/project-14.png";
 
 import screenshotIslami1 from "../assets/screenshots/islami/islami-1.png";
 import screenshotIslami2 from "../assets/screenshots/islami/islami-2.png";
@@ -259,6 +261,34 @@ export const PERSONAL_PROJECTS = [
     accent: "#336791",
     demo: "live",                                   
     demoUrl: "https://yassineelkefi.github.io/Hangman-Game",
+  },
+  {
+    title: "Sudoo",
+    image: project13,
+    description:
+      "A modern, responsive, and fully-featured Sudoku web application designed with a beautiful and aesthetic UI, it brings a classic puzzle experience right to your browser",
+    technologies: ["Next.js", "Tailwindcss", "TypeScript"],
+    githubRepo: "https://github.com/YassineElkefi/Sudoo",
+    status: "public",
+    emoji: "🃏",
+    tag: "Web",
+    accent: "#336791",
+    demo: "live",                                   
+    demoUrl: "https://sudoo-game.vercel.app/",
+  },
+  {
+    title: "CodeHunt",
+    image: project14,
+    description:
+      "A real-time multiplayer code deduction game (Bulls and Cows style) where players create/join a room, set a secret 4-digit code, and take turns guessing until one player gets all 4 exact digits.",
+    technologies: ["Next.js", "Tailwindcss", "TypeScript", "Ably"],
+    githubRepo: "https://github.com/YassineElkefi/CodeHunt",
+    status: "public",
+    emoji: "🎲",
+    tag: "Web",
+    accent: "#D4A017",
+    demo: "live",                                   
+    demoUrl: "https://codehunt-fun.vercel.app/",
   },
 ];
 
