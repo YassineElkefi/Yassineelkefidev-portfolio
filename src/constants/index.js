@@ -12,6 +12,8 @@ import project11 from "../assets/projects/project-11.png";
 import project12 from "../assets/projects/project-12.png";
 import project13 from "../assets/projects/project-13.png";
 import project14 from "../assets/projects/project-14.png";
+import project15 from "../assets/projects/project-15.png";
+import project16 from "../assets/projects/project-16.png";
 
 import screenshotIslami1 from "../assets/screenshots/islami/islami-1.png";
 import screenshotIslami2 from "../assets/screenshots/islami/islami-2.png";
@@ -289,6 +291,34 @@ export const PERSONAL_PROJECTS = [
     accent: "#D4A017",
     demo: "live",                                   
     demoUrl: "https://codehunt-fun.vercel.app/",
+  },
+  {
+    title: "MineFlux",
+    image: project15,
+    description:
+      "A premium, modern Minesweeper experience built with Next.js, Framer Motion, and Tailwind CSS.",
+    technologies: ["Next.js", "Tailwindcss", "TypeScript"],
+    githubRepo: "https://github.com/YassineElkefi/MineFlux",
+    status: "public",
+    emoji: "💣",
+    tag: "Web",
+    accent: "#D4A017",
+    demo: "live",                                   
+    demoUrl: "https://mine-flux-game.vercel.app/",
+  },
+  {
+    title: "LexiQ",
+    image: project16,
+    description:
+      "LexiQ is a polished Wordle clone built with Next.js, TypeScript, and Tailwind CSS.",
+    technologies: ["Next.js", "Tailwindcss", "TypeScript"],
+    githubRepo: "https://github.com/YassineElkefi/LexiQ",
+    status: "public",
+    emoji: "🧩",
+    tag: "Web",
+    accent: "#F05032",
+    demo: "live",                                   
+    demoUrl: "https://lexi-q.vercel.app/",
   },
 ];
 
