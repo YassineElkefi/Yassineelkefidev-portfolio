@@ -55,6 +55,37 @@ import screenshotHomeSpot5 from "../assets/screenshots/homespot/homespot-5.png";
 import screenshotHomeSpot6 from "../assets/screenshots/homespot/homespot-6.png";
 import screenshotHomeSpot7 from "../assets/screenshots/homespot/homespot-7.png";
 
+import screenshotProjexa1 from "../assets/screenshots/projexa/projexa-1.png";
+import screenshotProjexa2 from "../assets/screenshots/projexa/projexa-2.png";
+import screenshotProjexa3 from "../assets/screenshots/projexa/projexa-3.png";
+import screenshotProjexa4 from "../assets/screenshots/projexa/projexa-4.png";
+import screenshotProjexa5 from "../assets/screenshots/projexa/projexa-5.png";
+import screenshotProjexa6 from "../assets/screenshots/projexa/projexa-6.png";
+import screenshotProjexa7 from "../assets/screenshots/projexa/projexa-7.png";
+import screenshotProjexa8 from "../assets/screenshots/projexa/projexa-8.png";
+import screenshotProjexa9 from "../assets/screenshots/projexa/projexa-9.png";
+import screenshotProjexa10 from "../assets/screenshots/projexa/projexa-10.png";
+import screenshotProjexa11 from "../assets/screenshots/projexa/projexa-11.png";
+import screenshotProjexa12 from "../assets/screenshots/projexa/projexa-12.png";
+import screenshotProjexa13 from "../assets/screenshots/projexa/projexa-13.png";
+import screenshotProjexa14 from "../assets/screenshots/projexa/projexa-14.png";
+import screenshotProjexa15 from "../assets/screenshots/projexa/projexa-15.png";
+import screenshotProjexa16 from "../assets/screenshots/projexa/projexa-16.png";
+import screenshotProjexa17 from "../assets/screenshots/projexa/projexa-17.png";
+import screenshotProjexa18 from "../assets/screenshots/projexa/projexa-18.png";
+import screenshotProjexa19 from "../assets/screenshots/projexa/projexa-19.png";
+import screenshotProjexa20 from "../assets/screenshots/projexa/projexa-20.png";
+import screenshotProjexa21 from "../assets/screenshots/projexa/projexa-21.png";
+import screenshotProjexa22 from "../assets/screenshots/projexa/projexa-22.png";
+import screenshotProjexa23 from "../assets/screenshots/projexa/projexa-23.png";
+import screenshotProjexa24 from "../assets/screenshots/projexa/projexa-24.png";
+import screenshotProjexa25 from "../assets/screenshots/projexa/projexa-25.png";
+import screenshotProjexa26 from "../assets/screenshots/projexa/projexa-26.png";
+import screenshotProjexa27 from "../assets/screenshots/projexa/projexa-27.png";
+import screenshotProjexa28 from "../assets/screenshots/projexa/projexa-28.png";
+import screenshotProjexa29 from "../assets/screenshots/projexa/projexa-29.png";
+
+
 export const HERO_CONTENT = `Tech enthusiast specializing in Mobile and Web development with proven experience in full-stack development. Demonstrated expertise in building responsive web applications and mobile solutions. Strong foundation in Web development with growing proficiency in Mobile apps creation through hands-on projects. Proactive problem-solver with excellent adaptability in dynamic software environments.`;
 
 export const ABOUT_TEXT = `I am a dedicated and versatile full stack & mobile apps developer with a passion for creating efficient and user-friendly applications. I have worked with a variety of technologies, including React, Angular, Nest, Node.js, MySQL, MongoDB, Swift, Java and Dart. My journey in Web and Mobile development began with a deep curiosity for how things work, and it has evolved into a career where I continuously strive to learn and adapt to new challenges. I thrive in collaborative environments and enjoy solving complex problems to deliver high-quality solutions. Outside of coding, I enjoy staying active, exploring new technologies, playing video games, and spending time with my family.`;
@@ -120,7 +151,7 @@ export const PROJECTS = [
     image: project1,
     description:
       "Comprehensive carpooling and object transportation application connecting users for shared rides and delivery services. Built with Angular, Express, and MongoDB.",
-    technologies: ["HTML", "CSS", "Angular", "Express", "MongoDB"],
+    technologies: ["Angular", "Express", "MongoDB"],
     githubRepo: "https://github.com/YassineElkefi/Deliverini",
     status: "public",
     emoji: "🚗",
@@ -128,16 +159,18 @@ export const PROJECTS = [
     accent: "#00E5FF",
   },
   {
-    title: "CoTEK",
+    title: "Projexa",
     image: project2,
     description:
-      "Advanced project management platform for team collaboration and productivity. Built with Angular, SpringBoot, and MySQL.",
-    technologies: ["HTML", "CSS", "Angular", "SpringBoot", "MySQL"],
-    githubRepo: "https://github.com/Hiba-Bahri/PI",
+      "A modern, full-stack project management platform designed for seamless collaboration and efficient task tracking.",
+    technologies: ["Angular","NestJS","Socket.io"],
+    githubRepo: "https://github.com/YassineElkefi/Projexa",
     status: "public",
     emoji: "📋",
     tag: "Web",
     accent: "#7B2FFF",
+    demo: "slideshow",
+    screenshots: [screenshotProjexa1, screenshotProjexa2, screenshotProjexa3, screenshotProjexa4, screenshotProjexa5, screenshotProjexa6, screenshotProjexa7, screenshotProjexa8, screenshotProjexa9, screenshotProjexa10, screenshotProjexa11, screenshotProjexa12, screenshotProjexa13, screenshotProjexa14, screenshotProjexa15, screenshotProjexa16, screenshotProjexa17, screenshotProjexa18, screenshotProjexa19, screenshotProjexa20, screenshotProjexa21, screenshotProjexa22, screenshotProjexa23, screenshotProjexa24, screenshotProjexa25, screenshotProjexa26, screenshotProjexa27, screenshotProjexa28, screenshotProjexa29],
   },
   {
     title: "Expense Tracking System",
@@ -156,7 +189,7 @@ export const PROJECTS = [
     image: project4,
     description:
       "Android app for buying, selling, and renting properties with map integration, photo galleries, and real-time listings.",
-    technologies: ["Java", "Android SDK", "Firebase Realtime Database", "Firebase Auth"],
+    technologies: ["Java", "Android SDK", "Firebase"],
     githubRepo: "https://github.com/Hiba-Bahri/Android-Project",
     status: "public",
     emoji: "🏠",

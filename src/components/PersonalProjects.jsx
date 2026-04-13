@@ -3,6 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { PERSONAL_PROJECTS } from '../constants'
 import Swal from 'sweetalert2'
 
+// Countries considered Muslim-majority (OIC members + a few more)
+const MUSLIM_COUNTRIES = new Set([
+  'AF','AL','DZ','AZ','BH','BD','BJ','BF','BN','CM','TD','KM',
+  'DJ','EG','GN','GW','GY','ID','IR','IQ','JO','KZ','KW','KG',
+  'LB','LY','MY','MV','ML','MR','MA','MZ','NE','NG','OM','PK',
+  'PS','QA','SA','SN','SL','SO','SD','SR','SY','TJ','TZ','TG',
+  'TN','TR','TM','UG','AE','UZ','YE','LR','GM','CI','GA',
+])
+
 /* ─────────────────────────────────────────────────────────────
    SLIDESHOW MODAL
    ───────────────────────────────────────────────────────────── */
@@ -83,9 +92,8 @@ const SlideshowModal = ({ project, onClose }) => {
           </div>
         </div>
 
-        {/* Image area — portrait-ratio container sized for mobile screenshots */}
+        {/* Image area */}
         <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: '500px' }}>
-          {/* Preload all images silently so they're cached before the user navigates */}
           {images.map((src, i) => i !== current && (
             <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
           ))}
@@ -103,7 +111,6 @@ const SlideshowModal = ({ project, onClose }) => {
             />
           </AnimatePresence>
 
-          {/* Prev / Next */}
           {total > 1 && (
             <>
               <button
@@ -132,7 +139,6 @@ const SlideshowModal = ({ project, onClose }) => {
           )}
         </div>
 
-        {/* Dots + counter */}
         {total > 1 && (
           <div
             className="flex items-center justify-center gap-2 py-3 flex-shrink-0"
@@ -199,7 +205,6 @@ const LivePreviewModal = ({ project, onClose }) => {
           className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome"
           style={{ borderBottom: `1px solid ${project.accent}22` }}
         >
-          {/* Traffic lights */}
           <div className="flex gap-1.5">
             <button
               onClick={onClose}
@@ -211,7 +216,6 @@ const LivePreviewModal = ({ project, onClose }) => {
             <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#28C840' }} />
           </div>
 
-          {/* URL bar */}
           <div
             className="flex-1 flex items-center gap-2 px-3 py-1 rounded-lg font-mono text-xs truncate modal-url-bar"
             style={{ border: '1px solid var(--border)', color: 'var(--muted)' }}
@@ -220,7 +224,6 @@ const LivePreviewModal = ({ project, onClose }) => {
             <span className="truncate">{project.demoUrl}</span>
           </div>
 
-          {/* Actions */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <a
               href={project.demoUrl}
@@ -315,7 +318,6 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
           boxShadow: `0 0 60px ${project.accent}18`,
         }}
       >
-        {/* Title */}
         <div className="text-center mb-6">
           <div className="text-3xl mb-2">{project.emoji}</div>
           <h3 className="font-bold text-lg" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
@@ -324,9 +326,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
           <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>What would you like to open?</p>
         </div>
 
-        {/* Options */}
         <div className="flex flex-col gap-3">
-          {/* Demo button */}
           <button
             onClick={onDemo}
             className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full"
@@ -350,7 +350,6 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
             <span className="ml-auto text-lg" style={{ color: project.accent }}>›</span>
           </button>
 
-          {/* GitHub button */}
           <button
             onClick={onGithub}
             className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-ghost-btn"
@@ -359,9 +358,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
               border: '1px solid var(--border)',
             }}
           >
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg"
-            >
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg">
               ⌥
             </div>
             <div>
@@ -372,7 +369,6 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
           </button>
         </div>
 
-        {/* Close */}
         <button
           onClick={onClose}
           className="w-full mt-4 py-2 rounded-xl font-mono text-xs transition-all duration-200 modal-ghost-btn"
@@ -390,6 +386,27 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
    ───────────────────────────────────────────────────────────── */
 const PersonalProjects = () => {
   const [modal, setModal] = useState(null)
+  // Start with the full list; will filter out Islami for non-Muslim countries once geo resolves
+  const [visibleProjects, setVisibleProjects] = useState(PERSONAL_PROJECTS)
+  // DEV ONLY — remove before pushing
+  //useEffect(() => { setVisibleProjects(PERSONAL_PROJECTS) }, [])
+
+  /* ── Geolocation filter ── */
+  useEffect(() => {
+    // We use the free, no-key-required ip-api.com endpoint.
+    // Falls back to showing ALL projects if the request fails (fail-open).
+    fetch('/api/geo')
+      .then(r => r.json())
+      .then(({ countryCode }) => {
+        if (!MUSLIM_COUNTRIES.has(countryCode)) {
+          setVisibleProjects(PERSONAL_PROJECTS.filter(p => p.title !== 'Islami'))
+        }
+        // If the country IS in the set, keep the full list (already set)
+      })
+      .catch(() => {
+        // Network error or blocked → show everything (fail-open)
+      })
+  }, [])
 
   const handleProjectClick = (project) => {
     if (project.status === 'private') {
@@ -443,92 +460,48 @@ const PersonalProjects = () => {
       style={{ borderColor: 'var(--border)' }}
     >
       <style>{`
-        /* ── Modal backdrop: adapts to light/dark ── */
         .modal-backdrop {
           background: var(--modal-backdrop, rgba(0, 0, 0, 0.75));
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
         }
-
-        /* Light mode overrides */
         :root[data-theme="light"] .modal-backdrop,
         .light .modal-backdrop,
         [class*="light"] .modal-backdrop {
           background: rgba(0, 0, 0, 0.45);
         }
-
-        /* Browser chrome bar */
-        .modal-browser-chrome {
-          background: var(--surface-raised, rgba(0, 0, 0, 0.18));
-        }
-
-        /* URL bar */
-        .modal-url-bar {
-          background: var(--input-bg, rgba(0, 0, 0, 0.06));
-        }
-
-        /* Nav arrows (prev/next in slideshow) */
+        .modal-browser-chrome { background: var(--surface-raised, rgba(0, 0, 0, 0.18)); }
+        .modal-url-bar { background: var(--input-bg, rgba(0, 0, 0, 0.06)); }
         .modal-nav-btn {
           background: var(--modal-nav-bg, rgba(0, 0, 0, 0.45));
           backdrop-filter: blur(6px);
         }
-        .modal-nav-btn:hover {
-          background: var(--nav-hover-bg, rgba(255,255,255,0.15)) !important;
-        }
-
-        /* Ghost buttons */
-        .modal-ghost-btn:hover {
-          background: var(--ghost-hover, rgba(0, 0, 0, 0.06)) !important;
-        }
-
-        /* Close button hover */
-        .modal-close-btn:hover {
-          background: var(--ghost-hover, rgba(0, 0, 0, 0.08)) !important;
-        }
-
-        /* Icon bg in choice modal */
-        .modal-icon-bg {
-          background: var(--icon-bg, rgba(0, 0, 0, 0.07));
-        }
-
-        /* ── Dark mode: restore original darker values ── */
+        .modal-nav-btn:hover { background: var(--nav-hover-bg, rgba(255,255,255,0.15)) !important; }
+        .modal-ghost-btn:hover { background: var(--ghost-hover, rgba(0, 0, 0, 0.06)) !important; }
+        .modal-close-btn:hover { background: var(--ghost-hover, rgba(0, 0, 0, 0.08)) !important; }
+        .modal-icon-bg { background: var(--icon-bg, rgba(0, 0, 0, 0.07)); }
         :root[data-theme="dark"] .modal-nav-btn,
         .dark .modal-nav-btn,
-        [class*="dark"] .modal-nav-btn {
-          background: rgba(0, 0, 0, 0.55);
-        }
+        [class*="dark"] .modal-nav-btn { background: rgba(0, 0, 0, 0.55); }
         :root[data-theme="dark"] .modal-browser-chrome,
         .dark .modal-browser-chrome,
-        [class*="dark"] .modal-browser-chrome {
-          background: rgba(0, 0, 0, 0.3);
-        }
+        [class*="dark"] .modal-browser-chrome { background: rgba(0, 0, 0, 0.3); }
         :root[data-theme="dark"] .modal-url-bar,
         .dark .modal-url-bar,
-        [class*="dark"] .modal-url-bar {
-          background: rgba(255, 255, 255, 0.05);
-        }
+        [class*="dark"] .modal-url-bar { background: rgba(255, 255, 255, 0.05); }
         :root[data-theme="dark"] .modal-ghost-btn:hover,
         .dark .modal-ghost-btn:hover,
-        [class*="dark"] .modal-ghost-btn:hover {
-          background: rgba(255, 255, 255, 0.06) !important;
-        }
+        [class*="dark"] .modal-ghost-btn:hover { background: rgba(255, 255, 255, 0.06) !important; }
         :root[data-theme="dark"] .modal-close-btn:hover,
         .dark .modal-close-btn:hover,
-        [class*="dark"] .modal-close-btn:hover {
-          background: rgba(255, 255, 255, 0.08) !important;
-        }
+        [class*="dark"] .modal-close-btn:hover { background: rgba(255, 255, 255, 0.08) !important; }
         :root[data-theme="dark"] .modal-icon-bg,
         .dark .modal-icon-bg,
-        [class*="dark"] .modal-icon-bg {
-          background: rgba(255, 255, 255, 0.06);
-        }
+        [class*="dark"] .modal-icon-bg { background: rgba(255, 255, 255, 0.06); }
         :root[data-theme="dark"] .modal-backdrop,
         .dark .modal-backdrop,
-        [class*="dark"] .modal-backdrop {
-          background: rgba(0, 0, 0, 0.88);
-        }
+        [class*="dark"] .modal-backdrop { background: rgba(0, 0, 0, 0.88); }
 
-        /* ── Card layout ── */
         .pp-card { display: flex; flex-direction: column; }
         .pp-thumb-wrap {
           position: relative; width: 100%; height: 200px;
@@ -560,9 +533,9 @@ const PersonalProjects = () => {
         </motion.h2>
 
         <div className="flex flex-col gap-5 md:gap-6">
-          {PERSONAL_PROJECTS.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
