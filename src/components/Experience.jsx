@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { EXPERIENCES } from '../constants'
 
 const Experience = () => {
+  const { t } = useTranslation()
+
   return (
     <section
       id="experience"
@@ -9,87 +12,106 @@ const Experience = () => {
       style={{ borderColor: 'var(--border)' }}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="section-label">Career</div>
+        <div className="section-label">{t('experience.label')}</div>
 
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-extrabold tracking-tight mb-12 md:mb-16"
+          className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 md:mb-14"
           style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
         >
-          Work Experience
+          {t('experience.heading')}
         </motion.h2>
 
-        {/* Timeline */}
-        <div
-          className="relative pl-6 md:pl-10"
-          style={{ borderLeft: '1px solid var(--border)' }}
-        >
-          {EXPERIENCES.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="relative mb-10 md:mb-14 last:mb-0"
-            >
-              {/* Timeline dot */}
-              <div
-                className="absolute rounded-full transition-transform duration-300 hover:scale-150"
-                style={{
-                  width: 10, height: 10,
-                  background: exp.color,
-                  border: `1px solid ${exp.color}`,
-                  left: -28,
-                  top: 6,
-                  boxShadow: `0 0 12px ${exp.color}66`,
-                }}
-              />
+        <div className="relative">
+          {/* Vertical timeline line */}
+          <div
+            className="absolute left-0 top-0 bottom-0 w-px hidden md:block"
+            style={{ background: 'var(--border)', marginLeft: '7px' }}
+          />
 
-              {/* Year */}
-              <p className="font-mono text-xs tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
-                {exp.year}
-              </p>
-
-              {/* Role */}
-              <h6 className="text-lg md:text-xl font-bold mb-1" style={{ letterSpacing: '-0.01em', color: 'var(--text)' }}>
-                {exp.role}
-              </h6>
-
-              {/* Company */}
-              <p className="font-mono text-sm mb-3 md:mb-4" style={{ color: exp.color }}>
-                {exp.company}
-              </p>
-
-              {/* Description */}
-              <p
-                className="text-sm leading-relaxed mb-4 md:mb-5"
-                style={{ color: 'var(--muted)', maxWidth: '42rem' }}
+          <div className="flex flex-col gap-10 md:gap-14">
+            {EXPERIENCES.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="flex gap-6 md:gap-10 items-start md:ps-10"
               >
-                {exp.description}
-              </p>
+                {/* Timeline dot */}
+                <div
+                  className="hidden md:block absolute w-4 h-4 rounded-full flex-shrink-0 mt-1"
+                  style={{
+                    background: exp.color,
+                    boxShadow: `0 0 12px ${exp.color}66`,
+                    left: 0,
+                  }}
+                />
 
-              {/* Tech tags */}
-              <div className="flex flex-wrap gap-2">
-                {exp.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="font-mono text-xs px-2 md:px-3 py-1 rounded"
-                    style={{
-                      color: exp.color,
-                      border: `1px solid ${exp.color}40`,
-                      background: `${exp.color}0D`,
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                {/* Card */}
+                <div
+                  className="flex-1 p-5 md:p-7 rounded-xl transition-all duration-300 group"
+                  style={{
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = exp.color + '55'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                    <div>
+                      <h6
+                        className="text-lg md:text-xl font-bold leading-tight"
+                        style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}
+                      >
+                        {exp.role}
+                      </h6>
+                      <span
+                        className="font-mono text-sm font-semibold"
+                        style={{ color: exp.color }}
+                      >
+                        {exp.company}
+                      </span>
+                    </div>
+                    <span
+                      className="font-mono text-xs px-3 py-1.5 rounded-full flex-shrink-0"
+                      style={{
+                        background: `${exp.color}15`,
+                        border: `1px solid ${exp.color}33`,
+                        color: exp.color,
+                      }}
+                    >
+                      {exp.year}
+                    </span>
+                  </div>
+
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
+                    {exp.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map(tech => (
+                      <span
+                        key={tech}
+                        className="font-mono text-xs px-2 md:px-3 py-1 rounded"
+                        style={{
+                          color: exp.color,
+                          border: `1px solid ${exp.color}35`,
+                          background: `${exp.color}0D`,
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

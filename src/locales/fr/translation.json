@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Disponible pour de nouvelles opportunités",
+    "subtitle": "Développeur Full Stack Mobile & Web",
+    "cta_resume": "CV",
+    "cta_github": "GitHub",
+    "scroll": "défiler"
+  },
+  "about": {
+    "label": "À propos",
+    "heading_1": "Construire des",
+    "heading_2": "expériences digitales",
+    "body": "Je suis un développeur full stack et applications mobiles polyvalent et dévoué, passionné par la création d'applications efficaces et conviviales. J'ai travaillé avec diverses technologies, notamment React, Angular, Nest, Node.js, MySQL, MongoDB, Swift, Java et Dart. Mon parcours dans le développement Web et Mobile a commencé par une profonde curiosité pour le fonctionnement des choses, et il a évolué vers une carrière où je m'efforce continuellement d'apprendre et de m'adapter à de nouveaux défis. Je m'épanouis dans des environnements collaboratifs et j'aime résoudre des problèmes complexes pour fournir des solutions de haute qualité. En dehors du code, j'aime rester actif, explorer de nouvelles technologies, jouer aux jeux vidéo et passer du temps avec ma famille.",
+    "stats": {
+      "years": "Ans de Code",
+      "projects": "Projets Réalisés",
+      "internships": "Stages"
+    }
+  },
+  "skills": {
+    "label": "Stack Technique",
+    "heading": "Technologies avec lesquelles je travaille"
+  },
+  "experience": {
+    "label": "Carrière",
+    "heading": "Expérience Professionnelle"
+  },
+  "projects": {
+    "label": "Travaux",
+    "heading": "Projets",
+    "filter_all": "Tous",
+    "filter_web": "Web",
+    "filter_mobile": "Mobile",
+    "private_title": "🔒 Dépôt Privé",
+    "private_body_1": "Ce dépôt est",
+    "private_body_2": "privé",
+    "private_body_3": "Contactez-moi pour plus de détails sur",
+    "private_confirm": "📧 Me Contacter",
+    "private_cancel": "✕ Fermer",
+    "modal_what": "Que souhaitez-vous ouvrir ?",
+    "modal_live_label": "🌐 Aperçu en direct",
+    "modal_live_sub": "Ouvrir dans le portfolio",
+    "modal_screenshots_label": "🖼️ Captures d'écran",
+    "modal_screenshots_sub": "Parcourir les captures",
+    "modal_github_label": "Dépôt GitHub",
+    "modal_github_sub": "Voir le code source",
+    "modal_cancel": "Annuler",
+    "loading_preview": "Chargement de l'aperçu…",
+    "screenshots_header": "Captures d'écran"
+  },
+  "personal_projects": {
+    "label": "Projets Personnels",
+    "heading": "Projets Personnels"
+  },
+  "contact": {
+    "label": "Discutons",
+    "heading_1": "Prêt à construire",
+    "heading_2": "quelque chose de grand ?",
+    "sub": "Je suis toujours ouvert à la discussion de nouveaux projets, d'idées créatives ou d'opportunités de faire partie d'une équipe ambitieuse.",
+    "email_label": "E-mail",
+    "location_label": "Localisation",
+    "phone_label": "Téléphone",
+    "form_name": "Nom",
+    "form_email": "E-mail",
+    "form_subject": "Sujet",
+    "form_message": "Message",
+    "form_name_placeholder": "Votre nom",
+    "form_email_placeholder": "vous@email.com",
+    "form_subject_placeholder": "Demande de projet",
+    "form_message_placeholder": "Parlez-moi de votre projet...",
+    "form_send": "Envoyer le message"
+  },
+  "footer": {
+    "copyright": "© 2026 Yassine ELKEFI"
+  }
+}

@@ -1,20 +1,24 @@
 import { motion } from 'framer-motion'
-import { ABOUT_TEXT } from '../constants'
+import { useTranslation } from 'react-i18next'
 import aboutImg from '../assets/about.webp'
 
-const stats = [
-  { num: '6+', label: 'Years Coding' },
-  { num: '16+', label: 'Projects Built' },
-  { num: '4',  label: 'Internships' },
-]
-
 const About = () => {
+  const { t } = useTranslation()
+
+  const stats = [
+    { num: '6+',  label: t('about.stats.years') },
+    { num: '16+', label: t('about.stats.projects') },
+    { num: '4',   label: t('about.stats.internships') },
+  ]
+
   return (
-    <section id="about" className="border-b border-neutral-900 py-20 md:py-28 px-6 md:px-12"
+    <section
+      id="about"
+      className="border-b py-20 md:py-28 px-6 md:px-12"
       style={{ borderColor: 'var(--border)' }}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="section-label">About Me</div>
+        <div className="section-label">{t('about.label')}</div>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start lg:items-center">
 
           {/* Image */}
@@ -62,13 +66,13 @@ const About = () => {
               className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6"
               style={{ letterSpacing: '-0.03em', color: 'var(--text)' }}
             >
-              Building digital
+              {t('about.heading_1')}
               <br />
-              <span style={{ color: 'var(--cyan)' }}>experiences</span>
+              <span style={{ color: 'var(--cyan)' }}>{t('about.heading_2')}</span>
             </h2>
 
             <p className="text-sm md:text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'var(--muted)' }}>
-              {ABOUT_TEXT}
+              {t('about.body')}
             </p>
 
             {/* Stats */}
@@ -77,10 +81,7 @@ const About = () => {
                 <div
                   key={s.label}
                   className="p-3 md:p-5 rounded-lg transition-all duration-300"
-                  style={{
-                    background: 'var(--surface)',
-                    border: '1px solid var(--border)',
-                  }}
+                  style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--cyan)'}
                   onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
                 >

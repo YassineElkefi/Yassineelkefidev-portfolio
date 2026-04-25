@@ -2,13 +2,22 @@ import { useState, useEffect } from 'react'
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa'
 import { FaSquareXTwitter, FaDiscord } from 'react-icons/fa6'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import ThemeToggle from './ThemeToggle'
-
-const NAV_LINKS = ['About', 'Skills', 'Experience', 'Projects', 'Contact']
+import LanguageSwitcher from './LanguageSwitcher'
 
 const Navbar = () => {
+  const { t } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const NAV_LINKS = [
+    { key: 'about',      label: t('nav.about') },
+    { key: 'skills',     label: t('nav.skills') },
+    { key: 'experience', label: t('nav.experience') },
+    { key: 'projects',   label: t('nav.projects') },
+    { key: 'contact',    label: t('nav.contact') },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -22,9 +31,9 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const handleNavClick = (link) => {
+  const handleNavClick = (key) => {
     setMenuOpen(false)
-    document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(key)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -57,31 +66,34 @@ const Navbar = () => {
 
         {/* Nav Links — desktop only */}
         <ul className="hidden lg:flex items-center gap-10 list-none">
-          {NAV_LINKS.map((link) => (
-            <li key={link}>
+          {NAV_LINKS.map(({ key, label }) => (
+            <li key={key}>
               <a
-                href={`#${link.toLowerCase()}`}
+                href={`#${key}`}
                 className="font-mono text-xs tracking-widest uppercase transition-colors duration-200"
                 style={{ color: 'var(--muted)' }}
                 onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
                 onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
               >
-                {link}
+                {label}
               </a>
             </li>
           ))}
         </ul>
 
         {/* Right side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Socials — hide on very small screens */}
           <div className="hidden sm:flex items-center gap-4 text-xl">
-            <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#3B82F6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaLinkedin /></a>
-            <a href="https://github.com/YassineElkefi" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaGithub /></a>
-            <a href="https://x.com/YassineElkefi" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaSquareXTwitter /></a>
-            <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#F472B6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaInstagram /></a>
-            <a href="http://discord.com/users/189012634056654849" target="_blank" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#818CF8'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaDiscord /></a>
+            <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#3B82F6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaLinkedin /></a>
+            <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaGithub /></a>
+            <a href="https://x.com/YassineElkefi" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaSquareXTwitter /></a>
+            <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#F472B6'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaInstagram /></a>
+            <a href="http://discord.com/users/189012634056654849" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{ color: 'var(--muted)' }} onMouseEnter={e => e.currentTarget.style.color = '#818CF8'} onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}><FaDiscord /></a>
           </div>
+
+          {/* Language switcher */}
+          <LanguageSwitcher />
 
           {/* Theme Toggle */}
           <ThemeToggle />
@@ -92,24 +104,9 @@ const Navbar = () => {
             className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
             aria-label="Toggle menu"
           >
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{
-                background: 'var(--text)',
-                transform: menuOpen ? 'translateY(4px) rotate(45deg)' : 'none',
-              }}
-            />
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{ background: 'var(--text)', opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block w-6 h-px transition-all duration-300"
-              style={{
-                background: 'var(--text)',
-                transform: menuOpen ? 'translateY(-4px) rotate(-45deg)' : 'none',
-              }}
-            />
+            <span className="block w-6 h-px transition-all duration-300" style={{ background: 'var(--text)', transform: menuOpen ? 'translateY(4px) rotate(45deg)' : 'none' }} />
+            <span className="block w-6 h-px transition-all duration-300" style={{ background: 'var(--text)', opacity: menuOpen ? 0 : 1 }} />
+            <span className="block w-6 h-px transition-all duration-300" style={{ background: 'var(--text)', transform: menuOpen ? 'translateY(-4px) rotate(-45deg)' : 'none' }} />
           </button>
         </div>
       </motion.nav>
@@ -123,43 +120,31 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className="mobile-menu fixed top-[68px] left-0 right-0 z-40 lg:hidden"
-            style={{
-              background: 'var(--bg)',
-              borderBottom: '1px solid var(--border)',
-              backdropFilter: 'blur(20px)',
-            }}
+            style={{ background: 'var(--bg)', borderBottom: '1px solid var(--border)', backdropFilter: 'blur(20px)' }}
           >
             <ul className="flex flex-col list-none py-4">
-              {NAV_LINKS.map((link, i) => (
-                <motion.li
-                  key={link}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
+              {NAV_LINKS.map(({ key, label }, i) => (
+                <motion.li key={key} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                   <button
-                    onClick={() => handleNavClick(link)}
+                    onClick={() => handleNavClick(key)}
                     className="w-full text-left px-6 py-4 font-mono text-sm tracking-widest uppercase transition-colors duration-200"
                     style={{ color: 'var(--muted)' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
                   >
-                    {link}
+                    {label}
                   </button>
                 </motion.li>
               ))}
             </ul>
 
             {/* Socials in mobile menu */}
-            <div
-              className="flex items-center gap-5 px-6 py-4 border-t text-xl"
-              style={{ borderColor: 'var(--border)' }}
-            >
-              <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" style={{ color: 'var(--muted)' }}><FaLinkedin /></a>
-              <a href="https://github.com/YassineElkefi" target="_blank" style={{ color: 'var(--muted)' }}><FaGithub /></a>
-              <a href="https://x.com/YassineElkefi" target="_blank" style={{ color: 'var(--muted)' }}><FaSquareXTwitter /></a>
-              <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" style={{ color: 'var(--muted)' }}><FaInstagram /></a>
-              <a href="http://discord.com/users/189012634056654849" target="_blank" style={{ color: 'var(--muted)' }}><FaDiscord /></a>
+            <div className="flex items-center gap-5 px-6 py-4 border-t text-xl" style={{ borderColor: 'var(--border)' }}>
+              <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" rel="noreferrer" style={{ color: 'var(--muted)' }}><FaLinkedin /></a>
+              <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer" style={{ color: 'var(--muted)' }}><FaGithub /></a>
+              <a href="https://x.com/YassineElkefi" target="_blank" rel="noreferrer" style={{ color: 'var(--muted)' }}><FaSquareXTwitter /></a>
+              <a href="https://www.instagram.com/yassine_elkefi/" target="_blank" rel="noreferrer" style={{ color: 'var(--muted)' }}><FaInstagram /></a>
+              <a href="http://discord.com/users/189012634056654849" target="_blank" rel="noreferrer" style={{ color: 'var(--muted)' }}><FaDiscord /></a>
             </div>
           </motion.div>
         )}

@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "about": "عنّي",
+    "skills": "المهارات",
+    "experience": "الخبرة",
+    "projects": "المشاريع",
+    "contact": "تواصل"
+  },
+  "hero": {
+    "badge": "متاح لفرص عمل جديدة",
+    "subtitle": "مطوّر Full Stack للموبايل والويب",
+    "cta_resume": "السيرة الذاتية",
+    "cta_github": "GitHub",
+    "scroll": "تمرير"
+  },
+  "about": {
+    "label": "عنّي",
+    "heading_1": "بناء تجارب",
+    "heading_2": "رقمية مميزة",
+    "body": "أنا مطوّر full stack وتطبيقات موبايل متعدد المهارات، شغوف بإنشاء تطبيقات فعّالة وسهلة الاستخدام. عملت مع مجموعة متنوعة من التقنيات تشمل React وAngular وNest وNode.js وMySQL وMongoDB وSwift وJava وDart. بدأت مسيرتي في تطوير الويب والموبايل بفضول عميق لفهم آلية عمل الأشياء، وتطوّرت إلى مسار مهني أسعى فيه باستمرار للتعلم والتكيف مع التحديات الجديدة. أزدهر في البيئات التعاونية وأستمتع بحل المشكلات المعقدة لتقديم حلول عالية الجودة. خارج البرمجة، أحب ممارسة النشاط البدني، واستكشاف التقنيات الجديدة، ولعب ألعاب الفيديو، وقضاء الوقت مع عائلتي.",
+    "stats": {
+      "years": "سنوات برمجة",
+      "projects": "مشروع منجز",
+      "internships": "تدريبات"
+    }
+  },
+  "skills": {
+    "label": "التقنيات المستخدمة",
+    "heading": "التقنيات التي أعمل بها"
+  },
+  "experience": {
+    "label": "المسار المهني",
+    "heading": "الخبرة المهنية"
+  },
+  "projects": {
+    "label": "الأعمال",
+    "heading": "المشاريع",
+    "filter_all": "الكل",
+    "filter_web": "ويب",
+    "filter_mobile": "موبايل",
+    "private_title": "🔒 مستودع خاص",
+    "private_body_1": "هذا المستودع",
+    "private_body_2": "خاص",
+    "private_body_3": "تواصل معي لمزيد من التفاصيل حول",
+    "private_confirm": "📧 تواصل معي",
+    "private_cancel": "✕ إغلاق",
+    "modal_what": "ماذا تريد أن تفتح؟",
+    "modal_live_label": "🌐 معاينة مباشرة",
+    "modal_live_sub": "فتح داخل المحفظة",
+    "modal_screenshots_label": "🖼️ لقطات الشاشة",
+    "modal_screenshots_sub": "تصفح لقطات التطبيق",
+    "modal_github_label": "مستودع GitHub",
+    "modal_github_sub": "عرض الكود المصدري",
+    "modal_cancel": "إلغاء",
+    "loading_preview": "جارٍ تحميل المعاينة…",
+    "screenshots_header": "لقطات الشاشة"
+  },
+  "personal_projects": {
+    "label": "مشاريع جانبية",
+    "heading": "المشاريع الشخصية"
+  },
+  "contact": {
+    "label": "لنتحدث",
+    "heading_1": "هل أنت مستعد لبناء",
+    "heading_2": "شيء رائع؟",
+    "sub": "أنا دائمًا منفتح على مناقشة المشاريع الجديدة والأفكار الإبداعية أو الفرص للانضمام إلى فريق طموح.",
+    "email_label": "البريد الإلكتروني",
+    "location_label": "الموقع",
+    "phone_label": "الهاتف",
+    "form_name": "الاسم",
+    "form_email": "البريد الإلكتروني",
+    "form_subject": "الموضوع",
+    "form_message": "الرسالة",
+    "form_name_placeholder": "اسمك الكامل",
+    "form_email_placeholder": "بريدك@الإلكتروني.com",
+    "form_subject_placeholder": "استفسار عن مشروع",
+    "form_message_placeholder": "أخبرني عن مشروعك...",
+    "form_send": "إرسال الرسالة"
+  },
+  "footer": {
+    "copyright": "© 2026 ياسين الكافي"
+  }
+}

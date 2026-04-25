@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { HERO_CONTENT } from '../constants'
+import { useTranslation } from 'react-i18next'
 import profilePic from '../assets/yassineELKEFIProfile.jpeg'
 import resume from '../assets/resume.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'
@@ -10,6 +10,8 @@ const container = (delay) => ({
 })
 
 const Hero = () => {
+  const { t } = useTranslation()
+
   return (
     <section
       id="hero"
@@ -55,7 +57,7 @@ const Hero = () => {
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                 style={{ background: 'var(--cyan)', animation: 'pulse 2s ease-in-out infinite' }}
               />
-              Available for new opportunities
+              {t('hero.badge')}
             </div>
           </motion.div>
 
@@ -86,8 +88,7 @@ const Hero = () => {
             className="font-mono text-base md:text-lg mb-6"
             style={{ color: 'var(--muted)' }}
           >
-            <span style={{ color: 'var(--text)' }}>Mobile</span> &amp;{' '}
-            <span style={{ color: 'var(--text)' }}>Web Full Stack</span> Developer
+            {t('hero.subtitle')}
           </motion.p>
 
           <motion.p
@@ -97,7 +98,7 @@ const Hero = () => {
             className="text-sm md:text-base leading-relaxed max-w-lg mb-10"
             style={{ color: 'var(--muted)' }}
           >
-            {HERO_CONTENT}
+            {t('about.body')}
           </motion.p>
 
           <motion.div
@@ -106,12 +107,12 @@ const Hero = () => {
             animate="visible"
             className="flex flex-wrap gap-4"
           >
-            <a href={resume} target="_blank" className="btn-primary">
-              <span>Resume</span>
+            <a href={resume} target="_blank" rel="noreferrer" className="btn-primary">
+              <span>{t('hero.cta_resume')}</span>
               <FaFileAlt />
             </a>
-            <a href="https://github.com/YassineElkefi" target="_blank" className="btn-ghost">
-              <span>GitHub</span>
+            <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer" className="btn-ghost">
+              <span>{t('hero.cta_github')}</span>
               <FaGithub />
             </a>
           </motion.div>
@@ -163,7 +164,7 @@ const Hero = () => {
             style={{ background: 'var(--cyan)', animation: 'scanline 2s ease-in-out infinite' }}
           />
         </div>
-        scroll
+        {t('hero.scroll')}
       </div>
 
       <style>{`

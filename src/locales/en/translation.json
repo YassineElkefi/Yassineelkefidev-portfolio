@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Available for new opportunities",
+    "subtitle": "Mobile & Web Full Stack Developer",
+    "cta_resume": "Resume",
+    "cta_github": "GitHub",
+    "scroll": "scroll"
+  },
+  "about": {
+    "label": "About Me",
+    "heading_1": "Building digital",
+    "heading_2": "experiences",
+    "body": "I am a dedicated and versatile full stack & mobile apps developer with a passion for creating efficient and user-friendly applications. I have worked with a variety of technologies, including React, Angular, Nest, Node.js, MySQL, MongoDB, Swift, Java and Dart. My journey in Web and Mobile development began with a deep curiosity for how things work, and it has evolved into a career where I continuously strive to learn and adapt to new challenges. I thrive in collaborative environments and enjoy solving complex problems to deliver high-quality solutions. Outside of coding, I enjoy staying active, exploring new technologies, playing video games, and spending time with my family.",
+    "stats": {
+      "years": "Years Coding",
+      "projects": "Projects Built",
+      "internships": "Internships"
+    }
+  },
+  "skills": {
+    "label": "Tech Stack",
+    "heading": "Technologies I work with"
+  },
+  "experience": {
+    "label": "Career",
+    "heading": "Work Experience"
+  },
+  "projects": {
+    "label": "Work",
+    "heading": "Projects",
+    "filter_all": "All",
+    "filter_web": "Web",
+    "filter_mobile": "Mobile",
+    "private_title": "🔒 Private Repository",
+    "private_body_1": "This repository is",
+    "private_body_2": "private",
+    "private_body_3": "Contact me for more details about",
+    "private_confirm": "📧 Contact Me",
+    "private_cancel": "✕ Close",
+    "modal_what": "What would you like to open?",
+    "modal_live_label": "🌐 Live Preview",
+    "modal_live_sub": "Open inside portfolio",
+    "modal_screenshots_label": "🖼️ Screenshots",
+    "modal_screenshots_sub": "Browse app screenshots",
+    "modal_github_label": "GitHub Repository",
+    "modal_github_sub": "View source code",
+    "modal_cancel": "Cancel",
+    "loading_preview": "Loading preview…",
+    "screenshots_header": "Screenshots"
+  },
+  "personal_projects": {
+    "label": "Side Work",
+    "heading": "Personal Projects"
+  },
+  "contact": {
+    "label": "Let's Talk",
+    "heading_1": "Ready to build",
+    "heading_2": "something great?",
+    "sub": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team.",
+    "email_label": "Email",
+    "location_label": "Location",
+    "phone_label": "Phone",
+    "form_name": "Name",
+    "form_email": "Email",
+    "form_subject": "Subject",
+    "form_message": "Message",
+    "form_name_placeholder": "Your name",
+    "form_email_placeholder": "you@email.com",
+    "form_subject_placeholder": "Project inquiry",
+    "form_message_placeholder": "Tell me about your project...",
+    "form_send": "Send Message"
+  },
+  "footer": {
+    "copyright": "© 2026 Yassine ELKEFI"
+  }
+}

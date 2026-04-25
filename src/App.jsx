@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -51,24 +52,18 @@ const Cursor = () => {
 
 // ── App ────────────────────────────────────────────────────────────────────────
 const App = () => {
+  const { t } = useTranslation()
+
   return (
     <div
       className="overflow-x-hidden antialiased"
       style={{ background: 'var(--bg)', color: 'var(--text)' }}
     >
-      {/* Film grain overlay */}
       <div className="noise" />
-
-      {/* Custom cursor */}
       <Cursor />
-
-      {/* Background radial glow (fixed) */}
       <div
         className="bg-glow fixed top-0 left-0 w-full h-full pointer-events-none -z-10"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(123,47,255,0.18), transparent)',
-        }}
+        style={{ background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(123,47,255,0.18), transparent)' }}
       />
 
       <Navbar />
@@ -83,46 +78,27 @@ const App = () => {
         <Contact />
       </main>
 
-      {/* Footer */}
       <footer
         className="flex flex-wrap justify-between items-center gap-4 px-12 py-8 text-xs"
-        style={{
-          borderTop: '1px solid var(--border)',
-          color: 'var(--muted)',
-          fontFamily: "'DM Mono', monospace",
-        }}
+        style={{ borderTop: '1px solid var(--border)', color: 'var(--muted)', fontFamily: "'DM Mono', monospace" }}
       >
-        <span>© 2026 Yassine ELKEFI</span>
+        <span>{t('footer.copyright')}</span>
         <div className="flex gap-6">
-          <a
-            href="https://github.com/YassineElkefi"
-            target="_blank"
-            className="transition-colors"
-            style={{ color: 'var(--muted)' }}
+          <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer"
+            className="transition-colors" style={{ color: 'var(--muted)' }}
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
             onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/yassine-elkefi/"
-            target="_blank"
-            className="transition-colors"
-            style={{ color: 'var(--muted)' }}
+          >GitHub</a>
+          <a href="https://www.linkedin.com/in/yassine-elkefi/" target="_blank" rel="noreferrer"
+            className="transition-colors" style={{ color: 'var(--muted)' }}
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
             onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
-          >
-            LinkedIn
-          </a>
-          <a
-            href="mailto:yassine.elkefi6@gmail.com"
-            className="transition-colors"
-            style={{ color: 'var(--muted)' }}
+          >LinkedIn</a>
+          <a href="mailto:yassine.elkefi6@gmail.com"
+            className="transition-colors" style={{ color: 'var(--muted)' }}
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
             onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
-          >
-            Email
-          </a>
+          >Email</a>
         </div>
       </footer>
     </div>

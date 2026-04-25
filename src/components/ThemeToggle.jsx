@@ -1,9 +1,16 @@
 import { useTheme } from '../context/ThemeContext'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme()
+  const { i18n } = useTranslation()
+
   const isDark = theme === 'dark'
+  const isRTL = i18n.dir() === 'rtl'
+
+  // Use positive movement only
+  const thumbX = isDark ? 28 : 2
 
   return (
     <button
@@ -19,13 +26,15 @@ const ThemeToggle = () => {
           : '1px solid rgba(0,180,220,0.5)',
       }}
     >
-      {/* Track icons */}
+      {/* Sun */}
       <span
         className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] select-none pointer-events-none"
         style={{ opacity: isDark ? 0.4 : 1 }}
       >
         ☀️
       </span>
+
+      {/* Moon */}
       <span
         className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] select-none pointer-events-none"
         style={{ opacity: isDark ? 1 : 0.4 }}
@@ -33,12 +42,21 @@ const ThemeToggle = () => {
         🌙
       </span>
 
-      {/* Thumb */}
       <motion.div
         className="absolute top-0.5 w-6 h-6 rounded-full shadow-md"
-        animate={{ x: isDark ? 28 : 2 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+        animate={{
+          x: isRTL ? -thumbX : thumbX,
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 400,
+          damping: 28,
+        }}
         style={{
+          // Anchor depending on direction
+          left: isRTL ? 'auto' : 0,
+          right: isRTL ? 0 : 'auto',
+
           background: isDark
             ? 'linear-gradient(135deg, #7B2FFF, #00E5FF)'
             : 'linear-gradient(135deg, #00C8E0, #FF3CAC)',
