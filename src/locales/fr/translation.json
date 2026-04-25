@@ -11,7 +11,8 @@
     "subtitle": "Développeur Full Stack Mobile & Web",
     "cta_resume": "CV",
     "cta_github": "GitHub",
-    "scroll": "défiler"
+    "scroll": "défiler",
+    "body": "Passionné de technologie spécialisé dans le développement Mobile et Web avec une expérience confirmée en développement full-stack. Expertise démontrée dans la création d'applications web responsives et de solutions mobiles. Solides bases en développement Web avec une maîtrise croissante de la création d'applications mobiles à travers des projets concrets. Résolveur de problèmes proactif avec une excellente adaptabilité dans des environnements logiciels dynamiques."
   },
   "about": {
     "label": "À propos",
@@ -30,7 +31,39 @@
   },
   "experience": {
     "label": "Carrière",
-    "heading": "Expérience Professionnelle"
+    "heading": "Expérience Professionnelle",
+    "items": {
+      "playsoft_full": {
+        "year": "Février 2026 - Présent",
+        "role": "Développeur Full Stack",
+        "company": "PlaySoft",
+        "description": "Contribution au développement d'Instalab, une nouvelle plateforme interactive de laboratoires IT. Implémentation de nouvelles fonctionnalités et livraison d'un service de haute qualité pour les utilisateurs finaux."
+      },
+      "playsoft_intern": {
+        "year": "Février 2025 - Août 2025",
+        "role": "Développeur Full Stack Mobile (Stage)",
+        "company": "PlaySoft",
+        "description": "Conception et développement d'une application mobile de gestion intelligente de la maintenance avec Flutter, NestJS et GraphQL. Implémentation des fonctionnalités de réservation, de suivi et de signalement d'incidents. Intégration de notifications en temps réel, d'un chat en direct, de localisations et d'un chatbot pour la création et la catégorisation facile des tickets."
+      },
+      "tagamuta": {
+        "year": "Juin 2024 - Août 2024",
+        "role": "Ingénieur Logiciel (Stage)",
+        "company": "Tagamuta Valley",
+        "description": "Développement des interfaces utilisateur d'une application web de gestion de laboratoire avec Angular, PrimeNG et PrimeFlex. Collaboration avec les parties prenantes pour définir les exigences du projet et les délais."
+      },
+      "branper": {
+        "year": "Janvier 2022 - Mai 2022",
+        "role": "Développeur Logiciel (Stage)",
+        "company": "Branper",
+        "description": "Conception et développement de 'Sentinel', une application de web scraping utilisant la détection d'objets et les technologies OCR. Implémentation des interfaces frontend avec React pour la visualisation des données extraites. Intégration d'algorithmes de vision par ordinateur pour l'extraction automatisée de données."
+      },
+      "post": {
+        "year": "Juillet 2021 - Août 2021",
+        "role": "Stagiaire Technique",
+        "company": "La Poste Tunisienne",
+        "description": "Conception et développement d'un système complet de gestion de dépôt postal avec Angular et FastAPI. Implémentation de workflows automatisés et de fonctionnalités de suivi en temps réel pour optimiser les opérations de dépôt."
+      }
+    }
   },
   "projects": {
     "label": "Travaux",
@@ -53,11 +86,79 @@
     "modal_github_sub": "Voir le code source",
     "modal_cancel": "Annuler",
     "loading_preview": "Chargement de l'aperçu…",
-    "screenshots_header": "Captures d'écran"
+    "screenshots_header": "Captures d'écran",
+    "items": {
+      "repairy": {
+        "title": "Repairy",
+        "description": "Repairy est une application mobile intelligente conçue pour simplifier la réservation de services de réparation grâce à l'IA. Développée avec Flutter, NestJS, MySQL, GraphQL et Firebase."
+      },
+      "deliverini": {
+        "title": "Deliverini",
+        "description": "Application complète de covoiturage et de transport d'objets mettant en relation des utilisateurs pour des trajets partagés et des services de livraison. Développée avec Angular, Express et MongoDB."
+      },
+      "projexa": {
+        "title": "Projexa",
+        "description": "Une plateforme moderne de gestion de projets full-stack, conçue pour une collaboration fluide et un suivi efficace des tâches."
+      },
+      "expense": {
+        "title": "Système de Suivi des Dépenses",
+        "description": "Application intuitive pour gérer et suivre les finances personnelles avec NestJS, Angular et MongoDB."
+      },
+      "realestate": {
+        "title": "Application Mobile Immobilière",
+        "description": "Application Android pour l'achat, la vente et la location de biens immobiliers avec intégration de carte, galeries photos et annonces en temps réel."
+      }
+    }
   },
   "personal_projects": {
     "label": "Projets Personnels",
-    "heading": "Projets Personnels"
+    "heading": "Projets Personnels",
+    "items": {
+      "portfolio": {
+        "title": "Site Portfolio",
+        "description": "Un site portfolio personnel pour présenter mes compétences, projets et expériences. Développé avec Vite et Tailwind CSS."
+      },
+      "islami": {
+        "title": "Islami",
+        "description": "Application mobile proposant le Coran, les horaires de prière et la Qibla. Développée avec SwiftUI avec prise en charge de l'arabe et de l'anglais."
+      },
+      "foody": {
+        "title": "Foody",
+        "description": "Application de blog de recettes moderne et minimaliste développée avec Flutter et GraphQL, avec gestion des rôles et authentification persistante."
+      },
+      "garaji": {
+        "title": "Garaji",
+        "description": "Une application mobile élégante et conviviale pour la gestion de véhicules personnels. Suivez vos véhicules, enregistrez les activités de maintenance et anticipez les besoins grâce à des insights intelligents. Développée avec Flutter pour une expérience multiplateforme sur iOS et Android."
+      },
+      "homespot": {
+        "title": "HomeSpot",
+        "description": "Application immobilière moderne et minimaliste pour publier des annonces de maisons, appartements ou terrains et contacter des agences immobilières."
+      },
+      "numix": {
+        "title": "NumiX",
+        "description": "Un jeu style Wordle où vous devinez un numéro de téléphone tunisien à 8 chiffres."
+      },
+      "hangman": {
+        "title": "Hangman",
+        "description": "Le pendu en JavaScript — édition développeur. Testez vos connaissances en ingénierie logicielle."
+      },
+      "sudoo": {
+        "title": "Sudoo",
+        "description": "Une application web Sudoku moderne, responsive et complète, dotée d'une interface belle et esthétique, apportant l'expérience classique du puzzle directement dans votre navigateur."
+      },
+      "codehunt": {
+        "title": "CodeHunt",
+        "description": "Un jeu de déduction de code multijoueur en temps réel (style Bulls and Cows) où les joueurs créent ou rejoignent une salle, définissent un code secret à 4 chiffres et jouent à tour de rôle jusqu'à ce qu'un joueur trouve les 4 chiffres exacts."
+      },
+      "mineflux": {
+        "title": "MineFlux",
+        "description": "Une expérience Démineur premium et moderne développée avec Next.js, Framer Motion et Tailwind CSS."
+      },
+      "lexiq": {
+        "title": "LexiQ",
+        "description": "LexiQ est un clone Wordle soigné développé avec Next.js, TypeScript et Tailwind CSS."
+      }
+    }
   },
   "contact": {
     "label": "Discutons",

@@ -11,7 +11,8 @@
     "subtitle": "Mobile & Web Full Stack Developer",
     "cta_resume": "Resume",
     "cta_github": "GitHub",
-    "scroll": "scroll"
+    "scroll": "scroll",
+    "body": "Tech enthusiast specializing in Mobile and Web development with proven experience in full-stack development. Demonstrated expertise in building responsive web applications and mobile solutions. Strong foundation in Web development with growing proficiency in Mobile apps creation through hands-on projects. Proactive problem-solver with excellent adaptability in dynamic software environments."
   },
   "about": {
     "label": "About Me",
@@ -30,7 +31,39 @@
   },
   "experience": {
     "label": "Career",
-    "heading": "Work Experience"
+    "heading": "Work Experience",
+    "items": {
+      "playsoft_full": {
+        "year": "February 2026 - Present",
+        "role": "Full Stack Developer",
+        "company": "PlaySoft",
+        "description": "Contributing to the development of Instalab, a new Interactive IT Labs Platform. Implementing new features and delivering high quality service for end users."
+      },
+      "playsoft_intern": {
+        "year": "February 2025 - August 2025",
+        "role": "Full Stack Mobile Developer Intern",
+        "company": "PlaySoft",
+        "description": "Designed and developed a mobile application for smart maintenance management using Flutter, NestJS and GraphQL. Implemented features for booking, tracking, and reporting issues. Integrated real-time notifications, real-time chat, localizations and a chatbot for easy ticket creation and categorization."
+      },
+      "tagamuta": {
+        "year": "June 2024 - August 2024",
+        "role": "Software Engineer Intern",
+        "company": "Tagamuta Valley",
+        "description": "Developed the user interfaces for a laboratory management web application using Angular, PrimeNG and PrimeFlex. Collaborated with stakeholders to define project requirements and timelines."
+      },
+      "branper": {
+        "year": "January 2022 - May 2022",
+        "role": "Software Developer Intern",
+        "company": "Branper",
+        "description": "Designed and developed 'Sentinel', a web scraping application utilizing object detection and OCR technologies. Implemented frontend interfaces using React for visualizing scraped data. Integrated computer vision algorithms for automated data extraction."
+      },
+      "post": {
+        "year": "July 2021 - August 2021",
+        "role": "Technical Intern",
+        "company": "Tunisian Post Office",
+        "description": "Designed and developed a comprehensive Postal Depot Management System using Angular and FastAPI. Implemented automated workflows and real-time tracking features to streamline depot operations."
+      }
+    }
   },
   "projects": {
     "label": "Work",
@@ -53,11 +86,79 @@
     "modal_github_sub": "View source code",
     "modal_cancel": "Cancel",
     "loading_preview": "Loading preview…",
-    "screenshots_header": "Screenshots"
+    "screenshots_header": "Screenshots",
+    "items": {
+      "repairy": {
+        "title": "Repairy",
+        "description": "Repairy is a smart mobile application designed to simplify the process of booking repair services using AI. Built with Flutter, NestJS, MySQL, GraphQL, and Firebase."
+      },
+      "deliverini": {
+        "title": "Deliverini",
+        "description": "Comprehensive carpooling and object transportation application connecting users for shared rides and delivery services. Built with Angular, Express, and MongoDB."
+      },
+      "projexa": {
+        "title": "Projexa",
+        "description": "A modern, full-stack project management platform designed for seamless collaboration and efficient task tracking."
+      },
+      "expense": {
+        "title": "Expense Tracking System",
+        "description": "Intuitive application to manage and track personal finances with NestJS, Angular, and MongoDB."
+      },
+      "realestate": {
+        "title": "Real Estate Mobile App",
+        "description": "Android app for buying, selling, and renting properties with map integration, photo galleries, and real-time listings."
+      }
+    }
   },
   "personal_projects": {
     "label": "Side Work",
-    "heading": "Personal Projects"
+    "heading": "Personal Projects",
+    "items": {
+      "portfolio": {
+        "title": "Portfolio Website",
+        "description": "A personal portfolio website to showcase my skills, projects, and experiences. Built with Vite and Tailwind CSS."
+      },
+      "islami": {
+        "title": "Islami",
+        "description": "Mobile application providing the Quran, prayer times, and the Qibla. Built with SwiftUI with Arabic and English support."
+      },
+      "foody": {
+        "title": "Foody",
+        "description": "Modern minimalist recipe blog app built with Flutter and GraphQL, featuring role-based access and persistent authentication."
+      },
+      "garaji": {
+        "title": "Garaji",
+        "description": "A sleek, user-friendly mobile application for personal vehicle management. Effortlessly track your vehicles, log maintenance activities, and stay ahead with smart health insights. Built with Flutter for seamless cross-platform experience on iOS and Android."
+      },
+      "homespot": {
+        "title": "HomeSpot",
+        "description": "Modern & minimalist real-estate agency application for posting houses, apartments or fields adverts and contacting estate agencies."
+      },
+      "numix": {
+        "title": "NumiX",
+        "description": "A Wordle-style game where you guess an 8-digit Tunisian phone number."
+      },
+      "hangman": {
+        "title": "Hangman",
+        "description": "Hangman JavaScript fun game — developer edition. Test your skills in software engineering."
+      },
+      "sudoo": {
+        "title": "Sudoo",
+        "description": "A modern, responsive, and fully-featured Sudoku web application designed with a beautiful and aesthetic UI, bringing a classic puzzle experience right to your browser."
+      },
+      "codehunt": {
+        "title": "CodeHunt",
+        "description": "A real-time multiplayer code deduction game (Bulls and Cows style) where players create/join a room, set a secret 4-digit code, and take turns guessing until one player gets all 4 exact digits."
+      },
+      "mineflux": {
+        "title": "MineFlux",
+        "description": "A premium, modern Minesweeper experience built with Next.js, Framer Motion, and Tailwind CSS."
+      },
+      "lexiq": {
+        "title": "LexiQ",
+        "description": "LexiQ is a polished Wordle clone built with Next.js, TypeScript, and Tailwind CSS."
+      }
+    }
   },
   "contact": {
     "label": "Let's Talk",

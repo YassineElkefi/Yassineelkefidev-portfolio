@@ -52,7 +52,7 @@ const SlideshowModal = ({ project, onClose }) => {
       >
         <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: `1px solid ${project.accent}22` }}>
           <span className="font-bold text-base" style={{ color: 'var(--text)' }}>
-            {project.emoji} {project.title} — {t('projects.screenshots_header')}
+            {project.emoji} {t(`personal_projects.items.${project.i18nKey}.title`)} — {t('projects.screenshots_header')}
           </span>
           <div className="flex items-center gap-3">
             {project.githubRepo && project.status !== 'private' && (
@@ -76,7 +76,7 @@ const SlideshowModal = ({ project, onClose }) => {
           ))}
           <AnimatePresence initial={false}>
             <motion.img
-              key={current} src={images[current]} alt={`${project.title} screenshot ${current + 1}`}
+              key={current} src={images[current]} alt={`${t(`personal_projects.items.${project.i18nKey}.title`)} screenshot ${current + 1}`}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, position: 'absolute' }}
               transition={{ duration: 0.15 }}
               className="absolute w-full h-full object-contain"
@@ -167,7 +167,7 @@ const LivePreviewModal = ({ project, onClose }) => {
               <span className="font-mono text-xs" style={{ color: 'var(--muted)' }}>{t('projects.loading_preview')}</span>
             </div>
           )}
-          <iframe src={project.demoUrl} title={`${project.title} live preview`} className="w-full h-full border-0" onLoad={() => setLoading(false)} sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
+          <iframe src={project.demoUrl} title={`${t(`personal_projects.items.${project.i18nKey}.title`)} live preview`} className="w-full h-full border-0" onLoad={() => setLoading(false)} sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
         </div>
       </motion.div>
     </motion.div>
@@ -207,7 +207,9 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
       >
         <div className="text-center mb-6">
           <div className="text-3xl mb-2">{project.emoji}</div>
-          <h3 className="font-bold text-lg" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>{project.title}</h3>
+          <h3 className="font-bold text-lg" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+            {t(`personal_projects.items.${project.i18nKey}.title`)}
+          </h3>
           <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>{t('projects.modal_what')}</p>
         </div>
         <div className="flex flex-col gap-3">
@@ -260,17 +262,19 @@ const PersonalProjects = () => {
       .then(r => r.json())
       .then(({ countryCode }) => {
         if (!MUSLIM_COUNTRIES.has(countryCode)) {
-          setVisibleProjects(PERSONAL_PROJECTS.filter(p => p.title !== 'Islami'))
+          setVisibleProjects(PERSONAL_PROJECTS.filter(p => p.i18nKey !== 'islami'))
         }
       })
       .catch(() => {})
   }, [])
 
   const handleProjectClick = (project) => {
+    const projectTitle = t(`personal_projects.items.${project.i18nKey}.title`)
+
     if (project.status === 'private') {
       Swal.fire({
         title: t('projects.private_title'),
-        html: `<div class="text-gray-300 mb-4"><p class="mb-2">${t('projects.private_body_1')} <span class="text-red-400 font-semibold">${t('projects.private_body_2')}</span>.</p><p>${t('projects.private_body_3')} <span class="text-cyan-400 font-medium">${project.title}</span></p></div>`,
+        html: `<div class="text-gray-300 mb-4"><p class="mb-2">${t('projects.private_body_1')} <span class="text-red-400 font-semibold">${t('projects.private_body_2')}</span>.</p><p>${t('projects.private_body_3')} <span class="text-cyan-400 font-medium">${projectTitle}</span></p></div>`,
         icon: 'warning',
         iconColor: '#EF4444',
         confirmButtonText: t('projects.private_confirm'),
@@ -285,7 +289,7 @@ const PersonalProjects = () => {
         allowEscapeKey: true,
       }).then(result => {
         if (result.isConfirmed) {
-          window.location.href = `mailto:yassine.elkefi6@gmail.com?subject=Inquiry about Private Project: ${project.title}&body=Hi Yassine,%0D%0A%0D%0AI would like to know more about "${project.title}".%0D%0A%0D%0AThank you!`
+          window.location.href = `mailto:yassine.elkefi6@gmail.com?subject=Inquiry about Private Project: ${projectTitle}&body=Hi Yassine,%0D%0A%0D%0AI would like to know more about "${projectTitle}".%0D%0A%0D%0AThank you!`
         }
       })
       return
@@ -342,7 +346,7 @@ const PersonalProjects = () => {
         <div className="flex flex-col gap-5 md:gap-6">
           {visibleProjects.map((project, index) => (
             <motion.div
-              key={project.title}
+              key={project.i18nKey}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -353,21 +357,23 @@ const PersonalProjects = () => {
               whileHover={{ borderColor: project.accent + '44' }}
             >
               <div className="pp-thumb-wrap">
-                <img src={project.image} alt={project.title} />
+                <img src={project.image} alt={t(`personal_projects.items.${project.i18nKey}.title`)} />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.65) 0%, transparent 60%)' }} />
               </div>
 
               <div className="flex-1 min-w-0 p-5 md:p-6">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}>
-                    {project.emoji} {project.title}
+                    {project.emoji} {t(`personal_projects.items.${project.i18nKey}.title`)}
                   </h6>
                   {project.status === 'private' && <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,50,50,0.1)', border: '1px solid rgba(255,50,50,0.3)', color: '#FF5555' }}>Private</span>}
                   {project.demo === 'live' && <span className="font-mono text-xs px-2 py-1 rounded flex items-center gap-1" style={{ background: 'rgba(40,200,80,0.08)', border: '1px solid rgba(40,200,80,0.28)', color: '#4ade80' }}><span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse" />Live</span>}
                   {project.demo === 'slideshow' && <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: `${project.accent}0D`, border: `1px solid ${project.accent}33`, color: project.accent }}>🖼️ Preview</span>}
                   <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--surface)', border: '1px solid var(--border-bright)', color: 'var(--muted)' }}>{project.tag}</span>
                 </div>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>{project.description}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
+                  {t(`personal_projects.items.${project.i18nKey}.description`)}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map(tech => (
                     <span key={tech} className="font-mono text-xs px-2 md:px-3 py-1 rounded" style={{ color: project.accent, border: `1px solid ${project.accent}35`, background: `${project.accent}0D` }}>{tech}</span>

@@ -26,7 +26,6 @@ const Experience = () => {
         </motion.h2>
 
         <div className="relative">
-          {/* Vertical timeline line */}
           <div
             className="absolute left-0 top-0 bottom-0 w-px hidden md:block"
             style={{ background: 'var(--border)', marginLeft: '7px' }}
@@ -42,7 +41,6 @@ const Experience = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="flex gap-6 md:gap-10 items-start md:ps-10"
               >
-                {/* Timeline dot */}
                 <div
                   className="hidden md:block absolute w-4 h-4 rounded-full flex-shrink-0 mt-1"
                   style={{
@@ -52,7 +50,6 @@ const Experience = () => {
                   }}
                 />
 
-                {/* Card */}
                 <div
                   className="flex-1 p-5 md:p-7 rounded-xl transition-all duration-300 group"
                   style={{
@@ -68,13 +65,13 @@ const Experience = () => {
                         className="text-lg md:text-xl font-bold leading-tight"
                         style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}
                       >
-                        {exp.role}
+                        {t(`experience.items.${exp.i18nKey}.role`)}
                       </h6>
                       <span
                         className="font-mono text-sm font-semibold"
                         style={{ color: exp.color }}
                       >
-                        {exp.company}
+                        {t(`experience.items.${exp.i18nKey}.company`)}
                       </span>
                     </div>
                     <span
@@ -85,12 +82,12 @@ const Experience = () => {
                         color: exp.color,
                       }}
                     >
-                      {exp.year}
+                      {t(`experience.items.${exp.i18nKey}.year`)}
                     </span>
                   </div>
 
                   <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
-                    {exp.description}
+                    {t(`experience.items.${exp.i18nKey}.description`)}
                   </p>
 
                   <div className="flex flex-wrap gap-2">
