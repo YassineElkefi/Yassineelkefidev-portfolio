@@ -3,13 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { EXPERIENCES } from '../constants'
 
 const Experience = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  const isRTL = i18n.dir() === 'rtl'
 
   return (
     <section
       id="experience"
       className="border-b py-20 md:py-28 px-6 md:px-12"
       style={{ borderColor: 'var(--border)' }}
+      dir={i18n.dir()}
     >
       <div className="max-w-7xl mx-auto">
         <div className="section-label">{t('experience.label')}</div>
@@ -26,9 +29,13 @@ const Experience = () => {
         </motion.h2>
 
         <div className="relative">
+          {/* Timeline line */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-px hidden md:block"
-            style={{ background: 'var(--border)', marginLeft: '7px' }}
+            className="absolute top-0 bottom-0 w-px hidden md:block"
+            style={{
+              background: 'var(--border)',
+              insetInlineStart: '7px', // RTL-safe
+            }}
           />
 
           <div className="flex flex-col gap-10 md:gap-14">
@@ -39,34 +46,45 @@ const Experience = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex gap-6 md:gap-10 items-start md:ps-10"
+                className="flex gap-6 md:gap-10 items-start md:ps-10 md:pe-10"
               >
+                {/* Bullet */}
                 <div
                   className="hidden md:block absolute w-4 h-4 rounded-full flex-shrink-0 mt-1"
                   style={{
                     background: exp.color,
                     boxShadow: `0 0 12px ${exp.color}66`,
-                    left: 0,
+                    insetInlineStart: 0, // RTL-safe
                   }}
                 />
 
+                {/* Card */}
                 <div
                   className="flex-1 p-5 md:p-7 rounded-xl transition-all duration-300 group"
                   style={{
                     background: 'var(--surface)',
                     border: '1px solid var(--border)',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = exp.color + '55'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.borderColor = exp.color + '55')
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.borderColor = 'var(--border)')
+                  }
                 >
+                  {/* Header */}
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                     <div>
                       <h6
                         className="text-lg md:text-xl font-bold leading-tight"
-                        style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}
+                        style={{
+                          color: 'var(--text)',
+                          letterSpacing: '-0.02em',
+                        }}
                       >
                         {t(`experience.items.${exp.i18nKey}.role`)}
                       </h6>
+
                       <span
                         className="font-mono text-sm font-semibold"
                         style={{ color: exp.color }}
@@ -74,6 +92,7 @@ const Experience = () => {
                         {t(`experience.items.${exp.i18nKey}.company`)}
                       </span>
                     </div>
+
                     <span
                       className="font-mono text-xs px-3 py-1.5 rounded-full flex-shrink-0"
                       style={{
@@ -86,12 +105,17 @@ const Experience = () => {
                     </span>
                   </div>
 
-                  <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
+                  {/* Description */}
+                  <p
+                    className="text-sm leading-relaxed mb-4"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     {t(`experience.items.${exp.i18nKey}.description`)}
                   </p>
 
+                  {/* Technologies */}
                   <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map(tech => (
+                    {exp.technologies.map((tech) => (
                       <span
                         key={tech}
                         className="font-mono text-xs px-2 md:px-3 py-1 rounded"
