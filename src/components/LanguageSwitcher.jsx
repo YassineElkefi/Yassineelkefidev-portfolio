@@ -1,0 +1,102 @@
+import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+
+const LANGS = [
+  { code: 'en', label: 'English',  short: 'EN', flag: '🇬🇧' },
+  { code: 'fr', label: 'Français', short: 'FR', flag: '🇫🇷' },
+  { code: 'ar', label: 'العربية',  short: 'ع',  flag: '🇸🇦' },
+]
+
+const LanguageSwitcher = () => {
+  const { i18n } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const current = LANGS.find(l => l.code === i18n.language?.slice(0, 2)) ?? LANGS[0]
+
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const select = (code) => { i18n.changeLanguage(code); setOpen(false) }
+
+  return (
+    <div ref={ref} className="relative flex-shrink-0">
+      {/* Trigger */}
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg font-mono text-xs transition-all duration-200"
+        style={{
+          background: open ? 'rgba(123,47,255,0.12)' : 'transparent',
+          border: `1px solid ${open ? 'rgba(123,47,255,0.45)' : 'var(--border)'}`,
+          color: 'var(--text)',
+        }}
+        onMouseEnter={e => { if (!open) e.currentTarget.style.borderColor = 'var(--border-bright)' }}
+        onMouseLeave={e => { if (!open) e.currentTarget.style.borderColor = open ? 'rgba(123,47,255,0.45)' : 'var(--border)' }}
+      >
+        <span style={{ fontSize: '13px', lineHeight: 1 }}>{current.flag}</span>
+        <span className="tracking-widest uppercase hidden sm:inline">{current.short}</span>
+        <svg
+          width="10" height="10" viewBox="0 0 10 10" fill="none"
+          style={{ color: 'var(--muted)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}
+        >
+          <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {/* Dropdown — always anchored to the right edge of the trigger */}
+      {open && (
+        <div
+          role="listbox"
+          className="absolute mt-2 rounded-xl overflow-hidden z-50"
+          style={{
+            /* In RTL the trigger sits on the left; anchor left edge there.
+               In LTR the trigger sits on the right; anchor right edge. */
+            insetInlineEnd: 0,
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            minWidth: '150px',
+            top: '100%',
+          }}
+        >
+          {LANGS.map(({ code, label, short, flag }, idx) => {
+            const isActive = code === current.code
+            return (
+              <button
+                key={code}
+                role="option"
+                aria-selected={isActive}
+                onClick={() => select(code)}
+                className="w-full flex items-center gap-3 px-3 py-2.5 transition-colors duration-150"
+                style={{
+                  background: isActive ? 'rgba(123,47,255,0.1)' : 'transparent',
+                  borderBottom: idx < LANGS.length - 1 ? '1px solid var(--border)' : 'none',
+                  color: isActive ? 'var(--text)' : 'var(--muted)',
+                  cursor: 'pointer',
+                  textAlign: 'start',
+                }}
+                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(123,47,255,0.05)' }}
+                onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
+              >
+                <span style={{ fontSize: '15px', lineHeight: 1, flexShrink: 0 }}>{flag}</span>
+                <span className="font-mono text-xs tracking-widest uppercase">{short}</span>
+                <span className="flex-1 text-xs" style={{ color: 'var(--muted)', opacity: 0.8 }}>{label}</span>
+                {isActive && (
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ color: 'var(--violet)', flexShrink: 0 }}>
+                    <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default LanguageSwitcher
