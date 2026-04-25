@@ -12,7 +12,9 @@
     "cta_resume": "CV",
     "cta_github": "GitHub",
     "scroll": "défiler",
-    "body": "Passionné de technologie spécialisé dans le développement Mobile et Web avec une expérience confirmée en développement full-stack. Expertise démontrée dans la création d'applications web responsives et de solutions mobiles. Solides bases en développement Web avec une maîtrise croissante de la création d'applications mobiles à travers des projets concrets. Résolveur de problèmes proactif avec une excellente adaptabilité dans des environnements logiciels dynamiques."
+    "body": "Passionné de technologie spécialisé dans le développement Mobile et Web avec une expérience confirmée en développement full-stack. Expertise démontrée dans la création d'applications web responsives et de solutions mobiles. Solides bases en développement Web avec une maîtrise croissante de la création d'applications mobiles à travers des projets concrets. Résolveur de problèmes proactif avec une excellente adaptabilité dans des environnements logiciels dynamiques.",
+    "englishCv": "CV en anglais",
+    "frenchCv": "CV en français"
   },
   "about": {
     "label": "À propos",

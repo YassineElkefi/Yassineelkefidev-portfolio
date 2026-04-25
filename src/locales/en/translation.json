@@ -12,7 +12,9 @@
     "cta_resume": "Resume",
     "cta_github": "GitHub",
     "scroll": "scroll",
-    "body": "Tech enthusiast specializing in Mobile and Web development with proven experience in full-stack development. Demonstrated expertise in building responsive web applications and mobile solutions. Strong foundation in Web development with growing proficiency in Mobile apps creation through hands-on projects. Proactive problem-solver with excellent adaptability in dynamic software environments."
+    "body": "Tech enthusiast specializing in Mobile and Web development with proven experience in full-stack development. Demonstrated expertise in building responsive web applications and mobile solutions. Strong foundation in Web development with growing proficiency in Mobile apps creation through hands-on projects. Proactive problem-solver with excellent adaptability in dynamic software environments.",
+    "englishCv": "Resume in English",
+    "frenchCv": "Resume in French"
   },
   "about": {
     "label": "About Me",
