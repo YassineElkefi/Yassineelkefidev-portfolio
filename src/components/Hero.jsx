@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import profilePic from '../assets/yassineELKEFIProfile.jpeg'
-import resume from '../assets/resume.pdf'
+import resumeEn from '../assets/resumeEN.pdf'
+import resumeFr from '../assets/resumeFR.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'
+import { useState } from 'react'
 
 const container = (delay) => ({
   hidden: { x: -60, opacity: 0 },
@@ -11,6 +13,7 @@ const container = (delay) => ({
 
 const Hero = () => {
   const { t } = useTranslation()
+  const [openResume, setOpenResume] = useState(false)
 
   return (
     <section
@@ -107,10 +110,48 @@ const Hero = () => {
             animate="visible"
             className="flex flex-wrap gap-4"
           >
-            <a href={resume} target="_blank" rel="noreferrer" className="btn-primary">
-              <span>{t('hero.cta_resume')}</span>
-              <FaFileAlt />
-            </a>
+            <div className="relative">
+              {/* Main button */}
+              <button
+                onClick={() => setOpenResume(!openResume)}
+                className="btn-primary flex items-center gap-2"
+              >
+                <span>{t('hero.cta_resume')}</span>
+                <FaFileAlt />
+              </button>
+
+              {/* Dropdown */}
+              {openResume && (
+                <div
+                  className="absolute mt-2 w-44 rounded-xl overflow-hidden shadow-lg z-50"
+                  style={{
+                    background: 'rgba(10,10,14,0.95)',
+                    border: '1px solid rgba(123,47,255,0.3)',
+                    backdropFilter: 'blur(10px)',
+                  }}
+                >
+                  <a
+                    href={resumeEn}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block px-4 py-3 text-sm hover:bg-white/5 transition"
+                    onClick={() => setOpenResume(false)}
+                  >
+                    🇺🇸 {t('hero.englishCv')}
+                  </a>
+
+                  <a
+                    href={resumeFr}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block px-4 py-3 text-sm hover:bg-white/5 transition"
+                    onClick={() => setOpenResume(false)}
+                  >
+                    🇫🇷 {t('hero.frenchCv')}
+                  </a>
+                </div>
+              )}
+            </div>
             <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer" className="btn-ghost">
               <span>{t('hero.cta_github')}</span>
               <FaGithub />
