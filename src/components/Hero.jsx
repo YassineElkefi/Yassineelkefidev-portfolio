@@ -4,7 +4,7 @@ import profilePic from '../assets/yassineELKEFIProfile.jpeg'
 import resumeEn from '../assets/resumeEN.pdf'
 import resumeFr from '../assets/resumeFR.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import ReactCountryFlag from "react-country-flag"
 
 const container = (delay) => ({
@@ -42,8 +42,26 @@ const dropdown = {
 }
 
 const Hero = () => {
+  const nameRef = useRef(null)
+
   const { t } = useTranslation()
   const [openResume, setOpenResume] = useState(false)
+
+  const scramble = () => {
+    const el = nameRef.current
+    const original = 'ELKEFI'
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%'
+    let iter = 0
+    clearInterval(el._interval)
+    el._interval = setInterval(() => {
+      el.textContent = original.split('').map((c, i) =>
+        i < iter ? original[i] : chars[Math.floor(Math.random() * chars.length)]
+      ).join('')
+      if (iter >= original.length) clearInterval(el._interval)
+      iter += 0.35
+    }, 40)
+  }
+
 
   return (
     <section
@@ -104,10 +122,13 @@ const Hero = () => {
             Yassine
             <br />
             <span
+              ref={nameRef}
+              onMouseEnter={scramble}
               style={{
                 background: 'linear-gradient(90deg, #FF3CAC, #00E5FF)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
+                cursor: 'default',
               }}
             >
               ELKEFI
@@ -140,7 +161,20 @@ const Hero = () => {
             animate="visible"
             className="flex flex-wrap gap-4"
           >
-            <div className="relative">
+            <div 
+            className="relative"
+            onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect()
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.3
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.3
+            e.currentTarget.querySelector('button').style.transform = `translate(${x}px, ${y}px)`
+            e.currentTarget.querySelector('button').style.transition = 'transform 0.1s'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.querySelector('button').style.transform = 'translate(0, 0)'
+            e.currentTarget.querySelector('button').style.transition = 'transform 0.5s cubic-bezier(.16,1,.3,1)'
+          }}
+            >
               {/* Main button */}
               <button
                 onClick={() => setOpenResume(!openResume)}

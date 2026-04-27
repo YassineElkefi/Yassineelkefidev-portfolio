@@ -256,6 +256,18 @@ const Projects = () => {
     { key: 'Mobile', label: t('projects.filter_mobile') },
   ]
 
+  const handleTilt = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    e.currentTarget.style.transform = 
+      `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.03)`
+  }
+
+  const resetTilt = (e) => {
+    e.currentTarget.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)'
+  }
+
   const filtered = active === 'All' ? PROJECTS : PROJECTS.filter(p => p.tag === active)
 
   const handleClick = (project) => {
@@ -338,9 +350,11 @@ const Projects = () => {
                 onClick={() => handleClick(project)}
                 className="group relative flex flex-col rounded-xl overflow-hidden"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)', cursor: 'pointer' }}
-                whileHover={{ y: -6 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = project.accent + '55'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                //whileHover={{ y: -6 }}
+                //onMouseEnter={e => e.currentTarget.style.borderColor = project.accent + '55'}
+                //onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+                onMouseMove={handleTilt}
+                onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.borderColor = 'var(--border)' }}
               >
                 <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }} />
                 <div className="relative overflow-hidden h-44">

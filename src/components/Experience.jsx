@@ -1,11 +1,38 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { EXPERIENCES } from '../constants'
+import AnimatedDot from './AnimatedDot'
+import { useState } from 'react'
 
 const Experience = () => {
   const { t, i18n } = useTranslation()
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+
 
   const isRTL = i18n.dir() === 'rtl'
+
+  const BorderTrace = ({ color, active }) => (
+  <svg
+    className="absolute inset-0 w-full h-full pointer-events-none"
+    style={{ borderRadius: 'inherit', overflow: 'visible' }}
+  >
+    <rect
+      x="0.5" y="0.5"
+      width="calc(100% - 1px)" height="calc(100% - 1px)"
+      rx="11"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeDasharray="1000"
+      strokeDashoffset={active ? 0 : 1000}
+      style={{
+        transition: active
+          ? 'stroke-dashoffset 0.7s cubic-bezier(0.16, 1, 0.3, 1)'
+          : 'stroke-dashoffset 0.4s ease-in',
+      }}
+    />
+  </svg>
+)
 
   return (
     <section
@@ -49,14 +76,15 @@ const Experience = () => {
                 className="flex gap-6 md:gap-10 items-start md:ps-10 md:pe-10"
               >
                 {/* Bullet */}
-                <div
+                {/* <div
                   className="hidden md:block absolute w-4 h-4 rounded-full flex-shrink-0 mt-1"
                   style={{
                     background: exp.color,
                     boxShadow: `0 0 12px ${exp.color}66`,
                     insetInlineStart: 0, // RTL-safe
                   }}
-                />
+                /> */}
+                <AnimatedDot color={exp.color} />
 
                 {/* Card */}
                 <div

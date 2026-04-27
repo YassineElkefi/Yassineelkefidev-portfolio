@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -50,6 +50,24 @@ const Cursor = () => {
   )
 }
 
+// Add this component inside App.jsx, above the App function
+const ScrollProgress = () => {
+  const [pct, setPct] = useState(0)
+  useEffect(() => {
+    const update = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight
+      setPct((window.scrollY / total) * 100)
+    }
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
+  return (
+    <div style={{ position: 'fixed', top: 0, left: 0, height: '2px', 
+      width: `${pct}%`, background: 'linear-gradient(90deg, #7B2FFF, #00E5FF)', zIndex: 9999 }} 
+    />
+  )
+}
+
 // ── App ────────────────────────────────────────────────────────────────────────
 const App = () => {
   const { t } = useTranslation()
@@ -65,7 +83,7 @@ const App = () => {
         className="bg-glow fixed top-0 left-0 w-full h-full pointer-events-none -z-10"
         style={{ background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(123,47,255,0.18), transparent)' }}
       />
-
+      <ScrollProgress />
       <Navbar />
 
       <main>

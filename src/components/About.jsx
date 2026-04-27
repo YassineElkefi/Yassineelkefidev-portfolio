@@ -1,15 +1,41 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import aboutImg from '../assets/about.webp'
+import { useEffect, useRef, useState } from 'react'
 
 const About = () => {
   const { t } = useTranslation()
 
+  const CountUp = ({ target, suffix = '' }) => {
+  const [val, setVal] = useState(0)
+  const ref = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      observer.disconnect()
+      const start = performance.now()
+      const dur = 1400
+      const tick = (now) => {
+        const p = Math.min((now - start) / dur, 1)
+        const ease = 1 - Math.pow(1 - p, 3)
+        setVal(Math.round(ease * target))
+        if (p < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }, { threshold: 0.5 })
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [target])
+
+  return <span ref={ref}>{val}{suffix}</span>
+}
+
   const stats = [
-    { num: '6+',  label: t('about.stats.years') },
-    { num: '16+', label: t('about.stats.projects') },
-    { num: '4',   label: t('about.stats.internships') },
-  ]
+  { num: 6,  suffix: '+', label: t('about.stats.years') },
+  { num: 16, suffix: '+', label: t('about.stats.projects') },
+  { num: 4,  suffix: '',  label: t('about.stats.internships') },
+]
 
   return (
     <section
@@ -93,7 +119,7 @@ const About = () => {
                       WebkitTextFillColor: 'transparent',
                     }}
                   >
-                    {s.num}
+                    <CountUp target={s.num} suffix={s.suffix} />
                   </div>
                   <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase" style={{ color: 'var(--muted)' }}>
                     {s.label}
