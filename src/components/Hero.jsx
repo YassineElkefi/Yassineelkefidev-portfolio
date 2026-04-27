@@ -1,15 +1,45 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import profilePic from '../assets/yassineELKEFIProfile.jpeg'
 import resumeEn from '../assets/resumeEN.pdf'
 import resumeFr from '../assets/resumeFR.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'
 import { useState } from 'react'
+import ReactCountryFlag from "react-country-flag"
 
 const container = (delay) => ({
   hidden: { x: -60, opacity: 0 },
   visible: { x: 0, opacity: 1, transition: { duration: 0.6, delay, ease: 'easeOut' } },
 })
+
+const dropdown = {
+  hidden: {
+    opacity: 0,
+    y: -8,
+    scale: 0.96,
+    filter: 'blur(6px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.18,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -6,
+    scale: 0.98,
+    filter: 'blur(6px)',
+    transition: {
+      duration: 0.12,
+      ease: 'easeIn',
+    },
+  },
+}
 
 const Hero = () => {
   const { t } = useTranslation()
@@ -121,36 +151,45 @@ const Hero = () => {
               </button>
 
               {/* Dropdown */}
-              {openResume && (
-                <div
-                  className="absolute mt-2 w-44 rounded-xl overflow-hidden shadow-lg z-50"
-                  style={{
-                    background: 'rgba(10,10,14,0.95)',
-                    border: '1px solid rgba(123,47,255,0.3)',
-                    backdropFilter: 'blur(10px)',
-                  }}
-                >
-                  <a
-                    href={resumeEn}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block px-4 py-3 text-sm hover:bg-white/5 transition"
-                    onClick={() => setOpenResume(false)}
+              <AnimatePresence>
+                {openResume && (
+                  <motion.div
+                    variants={dropdown}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="absolute mt-2 w-44 rounded-xl overflow-hidden shadow-lg z-50"
+                    style={{
+                      background: 'rgba(10,10,14,0.92)',
+                      border: '1px solid rgba(123,47,255,0.3)',
+                      backdropFilter: 'blur(14px)',
+                      transformOrigin: 'top right',
+                    }}
                   >
-                    🇺🇸 {t('hero.englishCv')}
-                  </a>
+                    <a
+                      href={resumeEn}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 text-sm hover:bg-white/5 transition flex items-center gap-2"
+                      onClick={() => setOpenResume(false)}
+                    >
+                      <ReactCountryFlag countryCode="GB" svg style={{ width: '1.2em', height: '1.2em' }} />
+                      {t('hero.englishCv')}
+                    </a>
 
-                  <a
-                    href={resumeFr}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block px-4 py-3 text-sm hover:bg-white/5 transition"
-                    onClick={() => setOpenResume(false)}
-                  >
-                    🇫🇷 {t('hero.frenchCv')}
-                  </a>
-                </div>
-              )}
+                    <a
+                      href={resumeFr}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 text-sm hover:bg-white/5 transition flex items-center gap-2"
+                      onClick={() => setOpenResume(false)}
+                    >
+                      <ReactCountryFlag countryCode="FR" svg style={{ width: '1.2em', height: '1.2em' }} />
+                      {t('hero.frenchCv')}
+                    </a>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <a href="https://github.com/YassineElkefi" target="_blank" rel="noreferrer" className="btn-ghost">
               <span>{t('hero.cta_github')}</span>

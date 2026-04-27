@@ -1,11 +1,42 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactCountryFlag from "react-country-flag"
+import { motion, AnimatePresence } from 'framer-motion'
 
 const LANGS = [
-  { code: 'en', label: 'English',  short: 'EN', flag: '🇬🇧' },
-  { code: 'fr', label: 'Français', short: 'FR', flag: '🇫🇷' },
-  { code: 'ar', label: 'العربية',  short: 'ع',  flag: '🇸🇦' },
+  { code: 'en', label: 'English',  short: 'EN', country: 'GB' },
+  { code: 'fr', label: 'Français', short: 'FR', country: 'FR' },
+  { code: 'ar', label: 'العربية',  short: 'AR', country: 'SA' },
 ]
+
+const dropdown = {
+  hidden: {
+    opacity: 0,
+    y: -6,
+    scale: 0.96,
+    filter: 'blur(6px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.18,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -4,
+    scale: 0.98,
+    filter: 'blur(6px)',
+    transition: {
+      duration: 0.12,
+      ease: 'easeIn',
+    },
+  },
+}
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation()
@@ -37,7 +68,16 @@ const LanguageSwitcher = () => {
         onMouseEnter={e => { if (!open) e.currentTarget.style.borderColor = 'var(--border-bright)' }}
         onMouseLeave={e => { if (!open) e.currentTarget.style.borderColor = open ? 'rgba(123,47,255,0.45)' : 'var(--border)' }}
       >
-        <span style={{ fontSize: '13px', lineHeight: 1 }}>{current.flag}</span>
+        <ReactCountryFlag
+          countryCode={current.country}
+          svg
+          style={{
+            width: '1.2em',
+            height: '1.2em',
+            borderRadius: '9999px',
+          }}
+          title={current.label}
+        />        
         <span className="tracking-widest uppercase hidden sm:inline">{current.short}</span>
         <svg
           width="10" height="10" viewBox="0 0 10 10" fill="none"
@@ -48,53 +88,80 @@ const LanguageSwitcher = () => {
       </button>
 
       {/* Dropdown — always anchored to the right edge of the trigger */}
-      {open && (
-        <div
-          role="listbox"
-          className="absolute mt-2 rounded-xl overflow-hidden z-50"
-          style={{
-            /* In RTL the trigger sits on the left; anchor left edge there.
-               In LTR the trigger sits on the right; anchor right edge. */
-            insetInlineEnd: 0,
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
-            minWidth: '150px',
-            top: '100%',
-          }}
-        >
-          {LANGS.map(({ code, label, short, flag }, idx) => {
-            const isActive = code === current.code
-            return (
-              <button
-                key={code}
-                role="option"
-                aria-selected={isActive}
-                onClick={() => select(code)}
-                className="w-full flex items-center gap-3 px-3 py-2.5 transition-colors duration-150"
-                style={{
-                  background: isActive ? 'rgba(123,47,255,0.1)' : 'transparent',
-                  borderBottom: idx < LANGS.length - 1 ? '1px solid var(--border)' : 'none',
-                  color: isActive ? 'var(--text)' : 'var(--muted)',
-                  cursor: 'pointer',
-                  textAlign: 'start',
-                }}
-                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(123,47,255,0.05)' }}
-                onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
-              >
-                <span style={{ fontSize: '15px', lineHeight: 1, flexShrink: 0 }}>{flag}</span>
-                <span className="font-mono text-xs tracking-widest uppercase">{short}</span>
-                <span className="flex-1 text-xs" style={{ color: 'var(--muted)', opacity: 0.8 }}>{label}</span>
-                {isActive && (
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ color: 'var(--violet)', flexShrink: 0 }}>
-                    <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </button>
-            )
-          })}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="listbox"
+            variants={dropdown}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="absolute mt-2 rounded-xl overflow-hidden z-50"
+            style={{
+              insetInlineEnd: 0,
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+              minWidth: '150px',
+              top: '100%',
+              transformOrigin: 'top right',
+            }}
+          >
+            {LANGS.map(({ code, label, short, country }, idx) => {
+              const isActive = code === current.code
+
+              return (
+                <button
+                  key={code}
+                  role="option"
+                  aria-selected={isActive}
+                  onClick={() => select(code)}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 transition-colors duration-150"
+                  style={{
+                    background: isActive ? 'rgba(123,47,255,0.1)' : 'transparent',
+                    borderBottom: idx < LANGS.length - 1 ? '1px solid var(--border)' : 'none',
+                    color: isActive ? 'var(--text)' : 'var(--muted)',
+                    cursor: 'pointer',
+                    textAlign: 'start',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) e.currentTarget.style.background = 'rgba(123,47,255,0.05)'
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) e.currentTarget.style.background = 'transparent'
+                  }}
+                >
+                  <ReactCountryFlag
+                    countryCode={country}
+                    svg
+                    style={{
+                      width: '1.2em',
+                      height: '1.2em',
+                      flexShrink: 0,
+                      borderRadius: '9999px',
+                    }}
+                    title={label}
+                  />
+
+                  <span className="font-mono text-xs tracking-widest uppercase">
+                    {short}
+                  </span>
+
+                  <span className="flex-1 text-xs" style={{ color: 'var(--muted)', opacity: 0.8 }}>
+                    {label}
+                  </span>
+
+                  {isActive && (
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ color: 'var(--violet)', flexShrink: 0 }}>
+                      <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </button>
+              )
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
