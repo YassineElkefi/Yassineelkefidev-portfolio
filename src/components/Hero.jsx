@@ -160,8 +160,8 @@ const Hero = () => {
                     exit="exit"
                     className="absolute mt-2 w-44 rounded-xl overflow-hidden shadow-lg z-50"
                     style={{
-                      background: 'rgba(10,10,14,0.92)',
-                      border: '1px solid rgba(123,47,255,0.3)',
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border)',
                       backdropFilter: 'blur(14px)',
                       transformOrigin: 'top right',
                     }}
@@ -171,6 +171,15 @@ const Hero = () => {
                       target="_blank"
                       rel="noreferrer"
                       className="px-4 py-3 text-sm hover:bg-white/5 transition flex items-center gap-2"
+                      style={{
+                        color: 'var(--text)',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = 'var(--surface)'
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = 'transparent'
+                      }}
                       onClick={() => setOpenResume(false)}
                     >
                       <ReactCountryFlag countryCode="GB" svg style={{ width: '1.2em', height: '1.2em' }} />
@@ -182,6 +191,15 @@ const Hero = () => {
                       target="_blank"
                       rel="noreferrer"
                       className="px-4 py-3 text-sm hover:bg-white/5 transition flex items-center gap-2"
+                      style={{
+                        color: 'var(--text)',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = 'var(--surface)'
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = 'transparent'
+                      }}
                       onClick={() => setOpenResume(false)}
                     >
                       <ReactCountryFlag countryCode="FR" svg style={{ width: '1.2em', height: '1.2em' }} />
