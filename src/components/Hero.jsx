@@ -6,6 +6,7 @@ import resumeFr from '../assets/resumeFR.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'
 import { useRef, useState } from 'react'
 import ReactCountryFlag from "react-country-flag"
+import ParticleCanvas from './ParticleCanvas'
 
 const container = (delay) => ({
   hidden: { x: -60, opacity: 0 },
@@ -89,6 +90,9 @@ const Hero = () => {
           top: -200, right: -200,
         }}
       />
+
+      <ParticleCanvas />
+
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col xl:flex-row xl:items-center gap-12 xl:gap-16">
 
@@ -258,12 +262,42 @@ const Hero = () => {
           className="flex-shrink-0 flex justify-center xl:justify-end"
         >
           <div className="relative">
-            <div
+            {/* <div
               className="absolute inset-0 rounded-2xl pointer-events-none"
               style={{
                 border: '1px solid rgba(123,47,255,0.5)',
                 transform: 'translate(12px, 12px)',
                 zIndex: 0,
+              }}
+            /> */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                border: '1px solid rgba(123,47,255,0.5)',
+                transform: 'translate(12px, 12px)',
+                zIndex: 0,
+              }}
+              animate={{
+                boxShadow: [
+                  '0 0 0px rgba(123,47,255,0)',
+                  '0 0 18px rgba(123,47,255,0.55)',
+                  '0 0 6px rgba(123,47,255,0.2)',
+                  '0 0 22px rgba(123,47,255,0.6)',
+                  '0 0 0px rgba(123,47,255,0)',
+                ],
+                borderColor: [
+                  'rgba(123,47,255,0.35)',
+                  'rgba(123,47,255,0.9)',
+                  'rgba(123,47,255,0.4)',
+                  'rgba(123,47,255,1)',
+                  'rgba(123,47,255,0.35)',
+                ],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                repeatType: 'loop',
               }}
             />
             <img
