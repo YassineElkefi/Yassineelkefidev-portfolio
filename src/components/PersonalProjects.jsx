@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { PERSONAL_PROJECTS } from '../constants'
 import Swal from 'sweetalert2'
+import { ArrowRight, ArrowUpRight, CirclePlus, GitBranch, Globe, Images, LockKeyhole } from 'lucide-react'
 
 const MUSLIM_COUNTRIES = new Set([
   'AF','AL','DZ','AZ','BH','BD','BJ','BF','BN','CM','TD','KM',
@@ -17,6 +18,7 @@ const MUSLIM_COUNTRIES = new Set([
    ───────────────────────────────────────────────────────────── */
 const SlideshowModal = ({ project, onClose }) => {
   const { t } = useTranslation()
+  const ProjectIcon = project.icon
   const [current, setCurrent] = useState(0)
   const images = project.screenshots || []
   const total = images.length
@@ -52,7 +54,8 @@ const SlideshowModal = ({ project, onClose }) => {
       >
         <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: '1px solid var(--modal-border)' }}>
           <span className="font-bold text-base" style={{ color: 'var(--modal-text)' }}>
-            {project.emoji} {t(`personal_projects.items.${project.i18nKey}.title`)} — {t('projects.screenshots_header')}
+            <ProjectIcon size={18} style={{ color: project.accent }} />
+            {t(`personal_projects.items.${project.i18nKey}.title`)} — {t('projects.screenshots_header')}
           </span>
           <div className="flex items-center gap-3">
             {project.githubRepo && project.status !== 'private' && (
@@ -140,14 +143,14 @@ const LivePreviewModal = ({ project, onClose }) => {
             <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#28C840' }} />
           </div>
           <div className="flex-1 flex items-center gap-2 px-3 py-1 rounded-lg font-mono text-xs truncate modal-url-bar" style={{ border: '1px solid var(--modal-border)', color: 'var(--modal-muted)' }}>
-            <span style={{ color: project.accent }}>🔒</span>
+            <LockKeyhole size={14} style={{ color: project.accent, flexShrink: 0 }} />
             <span className="truncate">{project.demoUrl}</span>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <a href={project.demoUrl} target="_blank" rel="noreferrer"
               className="font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all duration-200 modal-accent-btn"
               style={{ color: project.accent, border: '1px solid var(--modal-border)' }}
-            >↗ Open</a>
+            ><ArrowUpRight size={14} /> Open</a>
             {project.githubRepo && project.status !== 'private' && (
               <a href={project.githubRepo} target="_blank" rel="noreferrer"
                 className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200 modal-ghost-btn"
@@ -175,6 +178,7 @@ const LivePreviewModal = ({ project, onClose }) => {
    ───────────────────────────────────────────────────────────── */
 const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
   const { t } = useTranslation()
+  const ProjectIcon = project.icon
 
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose() }
@@ -202,7 +206,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
         style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}
       >
         <div className="text-center mb-6">
-          <div className="text-3xl mb-2">{project.emoji}</div>
+          <ProjectIcon size={32} className="mx-auto mb-2" style={{ color: project.accent }} />
           <h3 className="font-bold text-lg" style={{ color: 'var(--modal-text)', letterSpacing: '-0.02em' }}>
             {t(`personal_projects.items.${project.i18nKey}.title`)}
           </h3>
@@ -213,7 +217,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
             className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-choice-btn"
           >
             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg">
-              {project.demo === 'live' ? '🌐' : '🖼️'}
+              {project.demo === 'live' ? <Globe size={20} /> : <Images size={20} />}
             </div>
             <div>
               <div className="font-semibold text-sm" style={{ color: project.accent }}>{demoLabel}</div>
@@ -225,7 +229,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
             className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-ghost-btn"
             style={{ background: 'var(--modal-chrome)', border: '1px solid var(--modal-border)' }}
           >
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg">⌥</div>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 modal-icon-bg"><GitBranch size={20} /></div>
             <div>
               <div className="font-semibold text-sm" style={{ color: 'var(--modal-text)' }}>{t('projects.modal_github_label')}</div>
               <div className="text-xs mt-0.5" style={{ color: 'var(--modal-muted)' }}>{t('projects.modal_github_sub')}</div>
@@ -341,11 +345,12 @@ const PersonalProjects = () => {
               <div className="flex-1 min-w-0 p-5 md:p-6">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}>
-                    {project.emoji} {t(`personal_projects.items.${project.i18nKey}.title`)}
+                    <project.icon size={18} style={{ color: project.accent, display: 'inline', verticalAlign: 'text-bottom', marginRight: '0.35rem' }} />
+                    {t(`personal_projects.items.${project.i18nKey}.title`)}
                   </h6>
                   {project.status === 'private' && <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,50,50,0.1)', border: '1px solid rgba(255,50,50,0.3)', color: '#FF5555' }}>Private</span>}
                   {project.demo === 'live' && <span className="font-mono text-xs px-2 py-1 rounded flex items-center gap-1" style={{ background: 'rgba(40,200,80,0.08)', border: '1px solid rgba(40,200,80,0.28)', color: '#4ade80' }}><span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse" />Live</span>}
-                  {project.demo === 'slideshow' && <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: `${project.accent}0D`, border: `1px solid ${project.accent}33`, color: project.accent }}>🖼️ Preview</span>}
+                  {project.demo === 'slideshow' && <span className="font-mono text-xs px-2 py-1 rounded flex items-center gap-1" style={{ background: `${project.accent}0D`, border: `1px solid ${project.accent}33`, color: project.accent }}><Images size={12} /> Preview</span>}
                   <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--surface)', border: '1px solid var(--border-bright)', color: 'var(--muted)' }}>{project.tag}</span>
                 </div>
                 <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
@@ -359,7 +364,7 @@ const PersonalProjects = () => {
               </div>
 
               <div className="hidden lg:flex flex-shrink-0 text-2xl pr-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: project.accent }}>
-                {project.status === 'private' ? '🔒' : project.demo ? '⊕' : '→'}
+                {project.status === 'private' ? <LockKeyhole size={18} /> : project.demo ? <CirclePlus size={18} /> : <ArrowRight size={18} />}
               </div>
             </motion.div>
           ))}

@@ -73,16 +73,16 @@
     "filter_all": "All",
     "filter_web": "Web",
     "filter_mobile": "Mobile",
-    "private_title": "🔒 Private Repository",
+    "private_title": "Private Repository",
     "private_body_1": "This repository is",
     "private_body_2": "private",
     "private_body_3": "Contact me for more details about",
-    "private_confirm": "📧 Contact Me",
+    "private_confirm": "Contact Me",
     "private_cancel": "✕ Close",
     "modal_what": "What would you like to open?",
-    "modal_live_label": "🌐 Live Preview",
+    "modal_live_label": "Live Preview",
     "modal_live_sub": "Open inside portfolio",
-    "modal_screenshots_label": "🖼️ Screenshots",
+    "modal_screenshots_label": "Screenshots",
     "modal_screenshots_sub": "Browse app screenshots",
     "modal_github_label": "GitHub Repository",
     "modal_github_sub": "View source code",
@@ -159,6 +159,18 @@
       "lexiq": {
         "title": "LexiQ",
         "description": "LexiQ is a polished Wordle clone built with Next.js, TypeScript, and Tailwind CSS."
+      },
+      "expenza": {
+        "title": "Expenza",
+        "description": "A smart personal finance app to track balances, manage income and expenses, plan upcoming payments, and stay in control of your budget."
+      },
+      "xampp-control-panel": {
+        "title": "XAMPP Control Panel",
+        "description": "XAMPP Control panel is currently not working with macOS 27 even with rosetta. This is a modern control panel built in electron to work with XAMPP Commands."
+      },
+      "xampp-control-website": {
+        "title": "XAMPP Control Panel Website",
+        "description": "This project is a single-page marketing and download site for the desktop app. The landing page includes feature highlights, architecture-download section and system requirements"
       }
     }
   },

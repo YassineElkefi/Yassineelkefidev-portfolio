@@ -29,8 +29,8 @@ const CountUp = ({ target, suffix = '' }) => {
 }
 
 const stats = (t) => [
-  { num: 6,  suffix: '+', label: t('about.stats.years') },
-  { num: 16, suffix: '+', label: t('about.stats.projects') },
+  { num: 7,  suffix: '+', label: t('about.stats.years') },
+  { num: 19, suffix: '+', label: t('about.stats.projects') },
   { num: 4,  suffix: '',  label: t('about.stats.internships') },
 ]
 

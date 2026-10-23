@@ -1,6 +1,7 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
+import { Moon, Sun } from 'lucide-react'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme()
@@ -28,18 +29,18 @@ const ThemeToggle = () => {
     >
       {/* Sun */}
       <span
-        className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] select-none pointer-events-none"
-        style={{ opacity: isDark ? 0.4 : 1 }}
+        className="absolute left-1.5 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+        style={{ opacity: isDark ? 0.4 : 1, color: 'var(--yellow, #A07800)' }}
       >
-        ☀️
+        <Sun size={12} />
       </span>
 
       {/* Moon */}
       <span
-        className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] select-none pointer-events-none"
-        style={{ opacity: isDark ? 1 : 0.4 }}
+        className="absolute right-1.5 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+        style={{ opacity: isDark ? 1 : 0.4, color: 'var(--cyan)' }}
       >
-        🌙
+        <Moon size={12} />
       </span>
 
       <motion.div

@@ -73,16 +73,16 @@
     "filter_all": "الكل",
     "filter_web": "ويب",
     "filter_mobile": "موبايل",
-    "private_title": "🔒 مستودع خاص",
+    "private_title": "مستودع خاص",
     "private_body_1": "هذا المستودع",
     "private_body_2": "خاص",
     "private_body_3": "تواصل معي لمزيد من التفاصيل حول",
-    "private_confirm": "📧 تواصل معي",
+    "private_confirm": "تواصل معي",
     "private_cancel": "✕ إغلاق",
     "modal_what": "ماذا تريد أن تفتح؟",
-    "modal_live_label": "🌐 معاينة مباشرة",
+    "modal_live_label": "معاينة مباشرة",
     "modal_live_sub": "فتح داخل المحفظة",
-    "modal_screenshots_label": "🖼️ لقطات الشاشة",
+    "modal_screenshots_label": "لقطات الشاشة",
     "modal_screenshots_sub": "تصفح لقطات التطبيق",
     "modal_github_label": "مستودع GitHub",
     "modal_github_sub": "عرض الكود المصدري",
@@ -159,6 +159,18 @@
       "lexiq": {
         "title": "LexiQ",
         "description": "LexiQ نسخة مصقولة من Wordle مبنية بـ Next.js وTypeScript وTailwind CSS."
+      },
+      "expenza": {
+        "title": "Expenza",
+        "description": "تطبيق ذكي لإدارة المصاريف والميزانية، يساعدك على متابعة أرصدتك، وتنظيم دخلك، والتحكم في نفقاتك والتزاماتك المالية بسهولة."
+      },
+      "xampp-control-panel": {
+        "title": "XAMPP Control Panel",
+        "description": "لوحة التحكم الرسمية لـ XAMPP لا تعمل حاليًا على macOS 27، حتى باستخدام Rosetta. لوحة التحكم الحديثة هذه، المطوّرة باستخدام Electron، تتيح إدارة XAMPP عبر أوامره."
+      },
+      "xampp-control-website": {
+        "title": "موقع XAMPP Control Panel",
+        "description": "هذا المشروع عبارة عن موقع تعريفي من صفحة واحدة مخصص للترويج لتطبيق سطح المكتب وتوفير إمكانية تحميله. تتضمن الصفحة الرئيسية أبرز الميزات، وقسمًا لتحميل النسخة المناسبة حسب بنية المعالج، ومتطلبات النظام."
       }
     }
   },

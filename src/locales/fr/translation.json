@@ -73,16 +73,16 @@
     "filter_all": "Tous",
     "filter_web": "Web",
     "filter_mobile": "Mobile",
-    "private_title": "🔒 Dépôt Privé",
+    "private_title": "Dépôt Privé",
     "private_body_1": "Ce dépôt est",
     "private_body_2": "privé",
     "private_body_3": "Contactez-moi pour plus de détails sur",
-    "private_confirm": "📧 Me Contacter",
+    "private_confirm": "Me Contacter",
     "private_cancel": "✕ Fermer",
     "modal_what": "Que souhaitez-vous ouvrir ?",
-    "modal_live_label": "🌐 Aperçu en direct",
+    "modal_live_label": "Aperçu en direct",
     "modal_live_sub": "Ouvrir dans le portfolio",
-    "modal_screenshots_label": "🖼️ Captures d'écran",
+    "modal_screenshots_label": "Captures d'écran",
     "modal_screenshots_sub": "Parcourir les captures",
     "modal_github_label": "Dépôt GitHub",
     "modal_github_sub": "Voir le code source",
@@ -159,6 +159,18 @@
       "lexiq": {
         "title": "LexiQ",
         "description": "LexiQ est un clone Wordle soigné développé avec Next.js, TypeScript et Tailwind CSS."
+      },
+      "expenza": {
+        "title": "Expenza",
+        "description": "Une application intelligente de gestion des finances personnelles pour suivre vos soldes, gérer vos revenus et dépenses, anticiper vos paiements et maîtriser votre budget."
+      },
+      "xampp-control-panel": {
+        "title": "XAMPP Control Panel",
+        "description": "Le panneau de contrôle XAMPP ne fonctionne actuellement pas sous macOS 27, même avec Rosetta. Ce panneau de contrôle moderne, développé avec Electron, permet de gérer XAMPP à l'aide de ses commandes."
+      },
+      "xampp-control-website": {
+        "title": "Site du XAMPP Control Panel",
+        "description": "Ce projet est un site vitrine monopage dédié à la présentation et au téléchargement de l'application de bureau. La page d'accueil présente les principales fonctionnalités, une section de téléchargement selon l'architecture et la configuration système requise."
       }
     }
   },

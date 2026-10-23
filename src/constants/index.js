@@ -1,3 +1,21 @@
+import {
+  Bomb,
+  CarFront,
+  ClipboardList,
+  Cog,
+  Dices,
+  Gamepad2,
+  Globe,
+  House,
+  Monitor,
+  MoonStar,
+  Puzzle,
+  Soup,
+  Spade,
+  Wallet,
+  Wrench,
+} from "lucide-react";
+
 import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
 import project3 from "../assets/projects/project-3.png";
@@ -14,6 +32,9 @@ import project13 from "../assets/projects/project-13.png";
 import project14 from "../assets/projects/project-14.png";
 import project15 from "../assets/projects/project-15.png";
 import project16 from "../assets/projects/project-16.png";
+import project17 from "../assets/projects/project-17.png";
+import project18 from "../assets/projects/project-18.png";
+import project19 from "../assets/projects/project-19.png";
 
 import screenshotIslami1 from "../assets/screenshots/islami/islami-1.png";
 import screenshotIslami2 from "../assets/screenshots/islami/islami-2.png";
@@ -82,6 +103,21 @@ import screenshotProjexa27 from "../assets/screenshots/projexa/projexa-27.png";
 import screenshotProjexa28 from "../assets/screenshots/projexa/projexa-28.png";
 import screenshotProjexa29 from "../assets/screenshots/projexa/projexa-29.png";
 
+import screenshotExpenza1 from "../assets/screenshots/expenza/expenza-1.png";
+import screenshotExpenza2 from "../assets/screenshots/expenza/expenza-2.png";
+import screenshotExpenza3 from "../assets/screenshots/expenza/expenza-3.png";
+import screenshotExpenza4 from "../assets/screenshots/expenza/expenza-4.png";
+import screenshotExpenza5 from "../assets/screenshots/expenza/expenza-5.png";
+import screenshotExpenza6 from "../assets/screenshots/expenza/expenza-6.png";
+import screenshotExpenza7 from "../assets/screenshots/expenza/expenza-7.png";
+
+
+import screenshotXAMPPControlPanel1 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-1.png";
+import screenshotXAMPPControlPanel2 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-2.png";
+import screenshotXAMPPControlPanel3 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-3.png";
+import screenshotXAMPPControlPanel4 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-4.png";
+import screenshotXAMPPControlPanel5 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-5.png";
+
 export const EXPERIENCES = [
   {
     i18nKey: "playsoft_full",
@@ -117,7 +153,7 @@ export const PROJECTS = [
     technologies: ["Flutter", "Dart", "NestJS", "MySQL", "GraphQL", "Firebase"],
     githubRepo: "https://github.com/maminebnr/repairy-mobile",
     status: "private",
-    emoji: "🔧",
+    icon: Wrench,
     tag: "Mobile",
     accent: "#FF3CAC",
   },
@@ -127,7 +163,7 @@ export const PROJECTS = [
     technologies: ["Angular", "Express", "MongoDB"],
     githubRepo: "https://github.com/YassineElkefi/Deliverini",
     status: "public",
-    emoji: "🚗",
+    icon: CarFront,
     tag: "Web",
     accent: "#00E5FF",
   },
@@ -137,7 +173,7 @@ export const PROJECTS = [
     technologies: ["Angular", "NestJS", "Socket.io"],
     githubRepo: "https://github.com/YassineElkefi/Projexa",
     status: "public",
-    emoji: "📋",
+    icon: ClipboardList,
     tag: "Web",
     accent: "#7B2FFF",
     demo: "slideshow",
@@ -158,7 +194,7 @@ export const PROJECTS = [
     technologies: ["NestJS", "Angular", "MongoDB"],
     githubRepo: "https://github.com/YassineElkefi/Expense-Tracking-System",
     status: "public",
-    emoji: "💸",
+    icon: Wallet,
     tag: "Web",
     accent: "#D4A017",
   },
@@ -168,7 +204,7 @@ export const PROJECTS = [
     technologies: ["Java", "Android SDK", "Firebase"],
     githubRepo: "https://github.com/Hiba-Bahri/Android-Project",
     status: "public",
-    emoji: "🏠",
+    icon: House,
     tag: "Mobile",
     accent: "#FF3CAC",
   },
@@ -182,7 +218,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
     githubRepo: "https://github.com/YassineElkefi/Yassineelkefidev-portfolio",
     status: "public",
-    emoji: "🖥️",
+    icon: Monitor,
     tag: "Web",
     accent: "#00E5FF",
     demo: "live",
@@ -194,7 +230,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["SwiftUI", "Xcode", "iOS"],
     githubRepo: "https://github.com/YassineElkefi/Islami",
     status: "public",
-    emoji: "☪️",
+    icon: MoonStar,
     tag: "iOS",
     accent: "#00E5FF",
     demo: "slideshow",
@@ -209,7 +245,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Flutter", "Dart", "GraphQL", "ExpressJS", "MongoDB"],
     githubRepo: "https://github.com/YassineElkefi/Foody",
     status: "public",
-    emoji: "🍜",
+    icon: Soup,
     tag: "Mobile",
     accent: "#7B2FFF",
     demo: "slideshow",
@@ -225,7 +261,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Flutter", "Dart", "LocalDB", "Offline"],
     githubRepo: "https://github.com/YassineElkefi/Garaji",
     status: "public",
-    emoji: "🚗",
+    icon: CarFront,
     tag: "Mobile",
     accent: "#7B2FFF",
     demo: "slideshow",
@@ -241,7 +277,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Flutter", "Dart", "NestJS", "MySQL", "GraphQL"],
     githubRepo: "https://github.com/YassineElkefi/HomeSpot",
     status: "public",
-    emoji: "🏡",
+    icon: House,
     tag: "Mobile",
     accent: "#FF3CAC",
     demo: "slideshow",
@@ -257,7 +293,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Next.js", "Tailwindcss"],
     githubRepo: "https://github.com/YassineElkefi/NumiX",
     status: "public",
-    emoji: "🎲",
+    icon: Dices,
     tag: "Web",
     accent: "#FF3CAC",
     demo: "live",
@@ -269,7 +305,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["HTML", "CSS", "JavaScript"],
     githubRepo: "https://github.com/YassineElkefi/Hangman-Game",
     status: "public",
-    emoji: "🎮",
+    icon: Gamepad2,
     tag: "Web",
     accent: "#336791",
     demo: "live",
@@ -281,7 +317,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Next.js", "Tailwindcss", "TypeScript"],
     githubRepo: "https://github.com/YassineElkefi/Sudoo",
     status: "public",
-    emoji: "🃏",
+    icon: Spade,
     tag: "Web",
     accent: "#336791",
     demo: "live",
@@ -293,7 +329,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Next.js", "Tailwindcss", "TypeScript", "Ably"],
     githubRepo: "https://github.com/YassineElkefi/CodeHunt",
     status: "public",
-    emoji: "🎲",
+    icon: Dices,
     tag: "Web",
     accent: "#D4A017",
     demo: "live",
@@ -305,7 +341,7 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Next.js", "Tailwindcss", "TypeScript"],
     githubRepo: "https://github.com/YassineElkefi/MineFlux",
     status: "public",
-    emoji: "💣",
+    icon: Bomb,
     tag: "Web",
     accent: "#D4A017",
     demo: "live",
@@ -317,12 +353,56 @@ export const PERSONAL_PROJECTS = [
     technologies: ["Next.js", "Tailwindcss", "TypeScript"],
     githubRepo: "https://github.com/YassineElkefi/LexiQ",
     status: "public",
-    emoji: "🧩",
+    icon: Puzzle,
     tag: "Web",
     accent: "#F05032",
     demo: "live",
     demoUrl: "https://lexi-q.vercel.app/",
   },
+  {
+    i18nKey: "expenza",
+    image: project17,
+    technologies: ["Next.js", "Tailwindcss", "TypeScript","lucide-react", "recharts", "Next.js routes", "MongoDB"],
+    githubRepo: "https://github.com/YassineElkefi/Expenza",
+    status: "public",
+    icon: Wallet,
+    tag: "Web",
+    accent: "#047857",
+    demo: "slideshow",
+    screenshots: [
+      screenshotExpenza1, screenshotExpenza2, screenshotExpenza3,
+      screenshotExpenza4, screenshotExpenza5, screenshotExpenza6,
+      screenshotExpenza7,
+    ],
+  },
+  {
+    i18nKey: "xampp-control-panel",
+    image: project18,
+    technologies: ["ElectronJS", "CSS", "Multi Architecture : ARM64 | X64", ".DMG Installer"],
+    githubRepo: "https://github.com/YassineElkefi/XAMPP-Control-Panel",
+    status: "public",
+    icon: Cog,
+    tag: "MacOS App",
+    accent: "#6e3c3c",
+    demo: "slideshow",
+    screenshots: [
+      screenshotXAMPPControlPanel1,screenshotXAMPPControlPanel2,screenshotXAMPPControlPanel3,
+      screenshotXAMPPControlPanel4,screenshotXAMPPControlPanel5
+    ],
+  },
+  {
+    i18nKey: "xampp-control-website",
+    image: project19,
+    technologies: ["Next.js", "Tailwindcss", "TypeScript"],
+    githubRepo: "https://github.com/YassineElkefi/XAMPP-Control-Website",
+    status: "public",
+    icon: Globe,
+    tag: "MacOS App",
+    accent: "#6e3c3c",
+    demo: "live",
+    demoUrl: "https://xampp-control-website.vercel.app/"
+  },
+
 ];
 
 export const CONTACT = {

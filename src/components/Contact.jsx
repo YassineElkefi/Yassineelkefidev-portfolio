@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { CONTACT } from '../constants'
 import { useState } from 'react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const Contact = () => {
   const { t } = useTranslation()
@@ -52,7 +53,7 @@ const Contact = () => {
                 onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--cyan)'}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-lg" style={{ background: 'rgba(0,229,255,0.1)' }}>✉</div>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(0,229,255,0.1)', color: 'var(--cyan)' }}><Mail size={20} /></div>
                 <div className="min-w-0">
                   <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>{t('contact.email_label')}</div>
                   <div className="text-sm truncate" style={{ color: 'var(--text)' }}>{CONTACT.email}</div>
@@ -60,7 +61,7 @@ const Contact = () => {
               </a>
 
               <div className="flex items-center gap-4 p-4 rounded-xl" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-lg" style={{ background: 'rgba(123,47,255,0.1)' }}>📍</div>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(123,47,255,0.1)', color: 'var(--violet)' }}><MapPin size={20} /></div>
                 <div className="min-w-0">
                   <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>{t('contact.location_label')}</div>
                   <div className="text-sm" style={{ color: 'var(--text)' }}>{CONTACT.address}</div>
@@ -68,7 +69,7 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center gap-4 p-4 rounded-xl" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-lg" style={{ background: 'rgba(255,60,172,0.1)' }}>📞</div>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,60,172,0.1)', color: 'var(--pink)' }}><Phone size={20} /></div>
                 <div className="min-w-0">
                   <div className="font-mono text-xs tracking-widest uppercase mb-0.5" style={{ color: 'var(--muted)' }}>{t('contact.phone_label')}</div>
                   <div className="text-sm hidden md:block" style={{ color: 'var(--text)' }}>{CONTACT.phoneNo.join('  |  ')}</div>
