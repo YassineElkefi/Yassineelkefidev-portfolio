@@ -10,43 +10,104 @@ import PersonalProjects from './components/PersonalProjects'
 import Contact from './components/Contact'
 
 // ── Custom cursor ──────────────────────────────────────────────────────────────
+
 const Cursor = () => {
-  const dotRef = useRef(null)
-  const ringRef = useRef(null)
-  const pos = useRef({ x: -100, y: -100 })
-  const ring = useRef({ x: -100, y: -100 })
-  const rafId = useRef(null)
+  const canvasRef = useRef(null)
 
   useEffect(() => {
-    const onMove = (e) => { pos.current = { x: e.clientX, y: e.clientY } }
-    window.addEventListener('mousemove', onMove)
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
 
-    const animate = () => {
-      ring.current.x += (pos.current.x - ring.current.x) * 0.12
-      ring.current.y += (pos.current.y - ring.current.y) * 0.12
-      if (dotRef.current) {
-        dotRef.current.style.left = `${pos.current.x}px`
-        dotRef.current.style.top  = `${pos.current.y}px`
-      }
-      if (ringRef.current) {
-        ringRef.current.style.left = `${ring.current.x}px`
-        ringRef.current.style.top  = `${ring.current.y}px`
-      }
-      rafId.current = requestAnimationFrame(animate)
+    // reads the current CSS variable value at runtime
+    const getCSSVar = (name) =>
+      getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+
+    let mouseMoved = false
+    const pointer = { x: 0.5 * window.innerWidth, y: 0.5 * window.innerHeight }
+    const params = {
+      pointsNumber: 40,
+      widthFactor: 0.3,
+      spring: 0.4,
+      friction: 0.5,
     }
-    rafId.current = requestAnimationFrame(animate)
+
+    const trail = Array.from({ length: params.pointsNumber }, () => ({
+      x: pointer.x, y: pointer.y, dx: 0, dy: 0,
+    }))
+
+    const onMove = (e) => { mouseMoved = true; pointer.x = e.clientX; pointer.y = e.clientY }
+    const onTouch = (e) => { mouseMoved = true; pointer.x = e.targetTouches[0].clientX; pointer.y = e.targetTouches[0].clientY }
+
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('touchmove', onTouch)
+
+    const setupCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    setupCanvas()
+    window.addEventListener('resize', setupCanvas)
+
+    let rafId
+    const update = (t) => {
+      if (!mouseMoved) {
+        pointer.x = (0.5 + 0.3 * Math.cos(0.002 * t) * Math.sin(0.005 * t)) * window.innerWidth
+        pointer.y = (0.5 + 0.2 * Math.cos(0.005 * t) + 0.1 * Math.cos(0.01 * t)) * window.innerHeight
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      trail.forEach((p, i) => {
+        const prev = i === 0 ? pointer : trail[i - 1]
+        const spring = i === 0 ? 0.4 * params.spring : params.spring
+        p.dx += (prev.x - p.x) * spring
+        p.dy += (prev.y - p.y) * spring
+        p.dx *= params.friction
+        p.dy *= params.friction
+        p.x += p.dx
+        p.y += p.dy
+      })
+
+      // pulls the live CSS var each frame — reacts to theme switches instantly
+      const violet = getCSSVar('--violet')
+      const cyan = getCSSVar('--cyan')
+
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(trail[0].x, trail[0].y)
+
+      for (let i = 1; i < trail.length - 1; i++) {
+        const xc = 0.5 * (trail[i].x + trail[i + 1].x)
+        const yc = 0.5 * (trail[i].y + trail[i + 1].y)
+        ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc)
+        ctx.lineWidth = params.widthFactor * (params.pointsNumber - i)
+
+        // gradient along the tail: violet at head → cyan at tip
+        const progress = i / trail.length
+        ctx.strokeStyle = progress < 0.5 ? violet : cyan
+        ctx.globalAlpha = 1 - progress * 0.6  // fades toward the tail
+        ctx.stroke()
+      }
+
+      ctx.globalAlpha = 1
+      rafId = requestAnimationFrame(update)
+    }
+    rafId = requestAnimationFrame(update)
 
     return () => {
+      cancelAnimationFrame(rafId)
       window.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(rafId.current)
+      window.removeEventListener('touchmove', onTouch)
+      window.removeEventListener('resize', setupCanvas)
     }
   }, [])
 
   return (
-    <>
-      <div ref={dotRef}  className="cursor cursor-dot" />
-      <div ref={ringRef} className="cursor cursor-ring" />
-    </>
+    <canvas
+      ref={canvasRef}
+      style={{ position: 'fixed', inset: 0, zIndex: 99999, pointerEvents: 'none' }}
+    />
   )
 }
 
