@@ -42,28 +42,53 @@ html, body {
 
 html { scroll-behavior: smooth; }
 
+:root {
+  --modal-bg: #ffffff;
+  --modal-chrome: #f5f5f7;
+  --modal-border: #d1d1d6;
+  --modal-text: #1c1c1e;
+  --modal-muted: #6e6e73;
+  --modal-input: #e5e5ea;
+  --modal-hover: #ebebf0;
+  --modal-icon-bg: #e5e5ea;
+  --modal-backdrop: rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] {
+  --modal-bg: #1c1c1e;
+  --modal-chrome: #2c2c2e;
+  --modal-border: #3a3a3c;
+  --modal-text: #f5f5f7;
+  --modal-muted: #98989d;
+  --modal-input: #3a3a3c;
+  --modal-hover: #3a3a3c;
+  --modal-icon-bg: #3a3a3c;
+  --modal-backdrop: rgba(0,0,0,0.75);
+}
+
 .modal-backdrop {
-  background: rgba(0,0,0,0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--modal-backdrop);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .modal-panel {
-  --surface: #18181b;
-  --text: #f4f4f5;
-  --muted: #a1a1aa;
-  --border: rgba(255,255,255,0.1);
-  background: #18181b;
-  color: #f4f4f5;
+  background: var(--modal-bg);
+  border: 1px solid var(--modal-border);
+  color: var(--modal-text);
 }
 
-.modal-browser-chrome { background: rgba(255,255,255,0.05); }
-.modal-url-bar { background: rgba(255,255,255,0.06); }
-.modal-nav-btn { background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); }
-.modal-nav-btn:hover { background: rgba(255,255,255,0.12) !important; }
-.modal-ghost-btn:hover { background: rgba(255,255,255,0.07) !important; }
-.modal-close-btn:hover { background: rgba(255,255,255,0.08) !important; }
-.modal-icon-bg { background: rgba(255,255,255,0.07); }
+.modal-browser-chrome { background: var(--modal-chrome); }
+.modal-url-bar { background: var(--modal-input); }
+.modal-nav-btn { background: var(--modal-chrome); border: 1px solid var(--modal-border) !important; }
+.modal-nav-btn:hover { background: var(--modal-hover) !important; }
+.modal-ghost-btn:hover { background: var(--modal-hover) !important; }
+.modal-close-btn:hover { background: var(--modal-hover) !important; }
+.modal-choice-btn { background: var(--modal-chrome); border: 1px solid var(--modal-border); }
+.modal-choice-btn:hover { background: var(--modal-hover); }
+.modal-accent-btn { background: var(--modal-chrome); }
+.modal-accent-btn:hover { background: var(--modal-hover) !important; }
+.modal-icon-bg { background: var(--modal-icon-bg); }
 
 body {
   background: var(--bg);

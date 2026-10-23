@@ -48,24 +48,22 @@ const SlideshowModal = ({ project, onClose }) => {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
         className="modal-panel relative w-full max-w-3xl mx-4 rounded-2xl overflow-hidden flex flex-col"
-        style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, maxHeight: '90vh' }}
+        style={{ maxHeight: '90vh' }}
       >
-        <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: `1px solid ${project.accent}22` }}>
-          <span className="font-bold text-base" style={{ color: 'var(--text)' }}>
+        <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: '1px solid var(--modal-border)' }}>
+          <span className="font-bold text-base" style={{ color: 'var(--modal-text)' }}>
             {project.emoji} {t(`personal_projects.items.${project.i18nKey}.title`)} — {t('projects.screenshots_header')}
           </span>
           <div className="flex items-center gap-3">
             {project.githubRepo && project.status !== 'private' && (
               <a href={project.githubRepo} target="_blank" rel="noreferrer"
-                className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200"
-                style={{ color: project.accent, border: `1px solid ${project.accent}44`, background: `${project.accent}11` }}
-                onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}22` }}
-                onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}11` }}
+                className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200 modal-accent-btn"
+                style={{ color: project.accent, border: '1px solid var(--modal-border)' }}
               >GitHub →</a>
             )}
             <button onClick={onClose}
               className="w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-200 modal-close-btn"
-              style={{ color: 'var(--muted)', border: '1px solid var(--border)', background: 'transparent' }}
+              style={{ color: 'var(--modal-muted)', border: '1px solid var(--modal-border)', background: 'var(--modal-chrome)' }}
             >✕</button>
           </div>
         </div>
@@ -85,20 +83,20 @@ const SlideshowModal = ({ project, onClose }) => {
           </AnimatePresence>
           {total > 1 && (
             <>
-              <button onClick={prev} className="absolute left-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn" style={{ border: `1px solid ${project.accent}33`, color: 'var(--text)', '--nav-hover-bg': `${project.accent}33` }}>‹</button>
-              <button onClick={next} className="absolute right-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn" style={{ border: `1px solid ${project.accent}33`, color: 'var(--text)', '--nav-hover-bg': `${project.accent}33` }}>›</button>
+              <button onClick={prev} className="absolute left-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn" style={{ color: 'var(--modal-text)' }}>‹</button>
+              <button onClick={next} className="absolute right-3 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 modal-nav-btn" style={{ color: 'var(--modal-text)' }}>›</button>
             </>
           )}
         </div>
 
         {total > 1 && (
-          <div className="flex items-center justify-center gap-2 py-3 flex-shrink-0" style={{ borderTop: `1px solid ${project.accent}22` }}>
+          <div className="flex items-center justify-center gap-2 py-3 flex-shrink-0" style={{ borderTop: '1px solid var(--modal-border)' }}>
             {images.map((_, i) => (
               <button key={i} onClick={() => setCurrent(i)} className="transition-all duration-200"
-                style={{ width: i === current ? '20px' : '8px', height: '8px', borderRadius: '4px', background: i === current ? project.accent : `${project.accent}44`, border: 'none', cursor: 'pointer', padding: 0 }}
+                style={{ width: i === current ? '20px' : '8px', height: '8px', borderRadius: '4px', background: i === current ? project.accent : 'var(--modal-border)', border: 'none', cursor: 'pointer', padding: 0 }}
               />
             ))}
-            <span className="ml-2 font-mono text-xs" style={{ color: 'var(--muted)' }}>{current + 1} / {total}</span>
+            <span className="ml-2 font-mono text-xs" style={{ color: 'var(--modal-muted)' }}>{current + 1} / {total}</span>
           </div>
         )}
       </motion.div>
@@ -133,38 +131,36 @@ const LivePreviewModal = ({ project, onClose }) => {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
         className="modal-panel relative w-full max-w-5xl mx-4 rounded-2xl overflow-hidden flex flex-col"
-        style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, height: '85vh' }}
+        style={{ height: '85vh' }}
       >
-        <div className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome" style={{ borderBottom: `1px solid ${project.accent}22` }}>
+        <div className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome" style={{ borderBottom: '1px solid var(--modal-border)' }}>
           <div className="flex gap-1.5">
             <button onClick={onClose} className="w-3.5 h-3.5 rounded-full" style={{ background: '#FF5F57' }} title="Close" />
             <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#FEBC2E' }} />
             <div className="w-3.5 h-3.5 rounded-full" style={{ background: '#28C840' }} />
           </div>
-          <div className="flex-1 flex items-center gap-2 px-3 py-1 rounded-lg font-mono text-xs truncate modal-url-bar" style={{ border: '1px solid var(--border)', color: 'var(--muted)' }}>
+          <div className="flex-1 flex items-center gap-2 px-3 py-1 rounded-lg font-mono text-xs truncate modal-url-bar" style={{ border: '1px solid var(--modal-border)', color: 'var(--modal-muted)' }}>
             <span style={{ color: project.accent }}>🔒</span>
             <span className="truncate">{project.demoUrl}</span>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <a href={project.demoUrl} target="_blank" rel="noreferrer"
-              className="font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all duration-200"
-              style={{ color: project.accent, border: `1px solid ${project.accent}44`, background: `${project.accent}11` }}
-              onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}22` }}
-              onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}11` }}
+              className="font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all duration-200 modal-accent-btn"
+              style={{ color: project.accent, border: '1px solid var(--modal-border)' }}
             >↗ Open</a>
             {project.githubRepo && project.status !== 'private' && (
               <a href={project.githubRepo} target="_blank" rel="noreferrer"
                 className="font-mono text-xs px-3 py-1.5 rounded-lg transition-all duration-200 modal-ghost-btn"
-                style={{ color: 'var(--muted)', border: '1px solid var(--border)', background: 'transparent' }}
+                style={{ color: 'var(--modal-muted)', border: '1px solid var(--modal-border)', background: 'var(--modal-chrome)' }}
               >GitHub →</a>
             )}
           </div>
         </div>
         <div className="relative flex-1 overflow-hidden">
           {loading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3" style={{ background: 'var(--surface)', zIndex: 1 }}>
-              <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: `${project.accent}44`, borderTopColor: project.accent }} />
-              <span className="font-mono text-xs" style={{ color: 'var(--muted)' }}>{t('projects.loading_preview')}</span>
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3" style={{ background: 'var(--modal-bg)', zIndex: 1 }}>
+              <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'var(--modal-border)', borderTopColor: project.accent }} />
+              <span className="font-mono text-xs" style={{ color: 'var(--modal-muted)' }}>{t('projects.loading_preview')}</span>
             </div>
           )}
           <iframe src={project.demoUrl} title={`${t(`personal_projects.items.${project.i18nKey}.title`)} live preview`} className="w-full h-full border-0" onLoad={() => setLoading(false)} sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
@@ -203,46 +199,43 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
         className="modal-panel w-full max-w-sm mx-4 rounded-2xl overflow-hidden p-6"
-        style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, boxShadow: `0 0 60px ${project.accent}18` }}
+        style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}
       >
         <div className="text-center mb-6">
           <div className="text-3xl mb-2">{project.emoji}</div>
-          <h3 className="font-bold text-lg" style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-bold text-lg" style={{ color: 'var(--modal-text)', letterSpacing: '-0.02em' }}>
             {t(`personal_projects.items.${project.i18nKey}.title`)}
           </h3>
-          <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>{t('projects.modal_what')}</p>
+          <p className="text-sm mt-1" style={{ color: 'var(--modal-muted)' }}>{t('projects.modal_what')}</p>
         </div>
         <div className="flex flex-col gap-3">
           <button onClick={onDemo}
-            className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full"
-            style={{ background: `${project.accent}0D`, border: `1px solid ${project.accent}33` }}
-            onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}1A` }}
-            onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}0D` }}
+            className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-choice-btn"
           >
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: `${project.accent}22` }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg">
               {project.demo === 'live' ? '🌐' : '🖼️'}
             </div>
             <div>
               <div className="font-semibold text-sm" style={{ color: project.accent }}>{demoLabel}</div>
-              <div className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{demoSub}</div>
+              <div className="text-xs mt-0.5" style={{ color: 'var(--modal-muted)' }}>{demoSub}</div>
             </div>
             <span className="ml-auto text-lg" style={{ color: project.accent }}>›</span>
           </button>
           <button onClick={onGithub}
             className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left w-full modal-ghost-btn"
-            style={{ background: 'transparent', border: '1px solid var(--border)' }}
+            style={{ background: 'var(--modal-chrome)', border: '1px solid var(--modal-border)' }}
           >
             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 modal-icon-bg">⌥</div>
             <div>
-              <div className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{t('projects.modal_github_label')}</div>
-              <div className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{t('projects.modal_github_sub')}</div>
+              <div className="font-semibold text-sm" style={{ color: 'var(--modal-text)' }}>{t('projects.modal_github_label')}</div>
+              <div className="text-xs mt-0.5" style={{ color: 'var(--modal-muted)' }}>{t('projects.modal_github_sub')}</div>
             </div>
-            <span className="ml-auto text-lg" style={{ color: 'var(--muted)' }}>›</span>
+            <span className="ml-auto text-lg" style={{ color: 'var(--modal-muted)' }}>›</span>
           </button>
         </div>
         <button onClick={onClose}
           className="w-full mt-4 py-2 rounded-xl font-mono text-xs transition-all duration-200 modal-ghost-btn"
-          style={{ color: 'var(--muted)', border: '1px solid var(--border)', background: 'transparent' }}
+          style={{ color: 'var(--modal-muted)', border: '1px solid var(--modal-border)', background: 'var(--modal-chrome)' }}
         >{t('projects.modal_cancel')}</button>
       </motion.div>
     </motion.div>
