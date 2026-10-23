@@ -40,7 +40,7 @@ const SlideshowModal = ({ project, onClose }) => {
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className={`relative w-full ${isWeb ? 'max-w-6xl' : 'max-w-3xl'} mx-4 rounded-2xl overflow-hidden flex flex-col`}
+        className={`modal-panel relative w-full ${isWeb ? 'max-w-6xl' : 'max-w-3xl'} mx-4 rounded-2xl overflow-hidden flex flex-col`}
         style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, maxHeight: '92vh' }}
       >
         <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: `1px solid ${project.accent}22` }}>
@@ -125,7 +125,7 @@ const LivePreviewModal = ({ project, onClose }) => {
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-5xl mx-4 rounded-2xl overflow-hidden flex flex-col"
+        className="modal-panel relative w-full max-w-5xl mx-4 rounded-2xl overflow-hidden flex flex-col"
         style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, height: '85vh' }}
       >
         <div className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome" style={{ borderBottom: `1px solid ${project.accent}22` }}>
@@ -195,7 +195,7 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
         exit={{ scale: 0.88, opacity: 0, y: 16 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className="w-full max-w-sm mx-4 rounded-2xl overflow-hidden p-6"
+        className="modal-panel w-full max-w-sm mx-4 rounded-2xl overflow-hidden p-6"
         style={{ background: 'var(--surface)', border: `1px solid ${project.accent}33`, boxShadow: `0 0 60px ${project.accent}18` }}
       >
         <div className="text-center mb-6">
@@ -304,25 +304,6 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg2)' }}>
-      <style>{`
-        .modal-backdrop { background: var(--modal-backdrop, rgba(0,0,0,0.75)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        :root[data-theme="light"] .modal-backdrop, .light .modal-backdrop { background: rgba(0,0,0,0.45); }
-        .modal-browser-chrome { background: var(--surface-raised, rgba(0,0,0,0.18)); }
-        .modal-url-bar { background: var(--input-bg, rgba(0,0,0,0.06)); }
-        .modal-nav-btn { background: var(--modal-nav-bg, rgba(0,0,0,0.45)); backdrop-filter: blur(6px); }
-        .modal-nav-btn:hover { background: var(--nav-hover-bg, rgba(255,255,255,0.15)) !important; }
-        .modal-ghost-btn:hover { background: var(--ghost-hover, rgba(0,0,0,0.06)) !important; }
-        .modal-close-btn:hover { background: var(--ghost-hover, rgba(0,0,0,0.08)) !important; }
-        .modal-icon-bg { background: var(--icon-bg, rgba(0,0,0,0.07)); }
-        :root[data-theme="dark"] .modal-nav-btn, .dark .modal-nav-btn { background: rgba(0,0,0,0.55); }
-        :root[data-theme="dark"] .modal-browser-chrome, .dark .modal-browser-chrome { background: rgba(0,0,0,0.3); }
-        :root[data-theme="dark"] .modal-url-bar, .dark .modal-url-bar { background: rgba(255,255,255,0.05); }
-        :root[data-theme="dark"] .modal-ghost-btn:hover, .dark .modal-ghost-btn:hover { background: rgba(255,255,255,0.06) !important; }
-        :root[data-theme="dark"] .modal-close-btn:hover, .dark .modal-close-btn:hover { background: rgba(255,255,255,0.08) !important; }
-        :root[data-theme="dark"] .modal-icon-bg, .dark .modal-icon-bg { background: rgba(255,255,255,0.06); }
-        :root[data-theme="dark"] .modal-backdrop, .dark .modal-backdrop { background: rgba(0,0,0,0.88); }
-      `}</style>
-
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-10 md:mb-14">
           <div>

@@ -42,6 +42,29 @@ html, body {
 
 html { scroll-behavior: smooth; }
 
+.modal-backdrop {
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.modal-panel {
+  --surface: #18181b;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --border: rgba(255,255,255,0.1);
+  background: #18181b;
+  color: #f4f4f5;
+}
+
+.modal-browser-chrome { background: rgba(255,255,255,0.05); }
+.modal-url-bar { background: rgba(255,255,255,0.06); }
+.modal-nav-btn { background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); }
+.modal-nav-btn:hover { background: rgba(255,255,255,0.12) !important; }
+.modal-ghost-btn:hover { background: rgba(255,255,255,0.07) !important; }
+.modal-close-btn:hover { background: rgba(255,255,255,0.08) !important; }
+.modal-icon-bg { background: rgba(255,255,255,0.07); }
+
 body {
   background: var(--bg);
   color: var(--text);
