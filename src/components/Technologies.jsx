@@ -7,24 +7,18 @@ import { FaNodeJs, FaAndroid, FaSwift, FaGitAlt, FaDocker, FaRedhat } from 'reac
 import { SiMongodb, SiNestjs, SiGraphql, SiMysql, SiPostgresql, SiTypescript, SiExpress, SiTailwindcss } from 'react-icons/si'
 
 const SKILLS = [
-  { name: 'Flutter',     Icon: RiFlutterFill,   level: 90, color: '#00E5FF' },
-  { name: 'React',       Icon: RiReactjsLine,   level: 88, color: '#61DAFB' },
-  { name: 'Angular',     Icon: RiAngularjsFill, level: 85, color: '#FF3CAC' },
-  { name: 'NestJS',      Icon: SiNestjs,        level: 85, color: '#FF3CAC' },
-  { name: 'Node.js',     Icon: FaNodeJs,        level: 82, color: '#68D391' },
-  { name: 'MongoDB',     Icon: SiMongodb,       level: 80, color: '#68D391' },
-  { name: 'GraphQL',     Icon: SiGraphql,       level: 80, color: '#E535AB' },
-  { name: 'MySQL',       Icon: SiMysql,         level: 80, color: '#00ADEF' },
-  { name: 'SwiftUI',     Icon: FaSwift,         level: 72, color: '#FF6B35' },
-  { name: 'Android',     Icon: FaAndroid,       level: 75, color: '#68D391' },
-  { name: 'Next.js',     Icon: RiNextjsFill,    level: 70, color: '#7B2FFF' },
-  { name: 'PostgreSQL',  Icon: SiPostgresql,    level: 60, color: '#336791' },
-  { name: 'TypeScript',  Icon: SiTypescript,    level: 90, color: '#3178C6' },
-  { name: 'Express.js',  Icon: SiExpress,       level: 85, color: '#FFFFFF' },
-  { name: 'Git',         Icon: FaGitAlt,        level: 85, color: '#F05032' },
-  { name: 'Docker',      Icon: FaDocker,        level: 65, color: '#2496ED' },
-  { name: 'Tailwind CSS',Icon: SiTailwindcss,   level: 85, color: '#06B6D4' },
-  { name: 'Red Hat',     Icon: FaRedhat,        level: 80, color: '#EE0000' },
+  { name: 'TypeScript',   Icon: SiTypescript,   level: 90, color: '#3178C6' },
+  { name: 'React',        Icon: RiReactjsLine,  level: 88, color: '#61DAFB' },
+  { name: 'Next.js',      Icon: RiNextjsFill,   level: 85, color: '#7B2FFF' },
+  { name: 'Tailwind CSS', Icon: SiTailwindcss,  level: 85, color: '#06B6D4' },
+  { name: 'NestJS',       Icon: SiNestjs,       level: 85, color: '#E0234E' },
+  { name: 'Node.js',      Icon: FaNodeJs,       level: 82, color: '#68D391' },
+  { name: 'GraphQL',      Icon: SiGraphql,      level: 80, color: '#E535AB' },
+  { name: 'PostgreSQL',   Icon: SiPostgresql,   level: 75, color: '#336791' },
+  { name: 'MongoDB',      Icon: SiMongodb,      level: 80, color: '#47A248' },
+  { name: 'Flutter',      Icon: RiFlutterFill,  level: 90, color: '#00E5FF' },
+  { name: 'Docker',       Icon: FaDocker,       level: 65, color: '#2496ED' },
+  { name: 'Git',          Icon: FaGitAlt,       level: 85, color: '#F05032' },
 ]
 
 const Technologies = () => {
