@@ -47,8 +47,8 @@ const SlideshowModal = ({ project, onClose }) => {
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className="modal-panel relative w-full max-w-3xl mx-4 rounded-2xl overflow-hidden flex flex-col"
-        style={{ maxHeight: '90vh' }}
+        className="modal-panel relative w-[96vw] max-w-[1600px] rounded-2xl overflow-hidden flex flex-col"
+        style={{ maxHeight: '94vh' }}
       >
         <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: '1px solid var(--modal-border)' }}>
           <span className="font-bold text-base" style={{ color: 'var(--modal-text)' }}>
@@ -68,7 +68,7 @@ const SlideshowModal = ({ project, onClose }) => {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: '500px' }}>
+        <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: 'min(68vh, 700px)' }}>
           {images.map((src, i) => i !== current && (
             <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
           ))}
@@ -78,7 +78,7 @@ const SlideshowModal = ({ project, onClose }) => {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, position: 'absolute' }}
               transition={{ duration: 0.15 }}
               className="absolute w-full h-full object-contain"
-              style={{ maxHeight: '65vh' }}
+              style={{ maxHeight: '78vh' }}
             />
           </AnimatePresence>
           {total > 1 && (
@@ -130,8 +130,8 @@ const LivePreviewModal = ({ project, onClose }) => {
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className="modal-panel relative w-full max-w-5xl mx-4 rounded-2xl overflow-hidden flex flex-col"
-        style={{ height: '85vh' }}
+        className="modal-panel relative w-[96vw] max-w-[1600px] rounded-2xl overflow-hidden flex flex-col"
+        style={{ height: '90vh' }}
       >
         <div className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 modal-browser-chrome" style={{ borderBottom: '1px solid var(--modal-border)' }}>
           <div className="flex gap-1.5">
