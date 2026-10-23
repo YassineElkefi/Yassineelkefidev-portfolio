@@ -15,6 +15,9 @@ const SlideshowModal = ({ project, onClose }) => {
   const images = project.screenshots || []
   const total = images.length
   const isWeb = project.tag === 'Web'
+  const preloadIndices = total > 1
+    ? [...new Set([(current + 1) % total, (current - 1 + total) % total])]
+    : []
 
   const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setCurrent(i => (i + 1) % total), [total])
@@ -65,8 +68,8 @@ const SlideshowModal = ({ project, onClose }) => {
         </div>
 
         <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: isWeb ? 'min(68vh, 700px)' : 'min(50vh, 400px)' }}>
-          {images.map((src, i) => i !== current && (
-            <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
+          {preloadIndices.map(index => (
+            <img key={`preload-${index}`} src={images[index]} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
           ))}
           <AnimatePresence initial={false}>
             <motion.img
@@ -351,7 +354,7 @@ const Projects = () => {
                     />
                   </div>
                 <div className="relative overflow-hidden h-44">
-                  <img src={project.image} alt={t(`projects.items.${project.i18nKey}.title`)} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img loading="lazy" decoding="async" src={project.image} alt={t(`projects.items.${project.i18nKey}.title`)} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0.2) 100%)' }} />
                   <div className="absolute top-3 right-3 flex gap-2">
                     <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'rgba(6,6,8,0.7)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(240,238,246,0.7)', backdropFilter: 'blur(8px)' }}>{project.tag}</span>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import aboutImg from '../assets/about.jfif'
+import aboutImg from '../assets/about.webp'
 import { useEffect, useRef, useState } from 'react'
 
 const CountUp = ({ target, suffix = '' }) => {

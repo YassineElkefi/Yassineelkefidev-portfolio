@@ -16,107 +16,107 @@ import {
   Wrench,
 } from "lucide-react";
 
-import project1 from "../assets/projects/project-1.png";
-import project2 from "../assets/projects/project-2.png";
-import project3 from "../assets/projects/project-3.png";
-import project4 from "../assets/projects/project-4.png";
-import project5 from "../assets/projects/project-5.png";
-import project6 from "../assets/projects/project-6.png";
-import project7 from "../assets/projects/project-7.png";
-import project8 from "../assets/projects/project-8.png";
-import project9 from "../assets/projects/project-9.png";
-import project10 from "../assets/projects/project-10.png";
-import project11 from "../assets/projects/project-11.png";
-import project12 from "../assets/projects/project-12.png";
-import project13 from "../assets/projects/project-13.png";
-import project14 from "../assets/projects/project-14.png";
-import project15 from "../assets/projects/project-15.png";
-import project16 from "../assets/projects/project-16.png";
-import project17 from "../assets/projects/project-17.png";
-import project18 from "../assets/projects/project-18.png";
-import project19 from "../assets/projects/project-19.png";
+import project1 from "../assets/projects/project-1.webp";
+import project2 from "../assets/projects/project-2.webp";
+import project3 from "../assets/projects/project-3.webp";
+import project4 from "../assets/projects/project-4.webp";
+import project5 from "../assets/projects/project-5.webp";
+import project6 from "../assets/projects/project-6.webp";
+import project7 from "../assets/projects/project-7.webp";
+import project8 from "../assets/projects/project-8.webp";
+import project9 from "../assets/projects/project-9.webp";
+import project10 from "../assets/projects/project-10.webp";
+import project11 from "../assets/projects/project-11.webp";
+import project12 from "../assets/projects/project-12.webp";
+import project13 from "../assets/projects/project-13.webp";
+import project14 from "../assets/projects/project-14.webp";
+import project15 from "../assets/projects/project-15.webp";
+import project16 from "../assets/projects/project-16.webp";
+import project17 from "../assets/projects/project-17.webp";
+import project18 from "../assets/projects/project-18.webp";
+import project19 from "../assets/projects/project-19.webp";
 
-import screenshotIslami1 from "../assets/screenshots/islami/islami-1.png";
-import screenshotIslami2 from "../assets/screenshots/islami/islami-2.png";
-import screenshotIslami3 from "../assets/screenshots/islami/islami-3.png";
-import screenshotIslami4 from "../assets/screenshots/islami/islami-4.png";
-import screenshotIslami5 from "../assets/screenshots/islami/islami-5.png";
-import screenshotIslami6 from "../assets/screenshots/islami/islami-6.png";
+import screenshotIslami1 from "../assets/screenshots/islami/islami-1.webp";
+import screenshotIslami2 from "../assets/screenshots/islami/islami-2.webp";
+import screenshotIslami3 from "../assets/screenshots/islami/islami-3.webp";
+import screenshotIslami4 from "../assets/screenshots/islami/islami-4.webp";
+import screenshotIslami5 from "../assets/screenshots/islami/islami-5.webp";
+import screenshotIslami6 from "../assets/screenshots/islami/islami-6.webp";
 
-import screenshotFoody1 from "../assets/screenshots/foody/foody-1.png";
-import screenshotFoody2 from "../assets/screenshots/foody/foody-2.png";
-import screenshotFoody3 from "../assets/screenshots/foody/foody-3.png";
-import screenshotFoody4 from "../assets/screenshots/foody/foody-4.png";
-import screenshotFoody5 from "../assets/screenshots/foody/foody-5.png";
-import screenshotFoody6 from "../assets/screenshots/foody/foody-6.png";
-import screenshotFoody7 from "../assets/screenshots/foody/foody-7.png";
-import screenshotFoody8 from "../assets/screenshots/foody/foody-8.png";
-import screenshotFoody9 from "../assets/screenshots/foody/foody-9.png";
+import screenshotFoody1 from "../assets/screenshots/foody/foody-1.webp";
+import screenshotFoody2 from "../assets/screenshots/foody/foody-2.webp";
+import screenshotFoody3 from "../assets/screenshots/foody/foody-3.webp";
+import screenshotFoody4 from "../assets/screenshots/foody/foody-4.webp";
+import screenshotFoody5 from "../assets/screenshots/foody/foody-5.webp";
+import screenshotFoody6 from "../assets/screenshots/foody/foody-6.webp";
+import screenshotFoody7 from "../assets/screenshots/foody/foody-7.webp";
+import screenshotFoody8 from "../assets/screenshots/foody/foody-8.webp";
+import screenshotFoody9 from "../assets/screenshots/foody/foody-9.webp";
 
-import screenshotGaraji1 from "../assets/screenshots/garaji/garaji-1.png";
-import screenshotGaraji2 from "../assets/screenshots/garaji/garaji-2.png";
-import screenshotGaraji3 from "../assets/screenshots/garaji/garaji-3.png";
-import screenshotGaraji4 from "../assets/screenshots/garaji/garaji-4.png";
-import screenshotGaraji5 from "../assets/screenshots/garaji/garaji-5.png";
-import screenshotGaraji6 from "../assets/screenshots/garaji/garaji-6.png";
-import screenshotGaraji7 from "../assets/screenshots/garaji/garaji-7.png";
-import screenshotGaraji8 from "../assets/screenshots/garaji/garaji-8.png";
-import screenshotGaraji9 from "../assets/screenshots/garaji/garaji-9.png";
-import screenshotGaraji10 from "../assets/screenshots/garaji/garaji-10.png";
-import screenshotGaraji11 from "../assets/screenshots/garaji/garaji-11.png";
+import screenshotGaraji1 from "../assets/screenshots/garaji/garaji-1.webp";
+import screenshotGaraji2 from "../assets/screenshots/garaji/garaji-2.webp";
+import screenshotGaraji3 from "../assets/screenshots/garaji/garaji-3.webp";
+import screenshotGaraji4 from "../assets/screenshots/garaji/garaji-4.webp";
+import screenshotGaraji5 from "../assets/screenshots/garaji/garaji-5.webp";
+import screenshotGaraji6 from "../assets/screenshots/garaji/garaji-6.webp";
+import screenshotGaraji7 from "../assets/screenshots/garaji/garaji-7.webp";
+import screenshotGaraji8 from "../assets/screenshots/garaji/garaji-8.webp";
+import screenshotGaraji9 from "../assets/screenshots/garaji/garaji-9.webp";
+import screenshotGaraji10 from "../assets/screenshots/garaji/garaji-10.webp";
+import screenshotGaraji11 from "../assets/screenshots/garaji/garaji-11.webp";
 
-import screenshotHomeSpot1 from "../assets/screenshots/homespot/homespot-1.png";
-import screenshotHomeSpot2 from "../assets/screenshots/homespot/homespot-2.png";
-import screenshotHomeSpot3 from "../assets/screenshots/homespot/homespot-3.png";
-import screenshotHomeSpot4 from "../assets/screenshots/homespot/homespot-4.png";
-import screenshotHomeSpot5 from "../assets/screenshots/homespot/homespot-5.png";
-import screenshotHomeSpot6 from "../assets/screenshots/homespot/homespot-6.png";
-import screenshotHomeSpot7 from "../assets/screenshots/homespot/homespot-7.png";
+import screenshotHomeSpot1 from "../assets/screenshots/homespot/homespot-1.webp";
+import screenshotHomeSpot2 from "../assets/screenshots/homespot/homespot-2.webp";
+import screenshotHomeSpot3 from "../assets/screenshots/homespot/homespot-3.webp";
+import screenshotHomeSpot4 from "../assets/screenshots/homespot/homespot-4.webp";
+import screenshotHomeSpot5 from "../assets/screenshots/homespot/homespot-5.webp";
+import screenshotHomeSpot6 from "../assets/screenshots/homespot/homespot-6.webp";
+import screenshotHomeSpot7 from "../assets/screenshots/homespot/homespot-7.webp";
 
-import screenshotProjexa1 from "../assets/screenshots/projexa/projexa-1.png";
-import screenshotProjexa2 from "../assets/screenshots/projexa/projexa-2.png";
-import screenshotProjexa3 from "../assets/screenshots/projexa/projexa-3.png";
-import screenshotProjexa4 from "../assets/screenshots/projexa/projexa-4.png";
-import screenshotProjexa5 from "../assets/screenshots/projexa/projexa-5.png";
-import screenshotProjexa6 from "../assets/screenshots/projexa/projexa-6.png";
-import screenshotProjexa7 from "../assets/screenshots/projexa/projexa-7.png";
-import screenshotProjexa8 from "../assets/screenshots/projexa/projexa-8.png";
-import screenshotProjexa9 from "../assets/screenshots/projexa/projexa-9.png";
-import screenshotProjexa10 from "../assets/screenshots/projexa/projexa-10.png";
-import screenshotProjexa11 from "../assets/screenshots/projexa/projexa-11.png";
-import screenshotProjexa12 from "../assets/screenshots/projexa/projexa-12.png";
-import screenshotProjexa13 from "../assets/screenshots/projexa/projexa-13.png";
-import screenshotProjexa14 from "../assets/screenshots/projexa/projexa-14.png";
-import screenshotProjexa15 from "../assets/screenshots/projexa/projexa-15.png";
-import screenshotProjexa16 from "../assets/screenshots/projexa/projexa-16.png";
-import screenshotProjexa17 from "../assets/screenshots/projexa/projexa-17.png";
-import screenshotProjexa18 from "../assets/screenshots/projexa/projexa-18.png";
-import screenshotProjexa19 from "../assets/screenshots/projexa/projexa-19.png";
-import screenshotProjexa20 from "../assets/screenshots/projexa/projexa-20.png";
-import screenshotProjexa21 from "../assets/screenshots/projexa/projexa-21.png";
-import screenshotProjexa22 from "../assets/screenshots/projexa/projexa-22.png";
-import screenshotProjexa23 from "../assets/screenshots/projexa/projexa-23.png";
-import screenshotProjexa24 from "../assets/screenshots/projexa/projexa-24.png";
-import screenshotProjexa25 from "../assets/screenshots/projexa/projexa-25.png";
-import screenshotProjexa26 from "../assets/screenshots/projexa/projexa-26.png";
-import screenshotProjexa27 from "../assets/screenshots/projexa/projexa-27.png";
-import screenshotProjexa28 from "../assets/screenshots/projexa/projexa-28.png";
-import screenshotProjexa29 from "../assets/screenshots/projexa/projexa-29.png";
+import screenshotProjexa1 from "../assets/screenshots/projexa/projexa-1.webp";
+import screenshotProjexa2 from "../assets/screenshots/projexa/projexa-2.webp";
+import screenshotProjexa3 from "../assets/screenshots/projexa/projexa-3.webp";
+import screenshotProjexa4 from "../assets/screenshots/projexa/projexa-4.webp";
+import screenshotProjexa5 from "../assets/screenshots/projexa/projexa-5.webp";
+import screenshotProjexa6 from "../assets/screenshots/projexa/projexa-6.webp";
+import screenshotProjexa7 from "../assets/screenshots/projexa/projexa-7.webp";
+import screenshotProjexa8 from "../assets/screenshots/projexa/projexa-8.webp";
+import screenshotProjexa9 from "../assets/screenshots/projexa/projexa-9.webp";
+import screenshotProjexa10 from "../assets/screenshots/projexa/projexa-10.webp";
+import screenshotProjexa11 from "../assets/screenshots/projexa/projexa-11.webp";
+import screenshotProjexa12 from "../assets/screenshots/projexa/projexa-12.webp";
+import screenshotProjexa13 from "../assets/screenshots/projexa/projexa-13.webp";
+import screenshotProjexa14 from "../assets/screenshots/projexa/projexa-14.webp";
+import screenshotProjexa15 from "../assets/screenshots/projexa/projexa-15.webp";
+import screenshotProjexa16 from "../assets/screenshots/projexa/projexa-16.webp";
+import screenshotProjexa17 from "../assets/screenshots/projexa/projexa-17.webp";
+import screenshotProjexa18 from "../assets/screenshots/projexa/projexa-18.webp";
+import screenshotProjexa19 from "../assets/screenshots/projexa/projexa-19.webp";
+import screenshotProjexa20 from "../assets/screenshots/projexa/projexa-20.webp";
+import screenshotProjexa21 from "../assets/screenshots/projexa/projexa-21.webp";
+import screenshotProjexa22 from "../assets/screenshots/projexa/projexa-22.webp";
+import screenshotProjexa23 from "../assets/screenshots/projexa/projexa-23.webp";
+import screenshotProjexa24 from "../assets/screenshots/projexa/projexa-24.webp";
+import screenshotProjexa25 from "../assets/screenshots/projexa/projexa-25.webp";
+import screenshotProjexa26 from "../assets/screenshots/projexa/projexa-26.webp";
+import screenshotProjexa27 from "../assets/screenshots/projexa/projexa-27.webp";
+import screenshotProjexa28 from "../assets/screenshots/projexa/projexa-28.webp";
+import screenshotProjexa29 from "../assets/screenshots/projexa/projexa-29.webp";
 
-import screenshotExpenza1 from "../assets/screenshots/expenza/expenza-1.png";
-import screenshotExpenza2 from "../assets/screenshots/expenza/expenza-2.png";
-import screenshotExpenza3 from "../assets/screenshots/expenza/expenza-3.png";
-import screenshotExpenza4 from "../assets/screenshots/expenza/expenza-4.png";
-import screenshotExpenza5 from "../assets/screenshots/expenza/expenza-5.png";
-import screenshotExpenza6 from "../assets/screenshots/expenza/expenza-6.png";
-import screenshotExpenza7 from "../assets/screenshots/expenza/expenza-7.png";
+import screenshotExpenza1 from "../assets/screenshots/expenza/expenza-1.webp";
+import screenshotExpenza2 from "../assets/screenshots/expenza/expenza-2.webp";
+import screenshotExpenza3 from "../assets/screenshots/expenza/expenza-3.webp";
+import screenshotExpenza4 from "../assets/screenshots/expenza/expenza-4.webp";
+import screenshotExpenza5 from "../assets/screenshots/expenza/expenza-5.webp";
+import screenshotExpenza6 from "../assets/screenshots/expenza/expenza-6.webp";
+import screenshotExpenza7 from "../assets/screenshots/expenza/expenza-7.webp";
 
 
-import screenshotXAMPPControlPanel1 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-1.png";
-import screenshotXAMPPControlPanel2 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-2.png";
-import screenshotXAMPPControlPanel3 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-3.png";
-import screenshotXAMPPControlPanel4 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-4.png";
-import screenshotXAMPPControlPanel5 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-5.png";
+import screenshotXAMPPControlPanel1 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-1.webp";
+import screenshotXAMPPControlPanel2 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-2.webp";
+import screenshotXAMPPControlPanel3 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-3.webp";
+import screenshotXAMPPControlPanel4 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-4.webp";
+import screenshotXAMPPControlPanel5 from "../assets/screenshots/xampp-control-panel/xampp-control-panel-5.webp";
 
 export const EXPERIENCES = [
   {
@@ -412,6 +412,6 @@ export const PERSONAL_PROJECTS = [
 
 export const CONTACT = {
   address: "El Mourouj 3, Ben Arous, Tunisia, 2074",
-  phoneNo: ["+216 58 804 932", "+216 29 478 595", "+216 53 504 391"],
+  phoneNo: ["+216 58 804 932", "+216 53 504 391"],
   email: "yassine.elkefi6@gmail.com",
 };

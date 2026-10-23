@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import profilePic from '../assets/yassineELKEFIProfile.jpeg'
+import profilePic from '../assets/yassineELKEFIProfile.webp'
 import resumeEn from '../assets/resumeEN.pdf'
 import resumeFr from '../assets/resumeFR.pdf'
 import { FaGithub, FaFileAlt } from 'react-icons/fa'

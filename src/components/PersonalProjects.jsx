@@ -20,6 +20,9 @@ const SlideshowModal = ({ project, onClose }) => {
   const [current, setCurrent] = useState(0)
   const images = project.screenshots || []
   const total = images.length
+  const preloadIndices = total > 1
+    ? [...new Set([(current + 1) % total, (current - 1 + total) % total])]
+    : []
 
   const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total])
   const next = useCallback(() => setCurrent(i => (i + 1) % total), [total])
@@ -69,8 +72,8 @@ const SlideshowModal = ({ project, onClose }) => {
           </div>
         </div>
         <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: 'min(68vh, 700px)' }}>
-          {images.map((src, i) => i !== current && (
-            <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
+          {preloadIndices.map(index => (
+            <img key={`preload-${index}`} src={images[index]} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
           ))}
           <AnimatePresence initial={false}>
             <motion.img
@@ -382,7 +385,7 @@ const PersonalProjects = () => {
               whileHover={{ borderColor: project.accent + '44' }}
             >
               <div className="pp-thumb-wrap">
-                <img src={project.image} alt={t(`personal_projects.items.${project.i18nKey}.title`)} />
+                <img loading="lazy" decoding="async" src={project.image} alt={t(`personal_projects.items.${project.i18nKey}.title`)} />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.65) 0%, transparent 60%)' }} />
               </div>
               <div className="flex-1 min-w-0 p-5 md:p-6">
