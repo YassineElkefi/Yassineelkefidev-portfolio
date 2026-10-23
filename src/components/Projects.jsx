@@ -349,14 +349,29 @@ const Projects = () => {
                 transition={{ duration: 0.35 }}
                 onClick={() => handleClick(project)}
                 className="group relative flex flex-col rounded-xl overflow-hidden"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)', cursor: 'pointer' }}
-                //whileHover={{ y: -6 }}
-                //onMouseEnter={e => e.currentTarget.style.borderColor = project.accent + '55'}
-                //onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
-                onMouseMove={handleTilt}
-                onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.borderColor = 'var(--border)' }}
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)', cursor: 'pointer', transition: 'transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease' }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-5px)'
+                  e.currentTarget.style.borderColor = project.accent + '66'
+                  e.currentTarget.style.boxShadow = `0 12px 40px ${project.accent}22, 0 0 0 1px ${project.accent}22`
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.borderColor = 'var(--border)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
               >
-                <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }} />
+                <div className="absolute left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ top: '176px', background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`, zIndex: 10 }} />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
+                      style={{ 
+                        top: '176px', 
+                        background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
+                        filter: 'blur(0.5px)',
+                        zIndex: 10 
+                      }}
+                    />
+                  </div>
                 <div className="relative overflow-hidden h-44">
                   <img src={project.image} alt={t(`projects.items.${project.i18nKey}.title`)} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.85) 0%, rgba(6,6,8,0.2) 100%)' }} />
