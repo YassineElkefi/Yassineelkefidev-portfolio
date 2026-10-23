@@ -14,6 +14,12 @@ html, body {
   .cursor-dot, .cursor-ring { display: none !important; }
 }
 
+/* Keep cursor: none only on pointer-fine devices */
+@media (pointer: fine) {
+  body { cursor: none !important; }
+  * { cursor: none !important; }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

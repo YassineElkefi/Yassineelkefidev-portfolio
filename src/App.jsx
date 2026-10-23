@@ -13,9 +13,13 @@ import Contact from './components/Contact'
 
 const Cursor = () => {
   const canvasRef = useRef(null)
+  const [isTouch, setIsTouch] = useState(false)
 
   useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return
+    if (!window.matchMedia('(pointer: fine)').matches){
+      setIsTouch(true)
+      return
+    }
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
 
@@ -102,6 +106,8 @@ const Cursor = () => {
       window.removeEventListener('resize', setupCanvas)
     }
   }, [])
+
+  if (isTouch) return null
 
   return (
     <canvas
