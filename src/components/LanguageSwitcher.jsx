@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactCountryFlag from "react-country-flag"
 import { motion, AnimatePresence } from 'framer-motion'
+import { createPortal } from 'react-dom'
 
 const LANGS = [
   { code: 'en', label: 'English',  short: 'EN', country: 'GB' },
@@ -41,7 +42,10 @@ const dropdown = {
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation()
   const [open, setOpen] = useState(false)
+  const [transitionPhase, setTransitionPhase] = useState('idle')
+  const [pendingLanguage, setPendingLanguage] = useState(null)
   const ref = useRef(null)
+  const transitionLock = useRef(false)
   const current = LANGS.find(l => l.code === i18n.language?.slice(0, 2)) ?? LANGS[0]
 
   useEffect(() => {
@@ -50,9 +54,69 @@ const LanguageSwitcher = () => {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
-  const select = (code) => { i18n.changeLanguage(code); setOpen(false) }
+  useEffect(() => {
+    if (transitionPhase === 'sweeping-in') {
+      const timer = setTimeout(() => {
+        i18n.changeLanguage(pendingLanguage.code)
+        setTransitionPhase('holding')
+      }, 600)
+      return () => clearTimeout(timer)
+    }
+
+    if (transitionPhase === 'holding') {
+      const timer = setTimeout(() => setTransitionPhase('sweeping-out'), 150)
+      return () => clearTimeout(timer)
+    }
+
+    if (transitionPhase === 'sweeping-out') {
+      const timer = setTimeout(() => {
+        setTransitionPhase('idle')
+        setPendingLanguage(null)
+        transitionLock.current = false
+      }, 600)
+      return () => clearTimeout(timer)
+    }
+  }, [i18n, pendingLanguage, transitionPhase])
+
+  const select = (code) => {
+    setOpen(false)
+    if (transitionLock.current) return
+
+    transitionLock.current = true
+    setPendingLanguage(LANGS.find(language => language.code === code))
+    setTransitionPhase('sweeping-in')
+  }
 
   return (
+    <>
+    {transitionPhase !== 'idle' && createPortal(
+      <div
+        className={`language-transition-overlay ${transitionPhase}`}
+        aria-hidden="true"
+      >
+        <div className="language-transition-content">
+          <svg
+            className="language-transition-icon"
+            viewBox="0 0 64 64"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M8 12h32a6 6 0 0 1 6 6v15a6 6 0 0 1-6 6H24L14 47v-8h-6a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z" />
+            <path d="M24 23v12m-6-6h12m-10-4 8 8" />
+            <path d="M40 43h16a6 6 0 0 1 6 6v2a6 6 0 0 1-6 6h-5l-7 5v-5h-4a6 6 0 0 1-6-6v-2a6 6 0 0 1 6-6Z" />
+            <path d="M44 54c2-2 3-4 3-7m0 0c1 4 3 6 6 7m-8-4h7" />
+          </svg>
+          <span
+            className="language-transition-language"
+            lang={pendingLanguage?.code}
+            dir={pendingLanguage?.code === 'ar' ? 'rtl' : 'ltr'}
+          >
+            {pendingLanguage?.label}
+          </span>
+        </div>
+      </div>,
+      document.body
+    )}
     <div ref={ref} className="relative flex-shrink-0">
       {/* Trigger */}
       <button
@@ -163,6 +227,7 @@ const LanguageSwitcher = () => {
         )}
       </AnimatePresence>
     </div>
+    </>
   )
 }
 
