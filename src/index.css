@@ -35,8 +35,6 @@ html, body {
   --cyan: #00E5FF;
   --pink: #FF3CAC;
   --violet: #7B2FFF;
-  --language-gradient-start: #21123D;
-  --language-gradient-end: #12303C;
   font-family: 'Syne', sans-serif;
 }
 
@@ -115,8 +113,9 @@ body {
   background: linear-gradient(
     135deg,
     var(--bg) 0%,
-    var(--language-gradient-start) 35%,
-    var(--language-gradient-end) 70%,
+    color-mix(in srgb, var(--violet) 28%, var(--bg)) 30%,
+    color-mix(in srgb, var(--pink) 20%, var(--bg)) 50%,
+    color-mix(in srgb, var(--cyan) 24%, var(--bg2)) 70%,
     var(--bg2) 100%
   );
   background-size: 300% 300%;
@@ -258,8 +257,6 @@ body {
   --cyan:         #0077AA;
   --pink:         #C0007A;
   --violet:       #5218BB;
-  --language-gradient-start: #E2D8F5;
-  --language-gradient-end:   #CDE8F2;
   --yellow:       #A07800;
 }
 
