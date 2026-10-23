@@ -89,6 +89,8 @@
     "modal_cancel": "إلغاء",
     "loading_preview": "جارٍ تحميل المعاينة…",
     "screenshots_header": "لقطات الشاشة",
+    "show_more": "عرض {{count}} مشاريع إضافية",
+    "show_less": "عرض أقل",
     "items": {
       "repairy": {
         "title": "Repairy",

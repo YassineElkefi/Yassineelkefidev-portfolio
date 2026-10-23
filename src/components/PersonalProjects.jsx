@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { PERSONAL_PROJECTS } from '../constants'
 import Swal from 'sweetalert2'
-import { ArrowRight, ArrowUpRight, CirclePlus, GitBranch, Globe, Images, LockKeyhole } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, CirclePlus, GitBranch, Globe, Images, LockKeyhole, ChevronDown } from 'lucide-react'
 
 const MUSLIM_COUNTRIES = new Set([
   'AF','AL','DZ','AZ','BH','BD','BJ','BF','BN','CM','TD','KM',
@@ -13,9 +13,7 @@ const MUSLIM_COUNTRIES = new Set([
   'TN','TR','TM','UG','AE','UZ','YE','LR','GM','CI','GA',
 ])
 
-/* ─────────────────────────────────────────────────────────────
-   SLIDESHOW MODAL
-   ───────────────────────────────────────────────────────────── */
+/* ── SLIDESHOW MODAL ── */
 const SlideshowModal = ({ project, onClose }) => {
   const { t } = useTranslation()
   const ProjectIcon = project.icon
@@ -53,7 +51,7 @@ const SlideshowModal = ({ project, onClose }) => {
         style={{ maxHeight: '94vh' }}
       >
         <div className="flex items-center justify-between px-5 py-3 flex-shrink-0" style={{ borderBottom: '1px solid var(--modal-border)' }}>
-          <span className="font-bold text-base" style={{ color: 'var(--modal-text)' }}>
+          <span className="font-bold text-base flex items-center gap-2" style={{ color: 'var(--modal-text)' }}>
             <ProjectIcon size={18} style={{ color: project.accent }} />
             {t(`personal_projects.items.${project.i18nKey}.title`)} — {t('projects.screenshots_header')}
           </span>
@@ -70,7 +68,6 @@ const SlideshowModal = ({ project, onClose }) => {
             >✕</button>
           </div>
         </div>
-
         <div className="relative flex items-center justify-center overflow-hidden flex-1" style={{ minHeight: 'min(68vh, 700px)' }}>
           {images.map((src, i) => i !== current && (
             <img key={`preload-${i}`} src={src} alt="" aria-hidden className="absolute opacity-0 pointer-events-none w-0 h-0" />
@@ -91,7 +88,6 @@ const SlideshowModal = ({ project, onClose }) => {
             </>
           )}
         </div>
-
         {total > 1 && (
           <div className="flex items-center justify-center gap-2 py-3 flex-shrink-0" style={{ borderTop: '1px solid var(--modal-border)' }}>
             {images.map((_, i) => (
@@ -107,9 +103,7 @@ const SlideshowModal = ({ project, onClose }) => {
   )
 }
 
-/* ─────────────────────────────────────────────────────────────
-   LIVE PREVIEW MODAL
-   ───────────────────────────────────────────────────────────── */
+/* ── LIVE PREVIEW MODAL ── */
 const LivePreviewModal = ({ project, onClose }) => {
   const { t } = useTranslation()
   const [loading, setLoading] = useState(true)
@@ -173,9 +167,7 @@ const LivePreviewModal = ({ project, onClose }) => {
   )
 }
 
-/* ─────────────────────────────────────────────────────────────
-   DEMO CHOICE MODAL
-   ───────────────────────────────────────────────────────────── */
+/* ── DEMO CHOICE MODAL ── */
 const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
   const { t } = useTranslation()
   const ProjectIcon = project.icon
@@ -246,12 +238,59 @@ const DemoChoiceModal = ({ project, onClose, onGithub, onDemo }) => {
   )
 }
 
-/* ─────────────────────────────────────────────────────────────
-   MAIN COMPONENT
-   ───────────────────────────────────────────────────────────── */
+/* ── COMPACT CARD ── */
+const CompactCard = ({ project, onClick }) => {
+  const { t } = useTranslation()
+  const ProjectIcon = project.icon
+
+  return (
+    <motion.div
+      onClick={() => onClick(project)}
+      className="group flex flex-col gap-3 p-4 rounded-xl transition-all duration-300 cursor-pointer"
+      style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+      whileHover={{ borderColor: project.accent + '44' }}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <ProjectIcon size={16} style={{ color: project.accent, flexShrink: 0 }} />
+          <span className="font-bold text-sm truncate" style={{ color: 'var(--text)', letterSpacing: '-0.01em' }}>
+            {t(`personal_projects.items.${project.i18nKey}.title`)}
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          {project.status === 'private' && <LockKeyhole size={12} style={{ color: '#FF5555' }} />}
+          {project.demo === 'live' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />}
+          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: project.accent }}>
+            {project.status === 'private' ? <LockKeyhole size={14} /> : project.demo ? <CirclePlus size={14} /> : <ArrowRight size={14} />}
+          </span>
+        </div>
+      </div>
+
+      <p className="text-xs leading-relaxed line-clamp-2" style={{ color: 'var(--muted)' }}>
+        {t(`personal_projects.items.${project.i18nKey}.description`)}
+      </p>
+
+      <div className="flex flex-wrap gap-1.5 mt-auto">
+        {project.technologies.slice(0, 4).map(tech => (
+          <span key={tech} className="font-mono text-xs px-2 py-0.5 rounded"
+            style={{ color: project.accent, border: `1px solid ${project.accent}35`, background: `${project.accent}0D` }}
+          >{tech}</span>
+        ))}
+        {project.technologies.length > 4 && (
+          <span className="font-mono text-xs px-2 py-0.5 rounded" style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}>
+            +{project.technologies.length - 4}
+          </span>
+        )}
+      </div>
+    </motion.div>
+  )
+}
+
+/* ── MAIN COMPONENT ── */
 const PersonalProjects = () => {
   const { t } = useTranslation()
   const [modal, setModal] = useState(null)
+  const [showAll, setShowAll] = useState(false)
   const [visibleProjects, setVisibleProjects] = useState(PERSONAL_PROJECTS)
 
   useEffect(() => {
@@ -264,6 +303,9 @@ const PersonalProjects = () => {
       })
       .catch(() => {})
   }, [])
+
+  const featuredProjects = visibleProjects.filter(p => p.featured)
+  const restProjects     = visibleProjects.filter(p => !p.featured)
 
   const handleProjectClick = (project) => {
     const projectTitle = t(`personal_projects.items.${project.i18nKey}.title`)
@@ -308,6 +350,7 @@ const PersonalProjects = () => {
           .pp-card { flex-direction: row; align-items: center; }
           .pp-thumb-wrap { width: 160px; height: 160px; margin: 1.25rem; border-radius: 0.75rem; }
         }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
       `}</style>
 
       <div className="max-w-7xl mx-auto">
@@ -324,8 +367,9 @@ const PersonalProjects = () => {
           {t('personal_projects.heading')}
         </motion.h2>
 
+        {/* Featured projects */}
         <div className="flex flex-col gap-5 md:gap-6">
-          {visibleProjects.map((project, index) => (
+          {featuredProjects.map((project, index) => (
             <motion.div
               key={project.i18nKey}
               initial={{ opacity: 0, y: 30 }}
@@ -341,7 +385,6 @@ const PersonalProjects = () => {
                 <img src={project.image} alt={t(`personal_projects.items.${project.i18nKey}.title`)} />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.65) 0%, transparent 60%)' }} />
               </div>
-
               <div className="flex-1 min-w-0 p-5 md:p-6">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <h6 className="text-lg md:text-xl font-bold" style={{ letterSpacing: '-0.02em', color: 'var(--text)' }}>
@@ -362,13 +405,55 @@ const PersonalProjects = () => {
                   ))}
                 </div>
               </div>
-
               <div className="hidden lg:flex flex-shrink-0 text-2xl pr-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: project.accent }}>
                 {project.status === 'private' ? <LockKeyhole size={18} /> : project.demo ? <CirclePlus size={18} /> : <ArrowRight size={18} />}
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Show more toggle */}
+        {restProjects.length > 0 && (
+          <div className="mt-8 md:mt-10">
+            <button
+              onClick={() => setShowAll(v => !v)}
+              className="flex items-center gap-2 font-mono text-sm mb-6 transition-all duration-200 group"
+              style={{ color: 'var(--muted)' }}
+            >
+              <motion.span animate={{ rotate: showAll ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <ChevronDown size={16} />
+              </motion.span>
+              <span className="group-hover:text-white transition-colors duration-200">
+                {showAll ? t('projects.show_less') : t('projects.show_more', { count: restProjects.length })}
+              </span>
+            </button>
+
+            <AnimatePresence>
+              {showAll && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {restProjects.map((project, index) => (
+                      <motion.div
+                        key={project.i18nKey}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: index * 0.05 }}
+                      >
+                        <CompactCard project={project} onClick={handleProjectClick} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>

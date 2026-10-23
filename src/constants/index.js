@@ -223,6 +223,7 @@ export const PERSONAL_PROJECTS = [
     accent: "#00E5FF",
     demo: "live",
     demoUrl: "https://yassineelkefidev-portfolio.vercel.app/",
+    featured: true
   },
   {
     i18nKey: "islami",
@@ -358,6 +359,7 @@ export const PERSONAL_PROJECTS = [
     accent: "#F05032",
     demo: "live",
     demoUrl: "https://lexi-q.vercel.app/",
+    featured: true
   },
   {
     i18nKey: "expenza",
@@ -374,6 +376,7 @@ export const PERSONAL_PROJECTS = [
       screenshotExpenza4, screenshotExpenza5, screenshotExpenza6,
       screenshotExpenza7,
     ],
+    featured :true
   },
   {
     i18nKey: "xampp-control-panel",
@@ -389,6 +392,7 @@ export const PERSONAL_PROJECTS = [
       screenshotXAMPPControlPanel1,screenshotXAMPPControlPanel2,screenshotXAMPPControlPanel3,
       screenshotXAMPPControlPanel4,screenshotXAMPPControlPanel5
     ],
+    featured: true
   },
   {
     i18nKey: "xampp-control-website",
@@ -400,7 +404,8 @@ export const PERSONAL_PROJECTS = [
     tag: "MacOS App",
     accent: "#6e3c3c",
     demo: "live",
-    demoUrl: "https://xampp-control-website.vercel.app/"
+    demoUrl: "https://xampp-control-website.vercel.app/",
+    featured: true
   },
 
 ];

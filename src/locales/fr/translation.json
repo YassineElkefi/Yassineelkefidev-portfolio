@@ -89,6 +89,8 @@
     "modal_cancel": "Annuler",
     "loading_preview": "Chargement de l'aperçu…",
     "screenshots_header": "Captures d'écran",
+    "show_more": "Afficher {{count}} projets supplémentaires",
+    "show_less": "Afficher moins",
     "items": {
       "repairy": {
         "title": "Repairy",
